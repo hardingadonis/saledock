@@ -1,0 +1,37 @@
+name: 'Release Sale Dock'
+
+on:
+  workflow_run:
+    workflows: [Build with Maven]
+    types:
+      - completed
+    branches:
+      - main
+  
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    name: 'Release Sale Dock'
+    runs-on: ubuntu-latest
+
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v4
+      
+      - name: 'Get version'
+        id: get_version
+        run: |
+          chmod +x get_version.sh
+          echo "version=$(./get_version.sh)" >> $GITHUB_OUTPUT
+      
+      - name: 'Release Sale Dock'
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          name: 'Sale Dock - v${{ steps.get_version.outputs.version }}'
+          tag_name: ${{ steps.get_version.outputs.version }}
+          generate_release_notes: true
