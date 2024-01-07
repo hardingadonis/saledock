@@ -32,21 +32,6 @@ CREATE TABLE `employee` (
   `updated_at` TIMESTAMP DEFAULT null
 );
 
-CREATE TABLE `warehouse` (
-  `id` VARCHAR(255) PRIMARY KEY,
-  `name` VARCHAR(255) NOT NULL,
-  `address` VARCHAR(255) NOT NULL,
-  `created_at` TIMESTAMP DEFAULT null,
-  `updated_at` TIMESTAMP DEFAULT null
-);
-
-CREATE TABLE `warehouse_stock` (
-  `warehouse_id` VARCHAR(255),
-  `product_id` VARCHAR(255),
-  `quantity` INT NOT NULL,
-  PRIMARY KEY (`warehouse_id`, `product_id`)
-);
-
 CREATE TABLE `order` (
   `order_id` VARCHAR(255) PRIMARY KEY,
   `employee_id` VARCHAR(255),
@@ -72,9 +57,5 @@ ALTER TABLE `order_detail` ADD FOREIGN KEY (`order_id`) REFERENCES `order` (`ord
 ALTER TABLE `product` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`);
 
 ALTER TABLE `order_detail` ADD FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
-
-ALTER TABLE `warehouse_stock` ADD FOREIGN KEY (`warehouse_id`) REFERENCES `warehouse` (`id`);
-
-ALTER TABLE `warehouse_stock` ADD FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
 
 ALTER TABLE `order` ADD FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`);
