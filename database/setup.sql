@@ -1,6 +1,6 @@
 CREATE TABLE `customer` (
   `id` int PRIMARY KEY AUTO_INCREMENT COMMENT 'ID dùng để quản lý, tự động tăng',
-  `code` varchar(255) UNIQUE COMMENT 'Mã khách hàng, sẽ hiện trên giao diện, ID thì không hiện',
+  `code` varchar(255) UNIQUE NOT NULL COMMENT 'Mã khách hàng, sẽ hiện trên giao diện, ID thì không hiện',
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
@@ -10,11 +10,11 @@ CREATE TABLE `customer` (
 
 CREATE TABLE `product` (
   `id` int PRIMARY KEY AUTO_INCREMENT COMMENT 'ID dùng để quản lý, tự động tăng',
-  `code` varchar(255) UNIQUE COMMENT 'Mã sản phẩm, sẽ hiện trên giao diện, ID thì không hiện',
+  `code` varchar(255) UNIQUE NOT NULL COMMENT 'Mã sản phẩm, sẽ hiện trên giao diện, ID thì không hiện',
   `name` varchar(255) NOT NULL,
   `description` TEXT,
   `price` REAL NOT NULL,
-  `category_id` varchar(255) NOT NULL,
+  `category_id` int NOT NULL,
   `image_url` LONGTEXT,
   `created_at` TIMESTAMP DEFAULT null,
   `updated_at` TIMESTAMP DEFAULT null
@@ -27,7 +27,7 @@ CREATE TABLE `category` (
 
 CREATE TABLE `employee` (
   `id` int PRIMARY KEY AUTO_INCREMENT COMMENT 'ID dùng để quản lý, tự động tăng',
-  `code` varchar(255) UNIQUE COMMENT 'Mã nhân viên, sẽ hiện trên giao diện, dùng để đăng nhập, vd QE170001',
+  `code` varchar(255) UNIQUE NOT NULL COMMENT 'Mã nhân viên, sẽ hiện trên giao diện, dùng để đăng nhập, vd QE170001',
   `password` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `created_at` TIMESTAMP DEFAULT null,
@@ -36,10 +36,10 @@ CREATE TABLE `employee` (
 
 CREATE TABLE `order` (
   `id` int PRIMARY KEY AUTO_INCREMENT COMMENT 'ID dùng để quản lý, tự động tăng',
-  `code` varchar(255) UNIQUE,
+  `code` varchar(255) UNIQUE NOT NULL,
   `employee_id` int NOT NULL,
   `customer_id` int NOT NULL,
-  `status` ENUM ('pending', 'shipping', 'done', 'canceled') NOT NULL,
+  `status` ENUM ('pending', 'shipping', 'done', 'cancelled') NOT NULL,
   `total` REAL NOT NULL,
   `note` TEXT DEFAULT null,
   `created_at` TIMESTAMP DEFAULT null,
