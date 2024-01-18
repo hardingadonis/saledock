@@ -30,11 +30,11 @@ public class Order {
     @Column(name = "`code`", unique = true)
     private String code;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "`employee_id`", nullable = false)
     private Employee employee;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "`customer_id`", nullable = false)
     private Customer customer;
 
@@ -54,8 +54,8 @@ public class Order {
     @Column(name = "`updated_at`")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<OrderDetail> orderDetails = new HashSet<>();
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<OrderDetail> orderDetails = new ArrayList<>();
 
     @PrePersist
     protected void onCreate() {
@@ -66,11 +66,11 @@ public class Order {
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"));
     }
-    
+
     public void addProduct(Product product, Integer quantity) {
         var detail = new OrderDetail(this, product);
         detail.setQuantity(quantity);
-        
+
         this.orderDetails.add(detail);
     }
 }
