@@ -19,6 +19,8 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hibernate.hbm2ddl.auto">update</property>
         
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
+        
         <!-- Mention annotated class -->
         <mapping class="io.hardingadonis.saledock.model.Category"/>
         <mapping class="io.hardingadonis.saledock.model.Customer"/>
