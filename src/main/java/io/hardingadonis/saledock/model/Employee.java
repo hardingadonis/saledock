@@ -25,6 +25,9 @@ public class Employee {
     @Column(name = "`password`", nullable = false)
     private String hashedPassword;
     
+    @Column(name = "`email`", nullable = false)
+    private String email;
+    
     @Column(name = "`name`", nullable = false)
     private String fullName;
     
