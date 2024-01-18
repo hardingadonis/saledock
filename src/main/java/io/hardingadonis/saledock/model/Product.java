@@ -36,7 +36,7 @@ public class Product {
     private Category category;
 
     @Column(name = "`image_url`", columnDefinition = "longtext")
-    private String imageURLs;
+    private String imageURL;
 
     @Column(name = "`created_at`")
     private LocalDateTime createdAt;
@@ -47,18 +47,10 @@ public class Product {
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"));
-
-        if (this.imageURLs == null || this.imageURLs.isBlank()) {
-            this.imageURLs = "[]";
-        }
     }
 
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"));
-
-        if (this.imageURLs == null || this.imageURLs.isBlank()) {
-            this.imageURLs = "[]";
-        }
     }
 }
