@@ -9,16 +9,23 @@
         <property name="hibernate.connection.password"></property>
         
         <!-- Specify dialect -->
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         
         <!-- Echo all executed SQL to stdout -->
         <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.highlight_sql">true</property>
         
         <!-- Drop and re-create the database schema on startup -->
         <property name="hibernate.hbm2ddl.auto">update</property>
         
         <!-- Mention annotated class -->
-        <!--<mapping class="com.example.YourEntityClass"/>-->
+        <mapping class="io.hardingadonis.saledock.model.Category"/>
+        <mapping class="io.hardingadonis.saledock.model.Customer"/>
+        <mapping class="io.hardingadonis.saledock.model.Employee"/>
+        <mapping class="io.hardingadonis.saledock.model.Order"/>
+        <mapping class="io.hardingadonis.saledock.model.OrderDetail"/>
+        <mapping class="io.hardingadonis.saledock.model.Product"/>
         
     </session-factory>
 </hibernate-configuration>
