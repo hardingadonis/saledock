@@ -10,16 +10,15 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 @ToString
 public class Product {
 
     @Id
     @Column(name = "`id`")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ID;
+    private Long ID;
 
-    @Column(name = "`code`", unique = true)
+    @Column(name = "`code`", unique = true, nullable = false, insertable = true, updatable = false)
     private String code;
 
     @Column(name = "`name`", nullable = false)
@@ -36,7 +35,7 @@ public class Product {
     private Category category;
 
     @Column(name = "`image_url`", columnDefinition = "longtext")
-    private String imageURLs;
+    private String imageURL;
 
     @Column(name = "`created_at`")
     private LocalDateTime createdAt;
@@ -47,18 +46,10 @@ public class Product {
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"));
-
-        if (this.imageURLs == null || this.imageURLs.isBlank()) {
-            this.imageURLs = "[]";
-        }
     }
 
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"));
-
-        if (this.imageURLs == null || this.imageURLs.isBlank()) {
-            this.imageURLs = "[]";
-        }
     }
 }
