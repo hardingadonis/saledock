@@ -15,11 +15,13 @@ public class CategoryDAOImpl implements ICategoryDAO {
     }
 
     @Override
-    public void add(Category obj) {
+    public Category save(Category obj) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.persist(obj);
+            Category o = session.merge(obj);
             session.getTransaction().commit();
+
+            return o;
         }
     }
 
@@ -34,15 +36,6 @@ public class CategoryDAOImpl implements ICategoryDAO {
     public List<Category> getAll() {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("FROM Category", Category.class).getResultList();
-        }
-    }
-
-    @Override
-    public void update(Category obj) {
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            session.merge(obj);
-            session.getTransaction().commit();
         }
     }
 }
