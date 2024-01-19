@@ -9,7 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 @ToString(exclude = {"order"})
 public class OrderDetail {
 

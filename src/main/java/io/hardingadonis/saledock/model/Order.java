@@ -11,7 +11,6 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 @ToString
 public class Order {
 
@@ -30,11 +29,11 @@ public class Order {
     @Column(name = "`code`", unique = true, nullable = false)
     private String code;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "`employee_id`", nullable = false)
     private Employee employee;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "`customer_id`", nullable = false)
     private Customer customer;
 
@@ -54,7 +53,7 @@ public class Order {
     @Column(name = "`updated_at`")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "order_id", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OrderDetail> orderDetails = new HashSet<>();
 
     @PrePersist
@@ -68,5 +67,11 @@ public class Order {
     }
 
     public void addProduct(Product product, Integer quantity) {
+        var detail = new OrderDetail();
+        detail.setOrder(this);
+        detail.setProduct(product);
+        detail.setQuantity(quantity);
+        
+        this.orderDetails.add(detail);
     }
 }

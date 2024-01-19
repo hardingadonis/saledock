@@ -10,7 +10,6 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 @ToString
 public class Product {
 
@@ -31,7 +30,7 @@ public class Product {
     @Column(name = "`price`", nullable = false)
     private Double price;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "`category_id`", nullable = false)
     private Category category;
 
