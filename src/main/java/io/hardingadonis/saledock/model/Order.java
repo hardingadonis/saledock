@@ -25,16 +25,16 @@ public class Order {
     @Id
     @Column(name = "`id`")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ID;
+    private Long ID;
 
-    @Column(name = "`code`", unique = true)
+    @Column(name = "`code`", unique = true, nullable = false)
     private String code;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "`employee_id`", nullable = false)
     private Employee employee;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "`customer_id`", nullable = false)
     private Customer customer;
 
@@ -54,8 +54,8 @@ public class Order {
     @Column(name = "`updated_at`")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<OrderDetail> orderDetails = new ArrayList<>();
+    @OneToMany(mappedBy = "order_id", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    private Set<OrderDetail> orderDetails = new HashSet<>();
 
     @PrePersist
     protected void onCreate() {
@@ -68,9 +68,5 @@ public class Order {
     }
 
     public void addProduct(Product product, Integer quantity) {
-        var detail = new OrderDetail(this, product);
-        detail.setQuantity(quantity);
-
-        this.orderDetails.add(detail);
     }
 }

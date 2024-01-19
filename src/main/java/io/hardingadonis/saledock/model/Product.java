@@ -17,9 +17,9 @@ public class Product {
     @Id
     @Column(name = "`id`")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ID;
+    private Long ID;
 
-    @Column(name = "`code`", unique = true)
+    @Column(name = "`code`", unique = true, nullable = false)
     private String code;
 
     @Column(name = "`name`", nullable = false)
@@ -31,7 +31,7 @@ public class Product {
     @Column(name = "`price`", nullable = false)
     private Double price;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "`category_id`", nullable = false)
     private Category category;
 
