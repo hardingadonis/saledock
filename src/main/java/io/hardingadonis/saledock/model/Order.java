@@ -67,11 +67,9 @@ public class Order {
     }
 
     public void addProduct(Product product, Integer quantity) {
-        var detail = new OrderDetail();
-        detail.setOrder(this);
-        detail.setProduct(product);
+        var detail = new OrderDetail(this, product);
         detail.setQuantity(quantity);
-        
+
         this.orderDetails.add(detail);
     }
 }

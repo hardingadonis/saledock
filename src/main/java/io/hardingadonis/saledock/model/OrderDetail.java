@@ -1,6 +1,7 @@
 package io.hardingadonis.saledock.model;
 
 import jakarta.persistence.*;
+import java.io.*;
 import lombok.*;
 
 @Entity(name = "OrderDetail")
@@ -12,19 +13,38 @@ import lombok.*;
 @ToString(exclude = {"order"})
 public class OrderDetail {
 
-    @Id
-    @Column(name = "`id`")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID;
+    @Embeddable
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Getter
+    @Setter
+    @ToString
+    public static class ID implements Serializable {
+
+        @Column(name = "`order_id`")
+        private Long orderID;
+
+        @Column(name = "`product_id`")
+        private Long productID;
+    }
+
+    @EmbeddedId
+    private ID ID;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`order_id`", nullable = false)
+    @MapsId("orderID")
     private Order order;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`product_id`", nullable = false)
+    @MapsId("productID")
     private Product product;
 
     @Column(name = "`quantity`", nullable = false)
     private int quantity;
+
+    public OrderDetail(Order order, Product product) {
+        this.order = order;
+        this.product = product;
+        this.ID = new ID(order.getID(), product.getID());
+    }
 }
