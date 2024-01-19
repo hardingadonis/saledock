@@ -26,7 +26,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
 
-    @Column(name = "`code`", unique = true, nullable = false)
+    @Column(name = "`code`", unique = true, nullable = false, insertable = true, updatable = false)
     private String code;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -59,6 +59,8 @@ public class Order {
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"));
+        this.code = generateRandomOrderCode();
+        this.status = Status.PENDING;
     }
 
     @PreUpdate
@@ -71,5 +73,17 @@ public class Order {
         detail.setQuantity(quantity);
 
         this.orderDetails.add(detail);
+
+        if (this.total == null) {
+            this.total = Double.valueOf(0);
+        }
+
+        this.total += product.getPrice() * quantity;
+    }
+
+    private static String generateRandomOrderCode() {
+        UUID uuid = UUID.randomUUID();
+
+        return uuid.toString().toUpperCase().replace("-", "").substring(0, 15);
     }
 }
