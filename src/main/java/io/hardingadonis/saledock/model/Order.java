@@ -11,7 +11,6 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 @ToString
 public class Order {
 
@@ -25,9 +24,9 @@ public class Order {
     @Id
     @Column(name = "`id`")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ID;
+    private Long ID;
 
-    @Column(name = "`code`", unique = true)
+    @Column(name = "`code`", unique = true, nullable = false)
     private String code;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -54,8 +53,8 @@ public class Order {
     @Column(name = "`updated_at`")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<OrderDetail> orderDetails = new ArrayList<>();
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<OrderDetail> orderDetails = new HashSet<>();
 
     @PrePersist
     protected void onCreate() {

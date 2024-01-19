@@ -15,11 +15,13 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
     }
 
     @Override
-    public void add(Employee obj) {
+    public Employee save(Employee obj) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.persist(obj);
+            Employee o = session.merge(obj);
             session.getTransaction().commit();
+
+            return o;
         }
     }
 
@@ -34,15 +36,6 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
     public List<Employee> getAll() {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("FROM Employee", Employee.class).getResultList();
-        }
-    }
-
-    @Override
-    public void update(Employee obj) {
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            session.merge(obj);
-            session.getTransaction().commit();
         }
     }
 }

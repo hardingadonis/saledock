@@ -10,16 +10,15 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 @ToString
 public class Product {
 
     @Id
     @Column(name = "`id`")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ID;
+    private Long ID;
 
-    @Column(name = "`code`", unique = true)
+    @Column(name = "`code`", unique = true, nullable = false)
     private String code;
 
     @Column(name = "`name`", nullable = false)

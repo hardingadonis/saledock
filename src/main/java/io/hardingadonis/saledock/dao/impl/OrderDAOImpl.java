@@ -15,11 +15,13 @@ public class OrderDAOImpl implements IOrderDAO {
     }
 
     @Override
-    public void add(Order obj) {
+    public Order save(Order obj) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.persist(obj);
+            Order o = session.merge(obj);
             session.getTransaction().commit();
+
+            return o;
         }
     }
 
@@ -34,15 +36,6 @@ public class OrderDAOImpl implements IOrderDAO {
     public List<Order> getAll() {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("FROM Order", Order.class).getResultList();
-        }
-    }
-
-    @Override
-    public void update(Order obj) {
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            session.merge(obj);
-            session.getTransaction().commit();
         }
     }
 }

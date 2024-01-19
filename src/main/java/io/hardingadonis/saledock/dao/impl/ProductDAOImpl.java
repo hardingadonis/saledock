@@ -15,11 +15,13 @@ public class ProductDAOImpl implements IProductDAO {
     }
 
     @Override
-    public void add(Product obj) {
+    public Product save(Product obj) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.persist(obj);
+            Product o = session.merge(obj);
             session.getTransaction().commit();
+
+            return o;
         }
     }
 
@@ -34,15 +36,6 @@ public class ProductDAOImpl implements IProductDAO {
     public List<Product> getAll() {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("FROM Product", Product.class).getResultList();
-        }
-    }
-
-    @Override
-    public void update(Product obj) {
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            session.merge(obj);
-            session.getTransaction().commit();
         }
     }
 }
