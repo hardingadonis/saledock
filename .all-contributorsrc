@@ -53,6 +53,17 @@
         "doc",
         "review"
       ]
+    },
+    {
+      "login": "linhlm0210",
+      "name": "linhlm0210",
+      "avatar_url": "https://avatars.githubusercontent.com/u/147788973?v=4",
+      "profile": "https://github.com/linhlm0210",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
     }
   ],
   "commitType": "docs",
