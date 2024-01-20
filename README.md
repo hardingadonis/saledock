@@ -65,6 +65,13 @@ docker-compose up -d
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/hardingadonis"><img src="https://avatars.githubusercontent.com/u/34091632?v=4?s=100" width="100px;" alt="Minh Vương"/><br /><sub><b>Minh Vương</b></sub></a><br /><a href="#code-hardingadonis" title="Code">💻</a> <a href="#data-hardingadonis" title="Data">🔣</a> <a href="#doc-hardingadonis" title="Documentation">📖</a> <a href="#maintenance-hardingadonis" title="Maintenance">🚧</a> <a href="#review-hardingadonis" title="Reviewed Pull Requests">👀</a> <a href="#design-hardingadonis" title="Design">🎨</a></td>
+    </tr>
+  </tbody>
+</table>
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->

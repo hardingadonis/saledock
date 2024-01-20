@@ -1,6 +1,26 @@
 {
-    "projectName": "saledock",
-    "projectOwner": "hardingadonis",
-    "files": ["README.md"],
-    "contributors": []
+  "projectName": "saledock",
+  "projectOwner": "hardingadonis",
+  "files": [
+    "README.md"
+  ],
+  "contributors": [
+    {
+      "login": "hardingadonis",
+      "name": "Minh Vương",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34091632?v=4",
+      "profile": "https://github.com/hardingadonis",
+      "contributions": [
+        "code",
+        "data",
+        "doc",
+        "maintenance",
+        "review",
+        "design"
+      ]
+    }
+  ],
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributorsPerLine": 7
 }
