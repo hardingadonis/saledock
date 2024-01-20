@@ -42,6 +42,17 @@
         "review",
         "maintenance"
       ]
+    },
+    {
+      "login": "yuhtnguyen",
+      "name": "Yuht",
+      "avatar_url": "https://avatars.githubusercontent.com/u/137138731?v=4",
+      "profile": "https://github.com/yuhtnguyen",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
     }
   ],
   "commitType": "docs",
