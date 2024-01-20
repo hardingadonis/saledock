@@ -1,0 +1,16 @@
+version: '3'
+
+name: 'saledock'
+
+services:
+  database:
+    image: ghcr.io/hardingadonis/saledock-database:latest
+    ports:
+      - "3306:3306"
+  
+  server:
+    image: ghcr.io/hardingadonis/saledock-server:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
