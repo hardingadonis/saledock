@@ -68,22 +68,22 @@ docker-compose up -d
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/hardingadonis"><img src="https://avatars.githubusercontent.com/u/34091632?v=4" width="100px;" alt=""/><br /><sub><b>Minh Vương</b></sub></a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/bakaqc"><img src="https://avatars.githubusercontent.com/u/126387856?v=4" width="100px;" alt=""/><br /><sub><b>Đinh Quốc Chương</b></sub></a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/htnghia1423"><img src="https://avatars.githubusercontent.com/u/137130942?v=4" width="100px;" alt=""/><br /><sub><b>Thunder</b></sub></a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/yuhtnguyen"><img src="https://avatars.githubusercontent.com/u/137138731?v=4" width="100px;" alt=""/><br /><sub><b>Yuht</b></sub></a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/linhlm0210"><img src="https://avatars.githubusercontent.com/u/147788973?v=4" width="100px;" alt=""/><br /><sub><b>linhlm0210</b></sub></a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/thson58"><img src="https://avatars.githubusercontent.com/u/152074875?v=4" width="100px;" alt=""/><br /><sub><b>Nguyen Son</b></sub></a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://allcontributors.org"><img src="https://avatars.githubusercontent.com/u/46410174?v=4" width="100px;" alt=""/><br /><sub><b>All Contributors</b></sub></a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/hardingadonis"><img src="https://avatars.githubusercontent.com/u/34091632?v=4" width="100px;" alt=""/><br /><sub><b>Minh Vương</b></sub></a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/bakaqc"><img src="https://avatars.githubusercontent.com/u/126387856?v=4" width="100px;" alt=""/><br /><sub><b>Đinh Quốc Chương</b></sub></a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/htnghia1423"><img src="https://avatars.githubusercontent.com/u/137130942?v=4" width="100px;" alt=""/><br /><sub><b>Thunder</b></sub></a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/yuhtnguyen"><img src="https://avatars.githubusercontent.com/u/137138731?v=4" width="100px;" alt=""/><br /><sub><b>Yuht</b></sub></a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/linhlm0210"><img src="https://avatars.githubusercontent.com/u/147788973?v=4" width="100px;" alt=""/><br /><sub><b>linhlm0210</b></sub></a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://imgbot.net"><img src="https://avatars.githubusercontent.com/u/31427850?v=4" width="100px;" alt=""/><br /><sub><b>Imgbot</b></sub></a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://www.codefactor.io"><img src="https://avatars.githubusercontent.com/u/13309880?v=4" width="100px;" alt=""/><br /><sub><b>Automated code reviews</b></sub></a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/thson58"><img src="https://avatars.githubusercontent.com/u/152074875?v=4" width="100px;" alt=""/><br /><sub><b>Nguyen Son</b></sub></a></td>
+      <td align="center" valign="top" width="20%"><a href="https://allcontributors.org"><img src="https://avatars.githubusercontent.com/u/46410174?v=4" width="100px;" alt=""/><br /><sub><b>All Contributors</b></sub></a></td>
+      <td align="center" valign="top" width="20%"><a href="https://imgbot.net"><img src="https://avatars.githubusercontent.com/u/31427850?v=4" width="100px;" alt=""/><br /><sub><b>Imgbot</b></sub></a></td>
+      <td align="center" valign="top" width="20%"><a href="https://www.codefactor.io"><img src="https://avatars.githubusercontent.com/u/13309880?v=4" width="100px;" alt=""/><br /><sub><b>Automated code reviews</b></sub></a></td>
     </tr>
   </tbody>
   <tfoot>
     <tr>
-      <td align="center" size="13px" colspan="7">
+      <td align="center" size="13px" colspan="5">
         <img src="https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg">
           <a href="https://all-contributors.js.org/docs/en/bot/usage">Add your contributions</a>
         </img>
