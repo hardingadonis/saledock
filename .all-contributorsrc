@@ -95,6 +95,18 @@
         "plugin",
         "tool"
       ]
+    },
+    {
+      "login": "code-factor",
+      "name": "Automated code reviews",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13309880?v=4",
+      "profile": "https://www.codefactor.io",
+      "contributions": [
+        "plugin",
+        "tool",
+        "bug",
+        "review"
+      ]
     }
   ],
   "commitType": "docs",
