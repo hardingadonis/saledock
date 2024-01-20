@@ -15,11 +15,13 @@ public class CustomerDAOImpl implements ICustomerDAO {
     }
 
     @Override
-    public void add(Customer obj) {
+    public Customer save(Customer obj) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.persist(obj);
+            Customer o = session.merge(obj);
             session.getTransaction().commit();
+
+            return o;
         }
     }
 
@@ -34,15 +36,6 @@ public class CustomerDAOImpl implements ICustomerDAO {
     public List<Customer> getAll() {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("FROM Customer", Customer.class).getResultList();
-        }
-    }
-
-    @Override
-    public void update(Customer obj) {
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            session.merge(obj);
-            session.getTransaction().commit();
         }
     }
 }

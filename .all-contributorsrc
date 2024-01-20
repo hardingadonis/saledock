@@ -1,7 +1,120 @@
 {
-    "projectName": "saledock",
-    "projectOwner": "hardingadonis",
-    "files": ["README.md"],
-    "contributorTemplate": "<a href=\"<%= contributor.profile %>\"><img src=\"<%= contributor.avatar_url %>\" width=\"<%= options.imageSize %>px;\" alt=\"\"/><br /><sub><b><%= contributor.name %></b></sub></a>",
-    "contributors": []
+  "projectName": "saledock",
+  "projectOwner": "hardingadonis",
+  "files": [
+    "README.md"
+  ],
+  "contributors": [
+    {
+      "login": "hardingadonis",
+      "name": "Minh Vương",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34091632?v=4",
+      "profile": "https://github.com/hardingadonis",
+      "contributions": [
+        "code",
+        "data",
+        "doc",
+        "maintenance",
+        "review",
+        "design",
+        "projectManagement"
+      ]
+    },
+    {
+      "login": "bakaqc",
+      "name": "Đinh Quốc Chương",
+      "avatar_url": "https://avatars.githubusercontent.com/u/126387856?v=4",
+      "profile": "https://github.com/bakaqc",
+      "contributions": [
+        "code",
+        "doc",
+        "review",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "htnghia1423",
+      "name": "Thunder",
+      "avatar_url": "https://avatars.githubusercontent.com/u/137130942?v=4",
+      "profile": "https://github.com/htnghia1423",
+      "contributions": [
+        "code",
+        "doc",
+        "review",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "yuhtnguyen",
+      "name": "Yuht",
+      "avatar_url": "https://avatars.githubusercontent.com/u/137138731?v=4",
+      "profile": "https://github.com/yuhtnguyen",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "linhlm0210",
+      "name": "linhlm0210",
+      "avatar_url": "https://avatars.githubusercontent.com/u/147788973?v=4",
+      "profile": "https://github.com/linhlm0210",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "thson58",
+      "name": "Nguyen Son",
+      "avatar_url": "https://avatars.githubusercontent.com/u/152074875?v=4",
+      "profile": "https://github.com/thson58",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "all-contributors",
+      "name": "All Contributors",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46410174?v=4",
+      "profile": "https://allcontributors.org",
+      "contributions": [
+        "plugin",
+        "tool"
+      ]
+    },
+    {
+      "login": "ImgBotApp",
+      "name": "Imgbot",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31427850?v=4",
+      "profile": "https://imgbot.net",
+      "contributions": [
+        "plugin",
+        "tool"
+      ]
+    },
+    {
+      "login": "code-factor",
+      "name": "Automated code reviews",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13309880?v=4",
+      "profile": "https://www.codefactor.io",
+      "contributions": [
+        "plugin",
+        "tool",
+        "bug",
+        "review"
+      ]
+    }
+  ],
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributorsPerLine": 5,
+  "linkToUsage": true,
+  "skipCi": true,
+  "imageSize": 100,
+  "contributorTemplate": "<a href=\"<%= contributor.profile %>\"><img src=\"<%= contributor.avatar_url %>\" width=\"<%= options.imageSize %>px;\" alt=\"\"/><br /><sub><b><%= contributor.name %></b></sub></a>"
 }

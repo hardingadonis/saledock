@@ -4,7 +4,7 @@
 
     <groupId>io.hardingadonis</groupId>
     <artifactId>saledock</artifactId>
-    <version>0.0.2</version>
+    <version>0.3.0</version>
     <packaging>war</packaging>
 
     <name>Sale Dock - v${project.version}</name>
