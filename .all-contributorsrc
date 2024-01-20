@@ -64,6 +64,17 @@
         "doc",
         "review"
       ]
+    },
+    {
+      "login": "thson58",
+      "name": "Nguyen Son",
+      "avatar_url": "https://avatars.githubusercontent.com/u/152074875?v=4",
+      "profile": "https://github.com/thson58",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
     }
   ],
   "commitType": "docs",
