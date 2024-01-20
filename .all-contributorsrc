@@ -18,6 +18,18 @@
         "review",
         "design"
       ]
+    },
+    {
+      "login": "bakaqc",
+      "name": "Đinh Quốc Chương",
+      "avatar_url": "https://avatars.githubusercontent.com/u/126387856?v=4",
+      "profile": "https://github.com/bakaqc",
+      "contributions": [
+        "code",
+        "doc",
+        "review",
+        "maintenance"
+      ]
     }
   ],
   "commitType": "docs",
