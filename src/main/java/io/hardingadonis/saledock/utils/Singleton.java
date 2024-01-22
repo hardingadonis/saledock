@@ -2,6 +2,7 @@ package io.hardingadonis.saledock.utils;
 
 import io.hardingadonis.saledock.dao.*;
 import io.hardingadonis.saledock.dao.impl.*;
+import io.hardingadonis.saledock.utils.impl.*;
 
 public class Singleton {
 
@@ -14,6 +15,8 @@ public class Singleton {
     public static IOrderDAO orderDAO;
 
     public static IProductDAO productDAO;
+    
+    public static IDBContext dbContext;
 
     static {
         categoryDAO = new CategoryDAOImpl();
@@ -25,5 +28,7 @@ public class Singleton {
         orderDAO = new OrderDAOImpl();
         
         productDAO = new ProductDAOImpl();
+        
+        dbContext = new DBContextMySQLImpl();
     }
 }
