@@ -11,7 +11,7 @@
                         <span class="d-none d-lg-inline me-2 text-gray-600 small">
                             ${sessionScope.employee.fullName}
                         </span>
-                        <img class="border rounded-circle img-profile" src="<%=request.getContextPath()%>/assets/img/avatars/employee.png">
+                        <img class="border rounded-circle img-profile" src="<%=request.getContextPath()%>/view/assets/images/icons/employee.png">
                     </a>
                     
                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
