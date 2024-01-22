@@ -23,7 +23,7 @@
           for (var bsCollapse of sidebarCollapseList) {
             bsCollapse.hide();
           }
-        };
+        }
       });
     }
 
@@ -35,7 +35,7 @@
         for (var bsCollapse of sidebarCollapseList) {
           bsCollapse.hide();
         }
-      };
+      }
     });
   }
 
