@@ -38,12 +38,18 @@
                                         </strong>
                                     </label>
                                     <select class="form-select form-select-sm" id="duration">
-                                        <option value="today" selected>Hôm nay</option>
-                                        <option value="yesterday">Hôm qua</option>
-                                        <option value="1-week-ago">1 tuần trước</option>
-                                        <option value="1-month-ago">1 tháng trước</option>
-                                        <option value="3-month-ago">3 tháng trước</option>
-                                        <option value="6-month-ago">6 tháng trước</option>
+                                        <option value="1" selected>1 tháng trước</option>
+                                        <option value="2">2 tháng trước</option>
+                                        <option value="3">3 tháng trước</option>
+                                        <option value="4">4 tháng trước</option>
+                                        <option value="5">5 tháng trước</option>
+                                        <option value="6">6 tháng trước</option>
+                                        <option value="7">7 tháng trước</option>
+                                        <option value="8">8 tháng trước</option>
+                                        <option value="9">9 tháng trước</option>
+                                        <option value="10">10 tháng trước</option>
+                                        <option value="11">11 tháng trước</option>
+                                        <option value="12">12 tháng trước</option>
                                     </select>
                                 </div>
 
