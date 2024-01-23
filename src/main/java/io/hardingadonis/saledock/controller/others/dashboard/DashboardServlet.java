@@ -13,9 +13,9 @@ public class DashboardServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        
+
         request.setAttribute("page", "dashboard");
-                
+
         request.getRequestDispatcher("/view/jsp/others/dashboard/dashboard.jsp").forward(request, response);
     }
 
