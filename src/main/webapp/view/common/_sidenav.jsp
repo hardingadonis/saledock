@@ -13,30 +13,30 @@
         
         <ul class="navbar-nav text-light" id="accordionSidebar">
             <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/dashboard">
+                <a class="nav-link ${requestScope.page eq 'dashboard' ? 'active' : ''}" href="<%=request.getContextPath()%>/dashboard" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="right" title="Bảng điều khiển">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Bảng điều khiển</span>
                 </a>
             </li>
                    
             <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/customer" title="Quản lí khách hàng">
+                <a class="nav-link ${requestScope.page eq 'customer' ? 'active' : ''}" href="<%=request.getContextPath()%>/customer" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="right" title="Quản lí khách hàng">
                     <i class="fas fa-table"></i>
-                    <span data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="right" title="Quản lí sản phẩm">
+                    <span>
                         Khách hàng
                     </span>
                 </a>
 
-                <a class="nav-link" href="<%=request.getContextPath()%>/product" title="Quản lí sản phẩm">
+                <a class="nav-link ${requestScope.page eq 'product' ? 'active' : ''}" href="<%=request.getContextPath()%>/product" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="right" title="Quản lí sản phẩm">
                     <i class="fas fa-table"></i>
-                    <span data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="right" title="Quản lí sản phẩm">
+                    <span>
                         Sản phẩm
                     </span>
                 </a>
 
-                <a class="nav-link" href="<%=request.getContextPath()%>/order" title="Quản lí đơn hàng">
+                <a class="nav-link ${requestScope.page eq 'order' ? 'active' : ''}" href="<%=request.getContextPath()%>/order"  data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="right" title="Quản lí đơn hàng">
                     <i class="fas fa-table"></i>
-                    <span data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="right" title="Quản lí đơn hàng">
+                    <span>
                         Đơn hàng
                     </span>
                 </a>
