@@ -14,24 +14,16 @@ public class DefaultFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-//        HttpServletRequest req = (HttpServletRequest) request;
-//        HttpServletResponse res = (HttpServletResponse) response;
-//
-//        String url = req.getServletPath();
-//
-//        if (url.equals("/") || url.contains(".jsp")) {
-//            HttpSession session = req.getSession();
-//
-//            if (session.getAttribute("employee") != null) {
-//                res.sendRedirect(req.getContextPath() + "/dashboard");
-//                
-//                return;
-//            }
-//
-//            res.sendRedirect(req.getContextPath() + "/login");
-//        } else {
-//            chain.doFilter(request, response);
-//        }
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
+        
+        String url = req.getServletPath();
+
+        if (url.equals("/") || url.contains(".jsp")) {
+            res.sendRedirect(req.getContextPath() + "/login");
+        } else {
+            chain.doFilter(request, response);
+        }
     }
 
     @Override
