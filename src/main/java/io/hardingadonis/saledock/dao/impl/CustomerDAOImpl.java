@@ -6,6 +6,7 @@ import io.hardingadonis.saledock.utils.*;
 import java.sql.*;
 import java.util.*;
 import org.hibernate.*;
+import org.json.simple.*;
 
 public class CustomerDAOImpl implements ICustomerDAO {
 
@@ -61,5 +62,41 @@ public class CustomerDAOImpl implements ICustomerDAO {
         }
 
         return count;
+    }
+
+    @Override
+    public String getTop10(Integer duration) {
+        JSONObject json = new JSONObject();
+
+        try {
+            Connection conn = Singleton.dbContext.getConnection();
+
+            PreparedStatement smt = conn.prepareStatement("SELECT `c`.`name`, COUNT(`o`.`id`) AS `count` FROM `customer` `c` JOIN `order` `o` ON `c`.`id` = `o`.`customer_id` WHERE `o`.`created_at` BETWEEN DATE_SUB(CURDATE(), INTERVAL ? MONTH) AND CURDATE() GROUP BY `c`.`id` ORDER BY `count` DESC LIMIT 10;");
+            smt.setInt(1, duration);
+
+            ResultSet rs = smt.executeQuery();
+
+            JSONArray labels = new JSONArray();
+            JSONArray dataset = new JSONArray();
+
+            while (rs.next()) {
+                String label = rs.getString(1);
+                Long data = rs.getLong(2);
+
+                labels.add(label);
+                dataset.add(data);
+            }
+
+            json.put("labels", labels);
+            json.put("dataset", dataset);
+
+            Singleton.dbContext.closeConnection(conn);
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        System.out.println(json.toJSONString());
+
+        return json.toJSONString();
     }
 }
