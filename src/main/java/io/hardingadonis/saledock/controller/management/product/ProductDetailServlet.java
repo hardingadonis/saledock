@@ -1,5 +1,6 @@
 package io.hardingadonis.saledock.controller.management.product;
 
+import io.hardingadonis.saledock.model.Category;
 import io.hardingadonis.saledock.model.Product;
 import io.hardingadonis.saledock.utils.Singleton;
 import java.io.*;
@@ -16,15 +17,25 @@ public class ProductDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        
-        //        Integer idP = (Integer) request.getAttribute("");
-        
-        Optional<Product> product = Singleton.productDAO.getByID(2);
-        
-        request.setAttribute("page", "dashboard");
-        request.setAttribute("product", product);
 
-        request.getRequestDispatcher("./view/jsp/management/product/product-detail.jsp").forward(request, response);
+//        Integer idP = (Integer) request.getParameter("id");
+        Optional<Product> product = Singleton.productDAO.getByID(2);
+
+        request.setAttribute("page", "product");
+
+        if (product.isPresent()) {
+            var p = product.get();
+            Category cat = p.getCategory();
+            if (p.getImageURL() == null) {
+
+            }
+            request.setAttribute("pro", p);
+            request.setAttribute("cat", cat);
+
+            request.getRequestDispatcher("/view/jsp/management/product/product-detail.jsp").forward(request, response);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/product");
+        }
     }
 
     @Override

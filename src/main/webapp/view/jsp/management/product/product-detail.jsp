@@ -1,5 +1,5 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="io.hardingadonis.saledock.utils.Singleton" %>
 
 <!DOCTYPE html>
@@ -46,7 +46,7 @@
                                                                 <label class="form-label" for="username">
                                                                     <strong>Mã sản phẩm</strong>
                                                                 </label>
-                                                                <input class="form-control" type="text" id="username" placeholder="${Singleton.productDAO}" name="username" readonly="">
+                                                                <input class="form-control" type="text" id="username" placeholder="${requestScope.pro.code}" name="username" readonly="">
                                                             </div>
                                                         </div>
                                                         <div class="col">
@@ -54,7 +54,7 @@
                                                                 <label class="form-label" for="email">
                                                                     <strong>Tên sản phẩm</strong>
                                                                 </label>
-                                                                <input class="form-control" type="email" id="email" placeholder="Nhập tên sản phẩm" name="email" readonly="">
+                                                                <input class="form-control" type="email" id="email" placeholder="${requestScope.pro.name}" name="email" readonly="">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -64,39 +64,54 @@
                                                                 <label class="form-label" for="username">
                                                                     <strong>Phân loại</strong>
                                                                 </label>
-                                                                <div class="dropdown float-none">
-                                                                    <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Dropdown </button>
-                                                                    <div class="dropdown-menu">
-                                                                        <a class="dropdown-item" href="#">First Item</a>
-                                                                        <a class="dropdown-item" href="#">Second Item</a>
-                                                                        <a class="dropdown-item" href="#">Third Item</a>
-                                                                    </div>
-                                                                </div>
+                                                                <input class="form-control" type="email" id="email" placeholder="${requestScope.cat.name}" name="email" readonly="">
                                                             </div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="email">
                                                                     <strong>Giá tiền</strong>
-                                                                </label>
-                                                                <input class="form-control" type="email" id="email-1" placeholder="Nhập giá tiền sản phẩm" name="email" readonly="">
+                                                                </label>                                  
+                                                                <input class="form-control" type="email" id="email-1" placeholder="${requestScope.pro.price}" name="email" readonly="">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
                                                         <div class="mb-3">
                                                             <label class="form-label" for="address">
-                                                                <strong>Ảnh minh họa</strong>
+                                                                <strong>Ảnh sản phẩm</strong>
                                                             </label>
-                                                            <input class="form-control" type="text" id="address" placeholder="Ảnh minh họa" name="address" readonly="">
+
+                                                            <br>
+
+                                                            <c:if test="${requestScope.pro.imageURL == null}">
+                                                                <label class="form-label" for="address">
+                                                                    Không có ảnh sản phẩm
+                                                                </label>
+                                                            </c:if>
+
+                                                            <c:if test="${requestScope.pro.imageURL != null}">
+                                                                <div class="tag" style="
+                                                                     background-image: url('<%=request.getContextPath()%>/${requestScope.pro.imageURL}');
+                                                                     background-repeat: no-repeat;
+                                                                     background-size: contain;
+                                                                     height: 300px;
+                                                                     width: 300px;">
+
+                                                                </div>
+                                                                                                                                   <!--<img src="<%=request.getContextPath()%>/${requestScope.pro.imageURL}">-->
+                                                            </c:if>
+
                                                         </div>
                                                         <div class="mb-3">
                                                             <label class="form-label" for="country">
                                                                 <strong>Mô tả chi tiết</strong>
                                                             </label>
-                                                            <textarea class="form-control" readonly=""></textarea>
+                                                            <textarea class="form-control" placeholder="${requestScope.pro.description}" readonly=""></textarea>
                                                         </div>
-                                                        <button class="btn btn-primary btn-sm" type="button">Quay lại</button>
+                                                        <button class="btn btn-primary btn-sm" type="button">
+                                                            <a class="back" href="<%=request.getContextPath()%>/product" style="color: white; text-decoration: none;">Quay lại</a>
+                                                        </button>
                                                     </div>
                                                 </form>
                                             </div>
