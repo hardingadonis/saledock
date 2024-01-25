@@ -1,13 +1,12 @@
 package io.hardingadonis.saledock.controller.management.product;
 
-import io.hardingadonis.saledock.model.Category;
-import io.hardingadonis.saledock.model.Product;
-import io.hardingadonis.saledock.utils.Singleton;
 import java.io.*;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
-import java.util.Optional;
+import java.util.*;
+import io.hardingadonis.saledock.model.*;
+import io.hardingadonis.saledock.utils.*;
 
 @WebServlet(name = "ProductDetailServlet", urlPatterns = {"/product-detail"})
 public class ProductDetailServlet extends HttpServlet {
