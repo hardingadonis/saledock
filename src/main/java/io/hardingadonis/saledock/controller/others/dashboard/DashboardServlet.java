@@ -14,13 +14,6 @@ public class DashboardServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
-        HttpSession session = request.getSession();
-
-        if (session.getAttribute("employee") == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
-
         request.setAttribute("page", "dashboard");
 
         request.getRequestDispatcher("/view/jsp/others/dashboard/dashboard.jsp").forward(request, response);

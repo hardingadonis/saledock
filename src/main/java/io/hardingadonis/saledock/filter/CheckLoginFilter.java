@@ -5,10 +5,9 @@ import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 
-@WebFilter(filterName = "DefaultFilter", urlPatterns = {"/*"})
-public class DefaultFilter implements Filter {
+public class CheckLoginFilter implements Filter {
 
-    public DefaultFilter() {
+    public CheckLoginFilter() {
     }
 
     @Override
@@ -17,10 +16,10 @@ public class DefaultFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        String url = req.getServletPath();
+        var session = req.getSession();
 
-        if (url.equals("/") || url.contains(".jsp")) {
-            res.sendRedirect(req.getContextPath() + "/dashboard");
+        if (session.getAttribute("employee") == null) {
+            res.sendRedirect(req.getContextPath() + "/login");
         } else {
             chain.doFilter(request, response);
         }
