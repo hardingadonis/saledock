@@ -105,7 +105,6 @@
                                                                      width: 300px;">
 
                                                                 </div>
-                                                                                                                                   <!--<img src="<%=request.getContextPath()%>/${requestScope.pro.imageURL}">-->
                                                             </c:if>
 
                                                         </div>
