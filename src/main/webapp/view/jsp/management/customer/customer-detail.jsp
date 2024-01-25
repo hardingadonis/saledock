@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title>Customer Detail - Brand</title>
         <link rel="icon" type="image/png" sizes="512x512" href="<%=request.getContextPath()%>/view/assets/images/favicon/favicon.png">
-        
+
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -67,32 +67,36 @@
                                             <div class="card-body">
                                                 <form>
                                                     <div class="row">
-                                                        
+
                                                         <div class="col">
-                                                            <div class="mb-3"><label class="form-label" for="username"><strong>Tên khách hàng</strong></label>
-                                                                <input class="form-control" type="text" id="username" placeholder="Nhập tên khách hàng" name="username" readonly="">
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="username"><strong>Tên khách hàng</strong></label>
+                                                                <input class="form-control" type="text" id="username" placeholder="${requestScope.cus.name}" name="username" readonly="">
                                                             </div>
                                                         </div>
 
                                                         <div class="col">
                                                             <div class="mb-3"><label class="form-label" for="email"><strong>Mã khách hàng</strong></label>
-                                                                <input class="form-control" type="email" id="email" placeholder="Mã khách hàng" name="email" readonly="">
+                                                                <input class="form-control" type="email" id="email" placeholder="${requestScope.cus.code}" name="email" readonly="">
                                                             </div>
                                                         </div>
-                                                        
+
                                                     </div>
-                                                    
+
                                                     <div class="mb-3">
-                                                        
+
                                                         <div class="mb-3"><label class="form-label" for="address"><strong>Địa chỉ</strong></label>
-                                                            <input class="form-control" type="text" id="address" placeholder="Nhập địa chỉ của khách hàng" name="address" readonly="">
+                                                            <input class="form-control" type="text" id="address" placeholder="${requestScope.cus.address}" name="address" readonly="">
                                                         </div>
-                                                        
+
                                                         <div class="mb-3"><label class="form-label" for="country"><strong>Email</strong></label>
-                                                            <input class="form-control" type="text" id="country" placeholder="Nhập email khách hàng" name="country" readonly="">
+                                                            <input class="form-control" type="text" id="country" placeholder="${requestScope.cus.email}" name="country" readonly="">
                                                         </div>
-                                                        
-                                                        <button class="btn btn-primary btn-sm" type="button">Quay lại</button>
+
+                                                        <button class="btn btn-primary btn-sm" type="button">
+                                                            <a class="back" href="<%=request.getContextPath()%>/customer" style="color: white; text-decoration: none;">Quay lại</a>
+                                                        </button>
+
                                                     </div>
                                                 </form>
                                             </div>
