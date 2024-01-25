@@ -28,9 +28,7 @@ public class ProductDetailServlet extends HttpServlet {
         if (product.isPresent()) {
             var p = product.get();
             Category cat = p.getCategory();
-            if (p.getImageURL() == null) {
 
-            }
             request.setAttribute("pro", p);
             request.setAttribute("cat", cat);
 
