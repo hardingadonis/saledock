@@ -18,9 +18,4 @@ public class DashboardServlet extends HttpServlet {
 
         request.getRequestDispatcher("/view/jsp/others/dashboard/dashboard.jsp").forward(request, response);
     }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
 }
