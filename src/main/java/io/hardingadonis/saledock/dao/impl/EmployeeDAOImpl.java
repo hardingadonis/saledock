@@ -38,4 +38,13 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
             return session.createQuery("FROM Employee", Employee.class).getResultList();
         }
     }
+
+    @Override
+    public Optional<Employee> getByCode(String code) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "FROM Employee WHERE code = :code";
+            return Optional.ofNullable(session.createQuery(hql, Employee.class).setParameter("code", code).uniqueResult());
+        }
+    }
+
 }
