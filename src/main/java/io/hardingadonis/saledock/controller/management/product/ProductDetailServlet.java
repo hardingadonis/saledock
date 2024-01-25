@@ -18,27 +18,29 @@ public class ProductDetailServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
 
         String pId = request.getParameter("id");
-        
+
         if (pId == null) {
             response.sendError(404);
-        } else {
-            Integer idP = Integer.parseInt(pId);
-            Optional<Product> product = Singleton.productDAO.getByID(idP);
 
-            request.setAttribute("page", "product");
-
-            if (product.isPresent()) {
-                var p = product.get();
-                Category cat = p.getCategory();
-
-                request.setAttribute("pro", p);
-                request.setAttribute("cat", cat);
-
-                request.getRequestDispatcher("/view/jsp/management/product/product-detail.jsp").forward(request, response);
-            } else {
-                response.sendRedirect(request.getContextPath() + "/product");
-            }
+            return;
         }
+        Integer idP = Integer.parseInt(pId);
+        Optional<Product> product = Singleton.productDAO.getByID(idP);
+
+        request.setAttribute("page", "product");
+
+        if (product.isPresent()) {
+            var p = product.get();
+            Category cat = p.getCategory();
+
+            request.setAttribute("pro", p);
+            request.setAttribute("cat", cat);
+
+            request.getRequestDispatcher("/view/jsp/management/product/product-detail.jsp").forward(request, response);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/product");
+        }
+
     }
 
     @Override
