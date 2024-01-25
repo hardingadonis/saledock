@@ -49,7 +49,6 @@ function Validator(options) {
 
         return !errorMessage;
     }
-    ;
 
     //Lấy element của form cần validate
     var formElement = document.querySelector(options.form);
