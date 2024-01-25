@@ -20,7 +20,7 @@ public class ProductDetailServlet extends HttpServlet {
         String pId = request.getParameter("id");
         
         if (pId == null) {
-            response.sendRedirect(request.getContextPath() + "/404.jsp");
+            response.sendError(404);
         } else {
             Integer idP = Integer.parseInt(pId);
             Optional<Product> product = Singleton.productDAO.getByID(idP);
