@@ -1,12 +1,12 @@
 package io.hardingadonis.saledock.controller.management.customer;
 
-import io.hardingadonis.saledock.model.Customer;
-import io.hardingadonis.saledock.utils.Singleton;
+import io.hardingadonis.saledock.model.*;
+import io.hardingadonis.saledock.utils.*;
 import java.io.*;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
-import java.util.Optional;
+import java.util.*;
 
 @WebServlet(name = "CustomerDetailServlet", urlPatterns = {"/customer-detail"})
 public class CustomerDetailServlet extends HttpServlet {
@@ -19,9 +19,14 @@ public class CustomerDetailServlet extends HttpServlet {
 
         request.setAttribute("page", "customer");
 
-        Integer id_customer = Integer.parseInt(request.getParameter("id"));
+        String id = request.getParameter("id");
+        if (id == null) {
+            response.sendError(404);      
+            return;
+        }
+                
+        Integer id_customer = Integer.parseInt(id);
         Optional<Customer> customer = Singleton.customerDAO.getByID(id_customer);
-
 
         if (customer.isPresent()) {
             var cus = customer.get();
