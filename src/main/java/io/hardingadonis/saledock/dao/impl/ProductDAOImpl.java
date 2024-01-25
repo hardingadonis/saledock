@@ -62,10 +62,4 @@ public class ProductDAOImpl implements IProductDAO {
 
         return count;
     }
-    
-    public static void main(String[] args) {
-        Optional<Product> p = Singleton.productDAO.getByID(1);
-        System.out.println(p.get().getImageURL());
-        
-    }
 }

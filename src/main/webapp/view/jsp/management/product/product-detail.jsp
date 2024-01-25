@@ -73,6 +73,12 @@
                                                                     <strong>Giá tiền</strong>
                                                                 </label>                                  
                                                                 <input class="form-control" type="email" id="email-1" placeholder="${requestScope.pro.price}" name="email" readonly="">
+                                                                <script>
+                                                                    let inputElement = document.getElementById("email-1");
+                                                                    let placeholderText = inputElement.placeholder;
+                                                                    let formattedNum = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(placeholderText);
+                                                                    inputElement.placeholder = formattedNum;
+                                                                </script>
                                                             </div>
                                                         </div>
                                                     </div>

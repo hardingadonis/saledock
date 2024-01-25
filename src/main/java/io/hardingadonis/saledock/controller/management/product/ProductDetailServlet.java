@@ -18,8 +18,10 @@ public class ProductDetailServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
-//        Integer idP = (Integer) request.getParameter("id");
-        Optional<Product> product = Singleton.productDAO.getByID(2);
+//        Integer idP = Integer.parseInt(request.getParameter("id"));
+//        Optional<Product> product = Singleton.productDAO.getByID(idP);
+
+        Optional<Product> product = Singleton.productDAO.getByID(2);// Test id product cụ thể
 
         request.setAttribute("page", "product");
 
