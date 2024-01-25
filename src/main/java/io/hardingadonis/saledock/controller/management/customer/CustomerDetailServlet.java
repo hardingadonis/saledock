@@ -19,10 +19,9 @@ public class CustomerDetailServlet extends HttpServlet {
 
         request.setAttribute("page", "customer");
 
-//        Integer id_customer = Integer.parseInt(request.getParameter("id"));
-//        Optional<Customer> customer = Singleton.productDAO.getByID(id_customer);
+        Integer id_customer = Integer.parseInt(request.getParameter("id"));
+        Optional<Customer> customer = Singleton.customerDAO.getByID(id_customer);
 
-        Optional<Customer> customer = Singleton.customerDAO.getByID(1);
 
         if (customer.isPresent()) {
             var cus = customer.get();
