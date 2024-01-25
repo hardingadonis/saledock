@@ -114,9 +114,11 @@
                                                             </label>
                                                             <textarea class="form-control" placeholder="${requestScope.pro.description}" readonly=""></textarea>
                                                         </div>
-                                                        <button class="btn btn-primary btn-sm" type="button">
-                                                            <a class="back" href="<%=request.getContextPath()%>/product" style="color: white; text-decoration: none;">Quay lại</a>
-                                                        </button>
+                                                        <a class="back" href="<%=request.getContextPath()%>/product">
+                                                            <button class="btn btn-primary btn-sm" type="button">
+                                                                Quay lại
+                                                            </button>
+                                                        </a>
                                                     </div>
                                                 </form>
                                             </div>
