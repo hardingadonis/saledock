@@ -6,29 +6,29 @@ import io.hardingadonis.saledock.utils.impl.*;
 
 public class Singleton {
 
-    public static ICategoryDAO categoryDAO;
+  public static ICategoryDAO categoryDAO;
 
-    public static ICustomerDAO customerDAO;
+  public static ICustomerDAO customerDAO;
 
-    public static IEmployeeDAO employeeDAO;
+  public static IEmployeeDAO employeeDAO;
 
-    public static IOrderDAO orderDAO;
+  public static IOrderDAO orderDAO;
 
-    public static IProductDAO productDAO;
-    
-    public static IDBContext dbContext;
+  public static IProductDAO productDAO;
 
-    static {
-        categoryDAO = new CategoryDAOImpl();
-        
-        customerDAO = new CustomerDAOImpl();
-        
-        employeeDAO = new EmployeeDAOImpl();
-        
-        orderDAO = new OrderDAOImpl();
-        
-        productDAO = new ProductDAOImpl();
-        
-        dbContext = new DBContextMySQLImpl();
-    }
+  public static IDBContext dbContext;
+
+  static {
+    categoryDAO = new CategoryDAOImpl();
+
+    customerDAO = new CustomerDAOImpl();
+
+    employeeDAO = new EmployeeDAOImpl();
+
+    orderDAO = new OrderDAOImpl();
+
+    productDAO = new ProductDAOImpl();
+
+    dbContext = new DBContextMySQLImpl();
+  }
 }

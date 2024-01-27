@@ -4,7 +4,7 @@ import java.sql.*;
 
 public interface IDBContext {
 
-    public Connection getConnection();
+  public Connection getConnection();
 
-    public void closeConnection(Connection connection);
+  public void closeConnection(Connection connection);
 }

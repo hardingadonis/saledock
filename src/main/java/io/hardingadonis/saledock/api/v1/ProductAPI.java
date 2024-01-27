@@ -7,11 +7,9 @@ import jakarta.ws.rs.core.*;
 @Path("v1/product")
 public class ProductAPI {
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getStatistic(
-            @QueryParam("duration") Integer duration
-    ) {
-        return Singleton.productDAO.getTop10(duration);
-    }
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  public String getStatistic(@QueryParam("duration") Integer duration) {
+    return Singleton.productDAO.getTop10(duration);
+  }
 }

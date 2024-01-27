@@ -4,5 +4,5 @@ import io.hardingadonis.saledock.model.*;
 
 public interface IProductDAO extends IDAO<Product> {
 
-    public String getTop10(Integer duration);
+  public String getTop10(Integer duration);
 }
