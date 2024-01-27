@@ -16,8 +16,8 @@
     </head>
 
     <body id="page-top">
-        
-        <%@ include file="../../common/sidenav.jsp"%>       
+
+        <%@ include file="../../common/sidenav.jsp"%>
         <%@ include file="../../common/nav.jsp"%>
         <div id="wrapper">
             <nav class="navbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 navbar-dark">
@@ -67,7 +67,7 @@
                                             </tr>
                                         </thead>
                                         <c:forEach items="${sessionScope.listC}" var="customer">
-                                            <tbody>                                        
+                                            <tbody>
                                                 <tr>
                                                     <td><img class="rounded-circle me-2" width="30" height="30" src="<%=request.getContextPath()%>/view/assets/images/icons/customer.png">${customer.name}</td>
                                                     <td>${customer.code}</td>
