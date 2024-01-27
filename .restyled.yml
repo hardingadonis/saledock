@@ -1,0 +1,5 @@
+restylers_version: stable
+restylers:
+  - clang-format:
+      arguments: ['--style="{BasedOnStyle: llvm, IndentWidth: 4}"']
+  - '*'
