@@ -1,13 +1,13 @@
 package io.hardingadonis.saledock.controller.management.customer;
 
-import io.hardingadonis.saledock.dao.impl.CustomerDAOImpl;
+
 import io.hardingadonis.saledock.model.Customer;
 import io.hardingadonis.saledock.utils.Singleton;
 import java.io.*;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
-import java.util.Optional;
+
 
 @WebServlet(name = "AddCustomerServlet", urlPatterns = {"/add-customer"})
 public class AddCustomerServlet extends HttpServlet {
@@ -29,24 +29,21 @@ public class AddCustomerServlet extends HttpServlet {
             throws ServletException, IOException {
 
        
-            CustomerDAOImpl dao = new CustomerDAOImpl();
 
             String name = request.getParameter("name");
             String code = request.getParameter("code");
             String address = request.getParameter("address");
             String email = request.getParameter("email");
 
-            if (name != null && code != null && address != null && email != null) {
+            if (name.length() > 0 && code.length() > 0  && address.length() > 0  && email.length() > 0 ) {
                 Customer customer = new Customer();
                 customer.setName(name);
                 customer.setCode(code);
                 customer.setAddress(address);
                 customer.setEmail(email);
-
-                boolean result = dao.insert(customer);
-                if(result == true){
-                    response.sendRedirect("./customer");
-                }
+                Singleton.customerDAO.save(customer);
+                
+                response.sendRedirect("./customer");
                 
             }
             response.sendRedirect("./add-customer");

@@ -156,9 +156,5 @@ public class OrderDAOImpl implements IOrderDAO {
     }
     
     
-    @Override
-    public boolean insert (Order customer){
-        
-        return false;
-    }
+
 }

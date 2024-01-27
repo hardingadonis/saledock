@@ -14,5 +14,4 @@ public interface IDAO<T> {
         return 0L;
     }
     
-    public boolean insert (T t);
 }

@@ -101,9 +101,5 @@ public class ProductDAOImpl implements IProductDAO {
     }
     
     
-    @Override
-    public boolean insert (Product customer){
-        
-        return false;
-    }
+
 }

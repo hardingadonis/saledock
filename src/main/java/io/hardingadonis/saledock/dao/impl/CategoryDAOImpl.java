@@ -39,9 +39,5 @@ public class CategoryDAOImpl implements ICategoryDAO {
         }
     }
     
-    @Override
-    public boolean insert (Category customer){
-        
-        return false;
-    }
+
 }
