@@ -47,4 +47,10 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
         }
     }
 
+    
+    @Override
+    public boolean insert (Employee customer){
+        
+        return false;
+    }
 }

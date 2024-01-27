@@ -13,4 +13,6 @@ public interface IDAO<T> {
     default Long count() {
         return 0L;
     }
+    
+    public boolean insert (T t);
 }

@@ -154,4 +154,11 @@ public class OrderDAOImpl implements IOrderDAO {
 
         return json.toJSONString();
     }
+    
+    
+    @Override
+    public boolean insert (Order customer){
+        
+        return false;
+    }
 }

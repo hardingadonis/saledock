@@ -38,4 +38,10 @@ public class CategoryDAOImpl implements ICategoryDAO {
             return session.createQuery("FROM Category", Category.class).getResultList();
         }
     }
+    
+    @Override
+    public boolean insert (Category customer){
+        
+        return false;
+    }
 }

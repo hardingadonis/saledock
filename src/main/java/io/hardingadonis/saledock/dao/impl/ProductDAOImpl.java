@@ -99,4 +99,11 @@ public class ProductDAOImpl implements IProductDAO {
 
         return json.toJSONString();
     }
+    
+    
+    @Override
+    public boolean insert (Product customer){
+        
+        return false;
+    }
 }

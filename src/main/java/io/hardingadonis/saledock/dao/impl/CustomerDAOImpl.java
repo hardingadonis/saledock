@@ -99,4 +99,23 @@ public class CustomerDAOImpl implements ICustomerDAO {
 
         return json.toJSONString();
     }
+    
+    @Override
+    public boolean insert (Customer customer){
+        try {
+            if(sessionFactory != null){
+                try (Session session = sessionFactory.openSession()) {
+                    Transaction transaction = session.beginTransaction();
+                    session.save(customer);
+                    transaction.commit();
+                }
+                return  true;
+            }
+        } catch (HibernateException e) {
+        }
+        System.out.println("FFFFFFFFFFFFFFFFFFFFFFFFF");
+        
+        return false;
+    }
+        
 }
