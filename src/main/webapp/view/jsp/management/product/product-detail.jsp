@@ -71,7 +71,7 @@
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="email">
                                                                     <strong>Giá tiền</strong>
-                                                                </label>                                  
+                                                                </label>
                                                                 <input class="form-control" type="email" id="email-1" placeholder="${requestScope.pro.price}" name="email" readonly="">
                                                                 <script>
                                                                     let inputElement = document.getElementById("email-1");

@@ -8,9 +8,9 @@
                 <span>SALE DOCK</span>
             </div>
         </a>
-        
+
         <hr class="sidebar-divider my-0">
-        
+
         <ul class="navbar-nav text-light" id="accordionSidebar">
             <li class="nav-item">
                 <a class="nav-link ${requestScope.page eq 'dashboard' ? 'active' : ''}" href="<%=request.getContextPath()%>/dashboard" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="right" title="Bảng điều khiển">
@@ -18,7 +18,7 @@
                     <span>Bảng điều khiển</span>
                 </a>
             </li>
-                   
+
             <li class="nav-item">
                 <a class="nav-link ${requestScope.page eq 'customer' ? 'active' : ''}" href="<%=request.getContextPath()%>/customer" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="right" title="Quản lí khách hàng">
                     <i class="fas fa-table"></i>
@@ -42,7 +42,7 @@
                 </a>
             </li>
         </ul>
-        
+
         <div class="text-center d-none d-md-inline">
             <button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>
         </div>
