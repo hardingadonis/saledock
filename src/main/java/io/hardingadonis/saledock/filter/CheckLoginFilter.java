@@ -16,13 +16,13 @@ public class CheckLoginFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        var session = req.getSession();
-
-        if (session.getAttribute("employee") == null) {
-            res.sendRedirect(req.getContextPath() + "/login");
-        } else {
+//        var session = req.getSession();
+//
+//        if (session.getAttribute("employee") == null) {
+//            res.sendRedirect(req.getContextPath() + "/login");
+//        } else {
             chain.doFilter(request, response);
-        }
+//        }
     }
 
     @Override
