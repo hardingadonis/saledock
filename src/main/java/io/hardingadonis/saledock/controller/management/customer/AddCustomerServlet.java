@@ -18,9 +18,11 @@ public class AddCustomerServlet extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-
+        request.setAttribute("page", "customer");
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/jsp/management/customer/add-customer.jsp");
+        
         requestDispatcher.forward(request, response);
+        
 
     }
 
