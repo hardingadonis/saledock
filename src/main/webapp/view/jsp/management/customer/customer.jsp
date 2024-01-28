@@ -23,17 +23,6 @@
             <div class="d-flex flex-column" id="content-wrapper">
                 <div id="content">
                     <%@include file="../../../common/_nav.jsp" %>
-                    <nav class="navbar navbar-expand bg-white shadow mb-4 topbar static-top navbar-light">
-                        <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                            <ul class="navbar-nav flex-nowrap ms-auto">
-                                <li class="nav-item dropdown no-arrow">
-                                    <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small">Valerie Luna</span><img class="border rounded-circle img-profile" src="<%=request.getContextPath()%>assets/img/avatars/employee.png"></a>
-                                        <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
                     <div class="container-fluid">
                         <h3 class="text-dark mb-4">Khách hàng</h3>
                         <div class="card shadow">
@@ -51,7 +40,7 @@
                                                 <th>Thao tác</th>
                                             </tr>
                                         </thead>
-                                        <c:forEach items="${sessionScope.listC}" var="customer">
+                                        <c:forEach items="${customers}" var="customer">
                                             <tbody>                                        
                                                 <tr>
                                                     <td><img class="rounded-circle me-2" width="30" height="30" src="<%=request.getContextPath()%>/view/assets/images/icons/customer.png">${customer.name}</td>
@@ -95,12 +84,7 @@
                    <%@include file="../../../common/_footer.jsp" %>                         
             </div>
             
-            <%@include file="../../../common/_goback.jsp" %>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-        <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
-        <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
-        <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
+
 
     </body>
 
