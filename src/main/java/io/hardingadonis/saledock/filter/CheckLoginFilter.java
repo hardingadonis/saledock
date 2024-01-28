@@ -18,11 +18,12 @@ public class CheckLoginFilter implements Filter {
 
         var session = req.getSession();
 
-        if (session.getAttribute("employee") == null) {
-            res.sendRedirect(req.getContextPath() + "/login");
-        } else {
-            chain.doFilter(request, response);
-        }
+//        if (session.getAttribute("employee") == null) {
+//            res.sendRedirect(req.getContextPath() + "/login");
+//        } else {
+//            
+//        }
+        chain.doFilter(request, response);
     }
 
     @Override
