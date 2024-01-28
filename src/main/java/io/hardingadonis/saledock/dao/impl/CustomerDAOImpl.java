@@ -99,7 +99,4 @@ public class CustomerDAOImpl implements ICustomerDAO {
 
         return json.toJSONString();
     }
-    
-
-        
 }

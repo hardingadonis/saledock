@@ -105,7 +105,7 @@ public class OrderDAOImpl implements IOrderDAO {
             while (rs.next()) {
                 Long data = rs.getLong(1);
                 String label = rs.getString(2);
-                
+
                 labels.add(label);
                 dataset.add(data);
             }
@@ -120,14 +120,14 @@ public class OrderDAOImpl implements IOrderDAO {
 
         return json.toJSONString();
     }
-    
+
     @Override
     public String statisticByStatus(Integer duration) {
         JSONObject json = new JSONObject();
 
         try {
             Connection conn = Singleton.dbContext.getConnection();
-            
+
             PreparedStatement smt = conn.prepareStatement("SELECT COUNT(*), CASE WHEN `status` = 'PENDING' THEN 'Đang xử lý' WHEN `status` = 'SHIPPING' THEN 'Đang giao hàng' WHEN `status` = 'DONE' THEN 'Đã hoàn thành' WHEN `status` = 'CANCELLED' THEN 'Đã hủy' END FROM `order` WHERE `created_at` BETWEEN DATE_SUB(CURDATE(), INTERVAL ? MONTH) AND CURDATE() GROUP BY `status`");
             smt.setInt(1, duration);
 
@@ -139,7 +139,7 @@ public class OrderDAOImpl implements IOrderDAO {
             while (rs.next()) {
                 Long data = rs.getLong(1);
                 String label = rs.getString(2);
-                
+
                 labels.add(label);
                 dataset.add(data);
             }
@@ -154,7 +154,4 @@ public class OrderDAOImpl implements IOrderDAO {
 
         return json.toJSONString();
     }
-    
-    
-
 }

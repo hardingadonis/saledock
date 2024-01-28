@@ -46,7 +46,4 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
             return Optional.ofNullable(session.createQuery(hql, Employee.class).setParameter("code", code).uniqueResult());
         }
     }
-
-    
-
 }

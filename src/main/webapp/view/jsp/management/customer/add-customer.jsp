@@ -8,7 +8,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <title>Add Customer - Brand</title>
+        <title>Sale Dock - Thêm khách hàng</title>
         <link rel="icon" type="image/png" sizes="512x512" href="<%=request.getContextPath()%>/view/assets/images/favicon/favicon.png">
 
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/bootstrap.min.css">
@@ -29,36 +29,6 @@
                         <h3 class="text-dark mb-4">Thêm khách hàng mới</h3>
                         <div class="row justify-content-center mb-3">
                             <div class="col-lg-8">
-                                <div class="row mb-3 d-none">
-                                    <div class="col">
-                                        <div class="card text-white bg-primary shadow">
-                                            <div class="card-body">
-                                                <div class="row mb-2">
-                                                    <div class="col">
-                                                        <p class="m-0">Peformance</p>
-                                                        <p class="m-0"><strong>65.2%</strong></p>
-                                                    </div>
-                                                    <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                                                </div>
-                                                <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="card text-white bg-success shadow">
-                                            <div class="card-body">
-                                                <div class="row mb-2">
-                                                    <div class="col">
-                                                        <p class="m-0">Peformance</p>
-                                                        <p class="m-0"><strong>65.2%</strong></p>
-                                                    </div>
-                                                    <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                                                </div>
-                                                <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="card shadow mb-3">

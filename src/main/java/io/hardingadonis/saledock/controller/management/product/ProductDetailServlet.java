@@ -24,7 +24,7 @@ public class ProductDetailServlet extends HttpServlet {
 
             return;
         }
-        Integer idP = Integer.parseInt(pId);
+        Integer idP = Integer.valueOf(pId);
         Optional<Product> product = Singleton.productDAO.getByID(idP);
 
         request.setAttribute("page", "product");

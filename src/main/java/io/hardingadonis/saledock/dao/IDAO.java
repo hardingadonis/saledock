@@ -13,5 +13,4 @@ public interface IDAO<T> {
     default Long count() {
         return 0L;
     }
-    
 }

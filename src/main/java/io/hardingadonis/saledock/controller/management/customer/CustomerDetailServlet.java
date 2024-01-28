@@ -25,7 +25,7 @@ public class CustomerDetailServlet extends HttpServlet {
             return;
         }
                 
-        Integer id_customer = Integer.parseInt(id);
+        Integer id_customer = Integer.valueOf(id);
         Optional<Customer> customer = Singleton.customerDAO.getByID(id_customer);
 
         if (customer.isPresent()) {

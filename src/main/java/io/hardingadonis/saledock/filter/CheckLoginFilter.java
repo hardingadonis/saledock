@@ -2,7 +2,6 @@ package io.hardingadonis.saledock.filter;
 
 import java.io.*;
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 
 public class CheckLoginFilter implements Filter {
@@ -23,8 +22,8 @@ public class CheckLoginFilter implements Filter {
         } else {
             chain.doFilter(request, response);
         }
-
     }
+
     @Override
     public void destroy() {
     }
