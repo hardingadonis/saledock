@@ -6,3 +6,5 @@ public interface ICustomerDAO extends IDAO<Customer> {
     
     public String getTop10(Integer duration);
 }
+    
+  
