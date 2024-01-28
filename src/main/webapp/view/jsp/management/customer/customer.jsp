@@ -17,9 +17,9 @@
 
     <body id="page-top">
         
-        <%@ include file="../../common/sidenav.jsp"%>       
-        <%@ include file="../../common/nav.jsp"%>
+
         <div id="wrapper">
+            <%@include file="../../../common/_sidenav.jsp" %>
             <nav class="navbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 navbar-dark">
                 <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
                         <div class="sidebar-brand-icon rotate-n-15"><i class="la la-balance-scale"></i></div>
@@ -38,6 +38,7 @@
             </nav>
             <div class="d-flex flex-column" id="content-wrapper">
                 <div id="content">
+                    <%@include file="../../../common/_nav.jsp" %>
                     <nav class="navbar navbar-expand bg-white shadow mb-4 topbar static-top navbar-light">
                         <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                             <ul class="navbar-nav flex-nowrap ms-auto">
@@ -106,13 +107,17 @@
                         </div>
                     </div>
                 </footer>
+                                            
+                   <%@include file="../../../common/_footer.jsp" %>                         
             </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+            
+            <%@include file="../../../common/_goback.jsp" %>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
-        <%@ include file="../../common/footer.jsp"%>
-        <%@ include file="../../common/goback.jsp"%>
+
     </body>
 
 </html>
