@@ -31,4 +31,8 @@ public class Singleton {
         
         dbContext = new DBContextMySQLImpl();
     }
+
+    public static CustomerDAOImpl getCustomerDAO() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
