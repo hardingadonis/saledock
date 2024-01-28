@@ -23,8 +23,8 @@ public class CheckLoginFilter implements Filter {
         } else {
             chain.doFilter(request, response);
         }
-    }
 
+    }
     @Override
     public void destroy() {
     }
