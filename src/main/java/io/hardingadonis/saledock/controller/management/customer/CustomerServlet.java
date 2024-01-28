@@ -2,6 +2,7 @@ package io.hardingadonis.saledock.controller.management.customer;
 
 import io.hardingadonis.saledock.dao.impl.CustomerDAOImpl;
 import io.hardingadonis.saledock.model.Customer;
+import io.hardingadonis.saledock.utils.Singleton;
 import java.io.*;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
@@ -14,22 +15,15 @@ public class CustomerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
+        CustomerDAOImpl customerDAO = Singleton.getCustomerDAO();
 
-        HttpSession session = request.getSession();
+        List<Customer> customers = customerDAO.getAll();
 
-
-        CustomerDAOImpl customerDAO = new CustomerDAOImpl();
-
-
-        List<Customer> listC = customerDAO.getAll();
-
-
-        session.setAttribute("listC", listC);
-
+        request.setAttribute("customers", customers);
 
         request.getRequestDispatcher("/view/jsp/management/customer/customer.jsp").forward(request, response);
 
