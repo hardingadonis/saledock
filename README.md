@@ -100,3 +100,4 @@ docker-compose up -d
 
 ## Licenses:
 - [Sale Dock](https://github.com/hardingadonis/saledock) is under the [Apache-2.0 license](https://github.com/hardingadonis/saledock/blob/main/LICENSE).
+- [favicon](https://github.com/hardingadonis/saledock/blob/main/src/main/webapp/assets/images/favicon/favicon.png) is under the [flaticon](https://www.flaticon.com/free-icon/sale_791968).

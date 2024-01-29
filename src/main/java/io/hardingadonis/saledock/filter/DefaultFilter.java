@@ -20,15 +20,7 @@ public class DefaultFilter implements Filter {
         String url = req.getServletPath();
 
         if (url.equals("/") || url.contains(".jsp")) {
-            HttpSession session = req.getSession();
-
-            if (session.getAttribute("employee") != null) {
-                res.sendRedirect(req.getContextPath() + "/dashboard");
-                
-                return;
-            }
-
-            res.sendRedirect(req.getContextPath() + "/login");
+            res.sendRedirect(req.getContextPath() + "/dashboard");
         } else {
             chain.doFilter(request, response);
         }

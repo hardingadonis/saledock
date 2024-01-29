@@ -9,4 +9,8 @@ public interface IDAO<T> {
     public Optional<T> getByID(Integer ID);
 
     public List<T> getAll();
+
+    default Long count() {
+        return 0L;
+    }
 }
