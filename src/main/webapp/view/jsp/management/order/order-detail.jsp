@@ -2,9 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="io.hardingadonis.saledock.utils.Singleton" %>
 
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Date" %>
-
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -113,9 +110,23 @@
 
                                                         <div class="col">
                                                             <div class="mb-3"><label class="form-label" for="email"><strong>Trạng thái</strong></label>
-                                                                <input class="form-control" type="email" id="email-2" value ="${requestScope.ord.status}" name="email" readonly="">
+                                                                <c:choose>
+                                                                    <c:when test="${requestScope.ord.status.toString() == 'PENDING'}">
+                                                                        <input class="form-control" type="email" id="email-2" value="Đang xử lý" name="email" readonly="">
+                                                                    </c:when>
+                                                                    <c:when test="${requestScope.ord.status == 'DONE'}">
+                                                                        <input class="form-control" type="email" id="email-2" value="Đã xong" name="email" readonly="">
+                                                                    </c:when>
+                                                                    <c:when test="${requestScope.ord.status == 'CANCELLED'}">
+                                                                        <input class="form-control" type="email" id="email-2" value="Đã hủy" name="email" readonly="">
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <input class="form-control" type="email" id="email-2" value="Đang giao" name="email" readonly="">
+                                                                    </c:otherwise>
+                                                                </c:choose>
+
+
                                                             </div>
-                                                            
                                                         </div>
                                                     </div>
                                                     <div class="row">
