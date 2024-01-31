@@ -54,5 +54,4 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
             return Optional.ofNullable(session.createQuery(hql, Employee.class).setParameter("email", email).uniqueResult());
         }
     }
-
 }

@@ -40,7 +40,7 @@ public class ProductDAOImpl implements IProductDAO {
             return session.createQuery("FROM Product", Product.class).getResultList();
         }
     }
-    
+
     @Override
     public Long count() {
         Long count = 0L;
@@ -63,7 +63,7 @@ public class ProductDAOImpl implements IProductDAO {
 
         return count;
     }
-    
+
     @Override
     public String getTop10(Integer duration) {
         JSONObject json = new JSONObject();
