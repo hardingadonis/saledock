@@ -47,4 +47,12 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
         }
     }
 
+    @Override
+    public Optional<Employee> getByEmail(String email) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "FROM Employee WHERE email = :email";
+            return Optional.ofNullable(session.createQuery(hql, Employee.class).setParameter("email", email).uniqueResult());
+        }
+    }
+
 }
