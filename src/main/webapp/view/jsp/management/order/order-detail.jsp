@@ -77,7 +77,14 @@
                                                         <div class="col">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="email"><strong>Ngày tạo</strong></label>
-                                                                <input class="form-control" type="email" id="email" value ="${requestScope.ord.createdAt}" name="email" readonly="">
+                                                                <input class="form-control" type="email" id="createAt" value ="${requestScope.ord.createdAt}" name="email" readonly="">
+                                                                <script>
+                                                                    window.onload = function () {
+                                                                        var input = document.getElementById('createAt');
+                                                                        var date = new Date(input.value);
+                                                                        input.value = date.toLocaleString();
+                                                                    }
+                                                                </script>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -172,7 +179,9 @@
                                                             <label class="form-label" for="country"><strong>Ghi chú</strong></label><textarea class="form-control" readonly=""></textarea>
                                                         </div>
 
-                                                        <button class="btn btn-primary btn-sm" type="button">Quay lại</button>
+                                                        <button class="btn btn-primary btn-sm" type="button">
+                                                            <a class="back" href="<%=request.getContextPath()%>/order" style="color: white; text-decoration: none;">Quay lại</a>
+                                                        </button>
                                                     </div>
                                                 </form>
                                             </div>
