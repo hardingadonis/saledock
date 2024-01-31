@@ -39,27 +39,57 @@
                                                 <form>
                                                     <div class="row">
                                                         <div class="col">
-                                                            <div class="mb-3"><label class="form-label" for="username"><strong>Mã sản phẩm</strong></label><input class="form-control" type="text" id="username" placeholder="Nhập mã sản phẩm" name="username"></div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="username">
+                                                                    <strong>Mã sản phẩm</strong></label>
+                                                                <input class="form-control" type="text" id="codeP" placeholder="Nhập mã sản phẩm" name="codeP">
+                                                            </div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="mb-3"><label class="form-label" for="email"><strong>Tên sản phẩm</strong></label><input class="form-control" type="email" id="email" placeholder="Nhập tên sản phẩm" name="email"></div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="email">
+                                                                    <strong>Tên sản phẩm</strong></label>
+                                                                <input class="form-control" type="email" id="nameP" placeholder="Nhập tên sản phẩm" name="nameP">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col">
-                                                            <div class="mb-3"><label class="form-label" for="username"><strong>Phân loại</strong></label>
-                                                                <div class="dropdown float-none"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Dropdown </button>
-                                                                    <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="username">
+                                                                    <strong>Phân loại</strong>
+                                                                </label>
+                                                                <div class="dropdown float-none">
+                                                                    <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Dropdown </button>
+                                                                    <div class="dropdown-menu">
+                                                                        <a class="dropdown-item" href="#">First Item</a>
+                                                                        <a class="dropdown-item" href="#">Second Item</a>
+                                                                        <a class="dropdown-item" href="#">Third Item</a>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="mb-3"><label class="form-label" for="email"><strong>Giá tiền</strong></label><input class="form-control" type="email" id="email-1" placeholder="Nhập giá tiền sản phẩm" name="email"></div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="email">
+                                                                    <strong>Giá tiền</strong></label>
+                                                                <input class="form-control" type="email" id="priceP" placeholder="Nhập giá tiền sản phẩm" name="priceP">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <div class="mb-3"><label class="form-label" for="address"><strong>Ảnh minh họa</strong></label><input class="form-control" type="text" id="address" placeholder="Ảnh minh họa" name="address"></div>
-                                                        <div class="mb-3"><label class="form-label" for="country"><strong>Mô tả chi tiết</strong></label><textarea class="form-control"></textarea></div><button class="btn btn-primary btn-sm" type="button">Lưu lại</button>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="address">
+                                                                <strong>Ảnh minh họa</strong>
+                                                            </label>
+                                                            <input class="form-control" type="text" id="address" placeholder="Ảnh minh họa" name="address"></div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="country">
+                                                                <strong>Mô tả chi tiết</strong>
+                                                            </label>
+                                                            <textarea class="form-control" id="desP"></textarea>
+                                                        </div>
+                                                        <button class="btn btn-primary btn-sm" type="button">Lưu sản phẩm</button>
                                                     </div>
                                                 </form>
                                             </div>
