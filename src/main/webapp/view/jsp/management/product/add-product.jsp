@@ -1,5 +1,5 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="io.hardingadonis.saledock.utils.Singleton" %>
 
 <!DOCTYPE html>
@@ -57,16 +57,13 @@
                                                         <div class="col">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="username">
-                                                                    <strong>Phân loại</strong>
+                                                                    <strong>Phân loại sản phẩm</strong>
                                                                 </label>
-                                                                <div class="dropdown float-none">
-                                                                    <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Dropdown </button>
-                                                                    <div class="dropdown-menu">
-                                                                        <a class="dropdown-item" href="#">First Item</a>
-                                                                        <a class="dropdown-item" href="#">Second Item</a>
-                                                                        <a class="dropdown-item" href="#">Third Item</a>
-                                                                    </div>
-                                                                </div>
+                                                                <select class="form-control" name="categoryP" id="exampleFormControlSelect1" required="">
+                                                                    <c:forEach items="${requestScope.categories}" var="cat">
+                                                                        <option value="${cat.ID}">${cat.name}</option>
+                                                                    </c:forEach>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="col">
@@ -79,15 +76,16 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <div class="mb-3">
-                                                            <label class="form-label" for="address">
-                                                                <strong>Ảnh minh họa</strong>
+                                                            <label class="form-label" for="imageUpload">
+                                                                <strong>Ảnh sản phẩm</strong>
                                                             </label>
-                                                            <input class="form-control" type="text" id="address" placeholder="Ảnh minh họa" name="address"></div>
+                                                            <input class="form-control" type="file" id="imageUpload" name="imageUpload" accept="image/*">
+                                                        </div>
                                                         <div class="mb-3">
                                                             <label class="form-label" for="country">
                                                                 <strong>Mô tả chi tiết</strong>
                                                             </label>
-                                                            <textarea class="form-control" id="desP"></textarea>
+                                                            <textarea class="form-control" id="descriptionP"></textarea>
                                                         </div>
                                                         <button class="btn btn-primary btn-sm" type="button">Lưu sản phẩm</button>
                                                     </div>
