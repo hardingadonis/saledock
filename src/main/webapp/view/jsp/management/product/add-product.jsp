@@ -36,7 +36,7 @@
                                                 <p class="text-primary m-0 fw-bold">Thêm sản phẩm mới</p>
                                             </div>
                                             <div class="card-body">
-                                                <form>
+                                                <form id="add-product" action="add-product" method="post">
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="mb-3">
