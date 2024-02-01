@@ -8,8 +8,6 @@ import java.util.*;
 import org.hibernate.*;
 import org.json.simple.*;
 
-import java.util.Date;
-
 public class OrderDAOImpl implements IOrderDAO {
 
     private final SessionFactory sessionFactory;

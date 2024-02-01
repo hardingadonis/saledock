@@ -8,7 +8,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <title>Profile - Brand</title>
+        <title>Sale Dock - Chi tiết đơn hàng</title>
         <link rel="icon" type="image/png" sizes="512x512" href="<%=request.getContextPath()%>/view/assets/images/favicon/favicon.png">
 
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/bootstrap.min.css">
@@ -78,13 +78,6 @@
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="email"><strong>Ngày tạo</strong></label>
                                                                 <input class="form-control" type="email" id="createAt" value ="${requestScope.ord.createdAt}" name="email" readonly="">
-                                                                <script>
-                                                                    window.onload = function () {
-                                                                        var input = document.getElementById('createAt');
-                                                                        var date = new Date(input.value);
-                                                                        input.value = date.toLocaleString();
-                                                                    }
-                                                                </script>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -105,13 +98,7 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="mb-3"><label class="form-label" for="username"><strong>Tổng tiền</strong></label>
-                                                                <input class="form-control" id="price" type="text" value ="${requestScope.ord.total}" readonly="">
-                                                                <script>
-                                                                    let inputElement = document.getElementById("price");
-                                                                    let placeholderText = inputElement.value;
-                                                                    let formattedNum = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(placeholderText);
-                                                                    inputElement.value = formattedNum;
-                                                                </script>
+                                                                <input class="form-control price" type ="text" value ="${requestScope.ord.total}" readonly="">
                                                             </div>
                                                         </div>
 
@@ -154,18 +141,12 @@
                                                                             <tr>
                                                                                 <td>${loop.index + 1}</td>
                                                                                 <td>${orderDetail.product.name}</td>
-                                                                                <td>
-                                                                                    <script>
-                                                                                        var formattedPrice = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(${orderDetail.product.price});
-                                                                                        document.write(formattedPrice);
-                                                                                    </script>
+                                                                                <td class="price">
+                                                                                    ${orderDetail.product.price};
                                                                                 </td>
                                                                                 <td>${orderDetail.quantity}</td>
-                                                                                <td>
-                                                                                    <script>
-                                                                                        var formattedPrice = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(${orderDetail.product.price * orderDetail.quantity});
-                                                                                        document.write(formattedPrice);
-                                                                                    </script>
+                                                                                <td class="price">
+                                                                                    ${orderDetail.product.price * orderDetail.quantity};
                                                                                 </td>
                                                                             </tr>
                                                                         </c:forEach>
@@ -199,6 +180,7 @@
         <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/management/order/order-detail.js"></script>
     </body>
 
 </html>
