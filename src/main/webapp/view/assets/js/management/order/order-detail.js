@@ -22,4 +22,4 @@ function formatCurrencyVND(amount) {
     });
 
     return formatter.format(amount);
-};
+}
