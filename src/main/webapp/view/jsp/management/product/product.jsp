@@ -43,7 +43,7 @@
                                                 <tr>
                                                     <td>${product.code}</td>
                                                     <td>${product.name}</td>
-                                                    <td>${product.category}</td>
+                                                    <td>${product.category.name}</td>
                                                     <td class="text-start">
                                                         <a class="btn btn-primary btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/product-detail?id=${product.ID}">
                                                             <i class="la la-info-circle"></i>
