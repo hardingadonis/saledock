@@ -1,7 +1,7 @@
 package io.hardingadonis.saledock.controller.management.product;
 
 import io.hardingadonis.saledock.model.*;
-import io.hardingadonis.saledock.utils.Singleton;
+import io.hardingadonis.saledock.utils.*;
 import java.io.*;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
