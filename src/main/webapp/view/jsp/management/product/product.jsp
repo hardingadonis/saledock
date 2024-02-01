@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <title>Sale Dock - Quản lý khách hàng</title>
+        <title>Sale Dock - Quản lý sản phẩm</title>
         <link rel="icon" type="image/png" sizes="512x512" href="<%=request.getContextPath()%>/view/assets/imgages/favicon/favicon.png">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
@@ -44,8 +44,12 @@
                                                     <td>${product.name}</td>
                                                     <td>${product.category}</td>
                                                     <td class="text-start">
-                                                        <a class="btn btn-primary btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/product-detail?id=${product.ID}"><i class="la la-info-circle"></i></a>
-                                                        <button class="btn btn-warning btn-sm" data-bs-toggle="tooltip" data-bss-tooltip="" type="button" style="margin: 2px;" title="Chỉnh sửa"><i class="la la-edit"></i></button>
+                                                        <a class="btn btn-primary btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/product-detail?id=${product.ID}">
+                                                            <i class="la la-info-circle"></i>
+                                                        </a>
+                                                        <a class="btn btn-warning btn-sm" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Chỉnh sửa" href="<%=request.getContextPath()%>/update-product?id=${product.ID}" >
+                                                            <i class="la la-edit"></i>
+                                                        </a>                          
                                                     </td>
                                                 </tr>
                                             </tbody>
