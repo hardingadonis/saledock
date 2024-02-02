@@ -19,7 +19,7 @@ public class DBContextMySQLImpl implements IDBContext {
             if (input == null) {
                 this.dbURL = "jdbc:mysql://localhost:3306/saledock";
                 this.user = "root";
-                this.password = "";
+                this.password = "root";
             } else {
                 prop.load(input);
 
