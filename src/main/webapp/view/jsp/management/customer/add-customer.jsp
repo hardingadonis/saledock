@@ -67,6 +67,7 @@
         <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
 
+
     </body>
 
 </html>
