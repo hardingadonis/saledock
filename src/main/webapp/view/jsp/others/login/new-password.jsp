@@ -23,28 +23,41 @@
                                 <div class="col-lg-6 m-auto">
                                     <div class="p-5">
                                         <c:choose>
-                                            <c:when test="${requestScope.message eq 'fail'}">
-                                                <div class="alert alert-danger text-center" role="alert">
-                                                    Lỗi: Không thể hoàn thành hành động được yêu cầu.
+                                            <c:when test="${requestScope.message eq 'success'}">
+                                                <div class="alert alert-success text-center" role="alert">
+                                                    Mã OTP hợp lệ. Hãy thay đổi mật khẩu của bạn.
                                                 </div>
                                             </c:when>
-                                            <c:when test="${requestScope.message eq 'emailNotExist'}">
+                                            <c:when test="${requestScope.message eq 'fail'}">
                                                 <div class="alert alert-danger text-center" role="alert">
-                                                    Tài khoản không tồn tại. Vui lòng sử dụng một địa chỉ email khác.
+                                                    Vui lòng nhập lại mật khẩu!
+                                                </div>
+                                            </c:when>
+                                            <c:when test="${requestScope.message eq 'notCorrect'}">
+                                                <div class="alert alert-danger text-center" role="alert">
+                                                    Mật khẩu nhập lại không chính xác. Vui lòng nhập lại!
                                                 </div>
                                             </c:when>
                                         </c:choose>
                                         <div class="text-center">
                                             <h4 class="text-dark mb-2">Quên mật khẩu?</h4>
-                                            <p class="mb-4">Bạn sẽ nhận được email thay đổi mật khẩu!</p>
+                                            <p class="mb-4">Tạo mật khẩu mới!</p>
                                         </div>
-                                        <form class="user" action="#" id="form-forgot-password" method="post">
+                                        <form class="user" action="#" id="form-new-password" method="post">
+                                            <input type="hidden" name="action" value="newPassword">
+                                            <div class="form-group d-flex mb-3">
+                                                <label for="show-email" class="font-italic font-weight-bold">Địa chỉ email của bạn: </label>
+                                                <p class="ml-5 font-italic font-weight-bold text-success" style="margin-left: 10px;">${sessionScope.email}</p>
+                                            </div>
                                             <div class="mb-3 form-group">
-                                                <input type="hidden" name="action" value="submitEmail">
-                                                <input class="form-control form-control-user" type="email" id="input-email" aria-describedby="emailHelp" placeholder="Nhập email nhân viên..." name="forgot-email">
+                                                <input class="form-control form-control-user" type="password" id="new-password" aria-describedby="" placeholder="Nhập mật khẩu mới..." name="new-password">
                                                 <span class="form-message"></span>
                                             </div>
-                                            <button class="btn btn-primary d-block btn-user w-100" type="submit">Quên mật khẩu</button>
+                                            <div class="mb-3 form-group">
+                                                <input class="form-control form-control-user" type="password" id="confirm-password" aria-describedby="" placeholder="Nhập lại mật khẩu..." name="confirm-password">
+                                                <span class="form-message"></span>
+                                            </div>
+                                            <button class="btn btn-primary d-block btn-user w-100" type="submit">Xác nhận</button>
                                         </form>
                                     </div>
                                 </div>
@@ -62,12 +75,18 @@
         <!--Validate Forgot Password-->
         <script>
             Validator({
-                form: '#form-forgot-password',
+                form: '#form-new-password',
                 errorSelector: '.form-message',
                 formGroupSelector: '.form-group',
                 rules: [
-                    Validator.isRequired('#input-email', 'Vui lòng nhập email nhân viên!'),
-                    Validator.isEmail('#input-email', 'Vui lòng nhập đúng kiểu email! Ví dụ: abc@gmail.com...')
+                    Validator.isRequired('#new-password', 'Vui lòng nhập mật khẩu mới!'),
+                    Validator.minLength('#new-password', 5, 'Vui lòng nhập mật khẩu có ít nhất 5 kí tự!'),
+
+                    Validator.isRequired('#confirm-password', 'Vui lòng nhập lại mật khẩu!'),
+                    Validator.minLength('#confirm-password', 5, 'Vui lòng nhập mật khẩu có ít nhất 5 kí tự!'),
+                    Validator.isConfirmed('#confirm-password', function () {
+                        return document.querySelector('#new-password').value;
+                    }, 'Mật khẩu nhập lại không chính xác!')
                 ]
             });
         </script>

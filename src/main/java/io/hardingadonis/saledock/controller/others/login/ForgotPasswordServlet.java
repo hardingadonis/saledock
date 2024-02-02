@@ -1,5 +1,7 @@
 package io.hardingadonis.saledock.controller.others.login;
 
+import io.hardingadonis.saledock.model.*;
+import io.hardingadonis.saledock.utils.*;
 import java.io.*;
 import java.util.Optional;
 
@@ -9,49 +11,99 @@ import io.hardingadonis.saledock.utils.Singleton;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
+import java.util.*;
 
 @WebServlet(name = "ForgotPasswordServlet", urlPatterns = { "/forgot-password" })
 public class ForgotPasswordServlet extends HttpServlet {
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.getRequestDispatcher("/view/jsp/others/login/forgot-password.jsp").forward(request, response);
-	}
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		resetPassword(request, response);
-	}
+        response.setContentType("text/html;charset=UTF-8");
+        request.getRequestDispatcher("/view/jsp/others/login/forgot-password.jsp").forward(request, response);
+    }
 
-	private void resetPassword(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String code = request.getParameter("employee-code");
-		String password = request.getParameter("password");
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getParameter("action");
 
-		if (code.isEmpty() || password.isEmpty()) {
-			handleError(request, response);
-			return;
-		}
+        switch (action) {
+            case "submitEmail":
+                checkEmail(request, response);
+                break;
+            case "submitOtp":
+                checkOtp(request, response);
+                break;
+            case "newPassword":
+                newPassword(request, response);
+                break;
+            default:
+                response.sendRedirect("./login");
+        }
+    }
 
-		Optional<Employee> employeeObj = Singleton.employeeDAO.getByCode(code.toUpperCase());
+    private void checkEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String email = request.getParameter("forgot-email").trim();
 
-		if (employeeObj.isEmpty()) {
-			response.sendRedirect(request.getContextPath() + "/forgot-password?message=notExists");
-		}
+        if (email == null || email.isEmpty()) {
+            request.setAttribute("message", "fail");
+            request.getRequestDispatcher("/view/jsp/others/login/forgot-password.jsp").forward(request, response);
+        } else {
+            Optional<Employee> employee = Singleton.employeeDAO.getByEmail(email);
 
-		Employee actualEmployee = employeeObj.get();
-		password = Hash.MD5(password);
-		actualEmployee.setHashedPassword(password);
-		Singleton.employeeDAO.save(actualEmployee);
-		response.sendRedirect(request.getContextPath() + "/login?message=resetSuccess");
-	}
+            if (employee.isPresent()) {
+                request.setAttribute("message", "success");
+                String newOtp = OtpUltil.generateRandomOTP();
+                SendEmailUtil.sendGetOTPMessage(email, "New OTP", newOtp);
+                SessionUtil.getInstance().putValue(request, "otp", newOtp);
+                SessionUtil.getInstance().putValue(request, "email", email);
+                request.getRequestDispatcher("/view/jsp/others/login/otp.jsp").forward(request, response);
+            } else {
+                request.setAttribute("message", "emailNotExist");
+                this.doGet(request, response);
+            }
+        }
+    }
 
-	private void handleError(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.setAttribute("message", "fail");
-		request.getRequestDispatcher("/view/jsp/others/login/forgot-password.jsp").forward(request, response);
-	}
+    private void checkOtp(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String otpInput = request.getParameter("otp-input").trim();
+        String otpStored = (String) SessionUtil.getInstance().getValue(request, "otp");
+
+        if (otpInput != null && otpStored != null && otpInput.equals(otpStored)) {
+            SessionUtil.getInstance().removeValue(request, "otp");
+            request.getRequestDispatcher("/view/jsp/others/login/new-password.jsp").forward(request, response);
+        } else {
+            request.setAttribute("message", "fail");
+            request.getRequestDispatcher("/view/jsp/others/login/otp.jsp").forward(request, response);
+        }
+    }
+    
+    private void newPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String email = (String) SessionUtil.getInstance().getValue(request, "email");
+        
+        String newPassword = request.getParameter("new-password");
+        String confirmPassword = request.getParameter("confirm-password");
+        
+        if (newPassword == null || confirmPassword == null) {
+            request.setAttribute("message", "fail");
+        } 
+        
+        if (newPassword != null && confirmPassword != null) {
+            if (newPassword.equals(confirmPassword)) {
+                Employee employee = Singleton.employeeDAO.getByEmail(email).get();
+                employee.setHashedPassword(Hash.MD5(newPassword));
+                Singleton.employeeDAO.save(employee);
+                SessionUtil.getInstance().removeValue(request, "email");
+                response.sendRedirect("./login?message=success");
+            } else {
+                request.setAttribute("message", "notCorrect");
+                request.getRequestDispatcher("/view/jsp/others/login/newPassword.jsp").forward(request, response);
+            }
+        } else {
+            request.setAttribute("message", "fail");
+            request.getRequestDispatcher("/view/jsp/others/login/newPassword.jsp").forward(request, response);
+        }
+    }
 }
