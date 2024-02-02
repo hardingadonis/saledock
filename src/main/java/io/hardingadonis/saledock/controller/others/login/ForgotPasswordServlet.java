@@ -3,12 +3,17 @@ package io.hardingadonis.saledock.controller.others.login;
 import io.hardingadonis.saledock.model.*;
 import io.hardingadonis.saledock.utils.*;
 import java.io.*;
+import java.util.Optional;
+
+import io.hardingadonis.saledock.model.Employee;
+import io.hardingadonis.saledock.utils.Hash;
+import io.hardingadonis.saledock.utils.Singleton;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import java.util.*;
 
-@WebServlet(name = "ForgotPasswordServlet", urlPatterns = {"/forgot-password"})
+@WebServlet(name = "ForgotPasswordServlet", urlPatterns = { "/forgot-password" })
 public class ForgotPasswordServlet extends HttpServlet {
 
     @Override

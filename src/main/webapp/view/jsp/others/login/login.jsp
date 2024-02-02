@@ -47,6 +47,11 @@
                                                         Vui lòng đăng nhập để truy cập.
                                                     </div>
                                                 </c:when>
+                                                <c:when test="${param.message eq 'resetSuccess'}">
+                                                    <div class="alert alert-success text-center" role="alert">
+                                                        Password Reset Was Successful
+                                                    </div>
+                                                </c:when>
                                             </c:choose>
 
                                             <form class="user" id="form-signin" method="post">
