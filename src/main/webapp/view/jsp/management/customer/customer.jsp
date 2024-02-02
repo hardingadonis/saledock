@@ -25,7 +25,7 @@
                         <h3 class="text-dark mb-4">Khách hàng</h3>
                         <div class="card shadow">
                             <div class="card-header d-xxl-flex justify-content-between align-items-center align-items-xxl-center py-3">
-                                <p class="text-primary m-0 fw-bold">Quản lý khách hàng</p><a class="btn btn-primary btn-sm" role="button" href="add-customer.html">Thêm khách hàng</a>
+                                <p class="text-primary m-0 fw-bold">Quản lý khách hàng</p><a class="btn btn-primary btn-sm" role="button" href="<%=request.getContextPath()%>/add-customer">Thêm khách hàng</a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
@@ -41,10 +41,11 @@
                                         <c:forEach items="${requestScope.customers}" var="customer">
                                             <tbody>                                        
                                                 <tr>
-                                                    <td><img class="rounded-circle me-2" width="30" height="30" src="<%=request.getContextPath()%>/view/assets/images/icons/customer.png">${customer.name}</td>
+                                                    <td><img class="rounded-circle me-2" width="30" height="30" src="<%=request.getContextPath()%>
+                                                    /view/assets/images/icons/customer.png">${customer.name}</td>
                                                     <td>${customer.code}</td>
                                                     <td>${customer.email}</td>
-                                                    <td class="text-start"><a class="btn btn-primary btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>customer-detail.html"><i class="la la-info-circle"></i></a><button class="btn btn-warning btn-sm" data-bs-toggle="tooltip" data-bss-tooltip="" type="button" style="margin: 2px;" title="Chỉnh sửa"><i class="la la-edit"></i></button></td>
+                                                    <td class="text-start"><a class="btn btn-primary btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/customer-detail?id=${customer.ID}"><i class="la la-info-circle"></i></a><button class="btn btn-warning btn-sm" data-bs-toggle="tooltip" data-bss-tooltip="" type="button" style="margin: 2px;" title="Chỉnh sửa"><i class="la la-edit"></i></button></td>
                                                 </tr>
 
                                             </tbody>
