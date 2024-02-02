@@ -18,6 +18,8 @@ public class ProductServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
 
         List<Product> products = Singleton.productDAO.getAll();
+        Long productCount = Singleton.productDAO.count(); 
+        request.setAttribute("productCount", productCount);
         request.setAttribute("products", products);
         request.setAttribute("page", "product");
 

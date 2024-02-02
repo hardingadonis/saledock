@@ -7,7 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title>Sale Dock - Quản lý sản phẩm</title>
-        <link rel="icon" type="image/png" sizes="512x512" href="<%=request.getContextPath()%>/view/assets/imgages/favicon/favicon.png">
+        <link rel="icon" type="image/png" sizes="512x512" href="<%=request.getContextPath()%>/view/assets/images/favicon/favicon.png">     
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/fonts/fontawesome-all.min.css">
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 align-self-center">
-                                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Hiển thị 1 trên 1 sản phẩm</p>
+                                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Hiển thị <%= request.getAttribute("productCount") %> trên <%= request.getAttribute("productCount") %> sản phẩm</p>
                                     </div>
                                     <div class="col-md-6">
                                         <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
