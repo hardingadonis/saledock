@@ -117,6 +117,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "AdrishOfHogwarts",
+      "name": "Adrish Bose",
+      "avatar_url": "https://avatars.githubusercontent.com/u/152976845?v=4",
+      "profile": "https://github.com/AdrishOfHogwarts",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitType": "docs",
