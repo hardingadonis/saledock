@@ -6,6 +6,7 @@ import io.hardingadonis.saledock.utils.*;
 import java.sql.*;
 import java.util.*;
 import org.hibernate.*;
+import org.hibernate.query.*;
 import org.json.simple.*;
 
 public class CustomerDAOImpl implements ICustomerDAO {
@@ -98,5 +99,16 @@ public class CustomerDAOImpl implements ICustomerDAO {
         System.out.println(json.toJSONString());
 
         return json.toJSONString();
+    }
+
+    @Override
+    public List<Customer> pagination(Integer offset, Integer limit) {
+        try (Session session = sessionFactory.openSession()) {
+            Query<Customer> query = session.createQuery("FROM Customer", Customer.class);
+            query.setFirstResult(offset);
+            query.setMaxResults(limit);
+
+            return query.getResultList();
+        }
     }
 }

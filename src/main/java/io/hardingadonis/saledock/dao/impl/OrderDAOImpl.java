@@ -6,6 +6,7 @@ import io.hardingadonis.saledock.utils.*;
 import java.sql.*;
 import java.util.*;
 import org.hibernate.*;
+import org.hibernate.query.Query;
 import org.json.simple.*;
 
 public class OrderDAOImpl implements IOrderDAO {
@@ -153,5 +154,16 @@ public class OrderDAOImpl implements IOrderDAO {
         }
 
         return json.toJSONString();
+    }
+
+    @Override
+    public List<Order> pagination(Integer offset, Integer limit) {
+        try (Session session = sessionFactory.openSession()) {
+            Query<Order> query = session.createQuery("FROM Order", Order.class);
+            query.setFirstResult(offset);
+            query.setMaxResults(limit);
+
+            return query.getResultList();
+        }
     }
 }
