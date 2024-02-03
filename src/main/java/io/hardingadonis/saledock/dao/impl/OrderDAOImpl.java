@@ -166,4 +166,9 @@ public class OrderDAOImpl implements IOrderDAO {
             return query.getResultList();
         }
     }
+
+    @Override
+    public Integer totalPages(Integer limit) {
+        return (int) Math.ceil((double) this.count() / limit);
+    }
 }

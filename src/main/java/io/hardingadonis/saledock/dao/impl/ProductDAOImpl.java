@@ -111,4 +111,9 @@ public class ProductDAOImpl implements IProductDAO {
             return query.getResultList();
         }
     }
+
+    @Override
+    public Integer totalPages(Integer limit) {
+        return (int) Math.ceil((double) this.count() / limit);
+    }
 }
