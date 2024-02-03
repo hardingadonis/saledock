@@ -108,6 +108,15 @@
         "bug",
         "review"
       ]
+    },
+    {
+      "login": "SaibalCts23",
+      "name": "SaibalCts23",
+      "avatar_url": "https://avatars.githubusercontent.com/u/153187590?v=4",
+      "profile": "https://github.com/SaibalCts23",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitType": "docs",
