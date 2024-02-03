@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 align-self-center">
-                                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Hiển thị 1 trên 1 khách hàng</p>
+                                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Hiển thị <%= request.getAttribute("customerCount") %> trên <%= request.getAttribute("customerCount") %> khách hàng</p>
                                     </div>
                                     <div class="col-md-6">
                                         <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
