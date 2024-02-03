@@ -43,8 +43,8 @@ public class CustomerDAOImpl implements ICustomerDAO {
     }
 
     @Override
-    public Long count() {
-        Long count = 0L;
+    public Integer count() {
+        Integer count = 0;
 
         try {
             Connection conn = Singleton.dbContext.getConnection();
@@ -54,7 +54,7 @@ public class CustomerDAOImpl implements ICustomerDAO {
             ResultSet rs = smt.executeQuery();
 
             if (rs.next()) {
-                count = rs.getLong(1);
+                count = rs.getInt(1);
             }
 
             Singleton.dbContext.closeConnection(conn);

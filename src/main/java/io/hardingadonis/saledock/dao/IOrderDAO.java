@@ -4,8 +4,8 @@ import io.hardingadonis.saledock.model.*;
 
 public interface IOrderDAO extends IDAO<Order>, IPagination<Order> {
 
-    default Long countOrderInProcess() {
-        return 0L;
+    default Integer countOrderInProcess() {
+        return 0;
     }
 
     public String statisticBySold(Integer duration);
