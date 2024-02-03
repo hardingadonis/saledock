@@ -23,28 +23,28 @@
                                 <div class="col-lg-6 m-auto">
                                     <div class="p-5">
                                         <c:choose>
-                                            <c:when test="${requestScope.message eq 'fail'}">
-                                                <div class="alert alert-danger text-center" role="alert">
-                                                    Lỗi: Không thể hoàn thành hành động được yêu cầu.
+                                            <c:when test="${requestScope.message eq 'success'}">
+                                                <div class="alert alert-success text-center" role="alert">
+                                                    Mã OTP đã được gửi. Vui lòng kiểm tra email của bạn.
                                                 </div>
                                             </c:when>
-                                            <c:when test="${requestScope.message eq 'emailNotExist'}">
+                                            <c:when test="${requestScope.message eq 'fail'}">
                                                 <div class="alert alert-danger text-center" role="alert">
-                                                    Tài khoản không tồn tại. Vui lòng sử dụng một địa chỉ email khác.
+                                                    Mã OTP của bạn không chính xác. Vui lòng kiểm tra và nhập lại!
                                                 </div>
                                             </c:when>
                                         </c:choose>
                                         <div class="text-center">
                                             <h4 class="text-dark mb-2">Quên mật khẩu?</h4>
-                                            <p class="mb-4">Bạn sẽ nhận được email thay đổi mật khẩu!</p>
+                                            <p class="mb-4">Nhập OTP để thay đổi mật khẩu!</p>
                                         </div>
-                                        <form class="user" action="#" id="form-forgot-password" method="post">
+                                        <form class="user" action="#" id="form-get-otp" method="post">
                                             <div class="mb-3 form-group">
-                                                <input type="hidden" name="action" value="submitEmail">
-                                                <input class="form-control form-control-user" type="email" id="input-email" aria-describedby="emailHelp" placeholder="Nhập email nhân viên..." name="forgot-email">
+                                                <input type="hidden" name="action" value="submitOtp">
+                                                <input class="form-control form-control-user" type="text" id="input-otp" aria-describedby="otpHelp" placeholder="Nhập mã OTP..." name="otp-input">
                                                 <span class="form-message"></span>
                                             </div>
-                                            <button class="btn btn-primary d-block btn-user w-100" type="submit">Quên mật khẩu</button>
+                                            <button class="btn btn-primary d-block btn-user w-100" type="submit">Xác nhận</button>
                                         </form>
                                     </div>
                                 </div>
@@ -62,12 +62,11 @@
         <!--Validate Forgot Password-->
         <script>
             Validator({
-                form: '#form-forgot-password',
+                form: '#form-get-otp',
                 errorSelector: '.form-message',
                 formGroupSelector: '.form-group',
                 rules: [
-                    Validator.isRequired('#input-email', 'Vui lòng nhập email nhân viên!'),
-                    Validator.isEmail('#input-email', 'Vui lòng nhập đúng kiểu email! Ví dụ: abc@gmail.com...')
+                    Validator.isRequired('#input-otp', 'Vui lòng nhập mã OTP!'),
                 ]
             });
         </script>
