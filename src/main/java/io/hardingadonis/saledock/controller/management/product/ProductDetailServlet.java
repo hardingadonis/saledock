@@ -17,13 +17,15 @@ public class ProductDetailServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
-        String pId = request.getParameter("id");
+       String pId = request.getParameter("id");
 
-        if (pId == null) {
-            response.sendError(404);
-
-            return;
-        }
+		
+		 if (pId == null){ 
+			 response.sendError(404);
+		 
+		  return;
+		  }
+		 
         Integer idP = Integer.valueOf(pId);
         Optional<Product> product = Singleton.productDAO.getByID(idP);
 

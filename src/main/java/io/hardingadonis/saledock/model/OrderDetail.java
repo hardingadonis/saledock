@@ -22,10 +22,10 @@ public class OrderDetail {
     public static class ID implements Serializable {
 
         @Column(name = "`order_id`")
-        private Long orderID;
+        private Integer orderID;
 
         @Column(name = "`product_id`")
-        private Long productID;
+        private Integer productID;
     }
 
     @EmbeddedId

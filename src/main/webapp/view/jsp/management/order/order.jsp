@@ -3,9 +3,7 @@
 <%@page import="java.text.DecimalFormat"%>
 
 <%
-
     DecimalFormat df = new DecimalFormat("#.###########");
-
 %>
 
 <!DOCTYPE html>
@@ -22,7 +20,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/animate.min.css">
-
     </head>
 
     <body id="page-top">
@@ -37,7 +34,6 @@
                             <div class="card-header d-xxl-flex justify-content-between align-items-center align-items-xxl-center py-3">
                                 <p class="text-primary m-0 fw-bold">Quản lý đơn hàng</p>
                                 <button class="btn btn-primary btn-sm" type="button" onclick="window.location.href = '<%=request.getContextPath()%>/add-order';">Thêm đơn hàng</button>
-
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
@@ -62,7 +58,6 @@
                                                 </tr>
                                             </tbody>
                                         </c:forEach>
-
                                     </table>
                                 </div>
                                 <div class="row">
@@ -89,6 +84,7 @@
             </div>
             <%@include file="../../../common/_goback.jsp" %>
         </div>
+      
         <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>

@@ -29,6 +29,8 @@ public class AddCustomerServlet extends HttpServlet {
         String code = request.getParameter("code");
         String address = request.getParameter("address");
         String email = request.getParameter("email");
+        
+        
 
         if (name.length() > 0 && code.length() > 0 && address.length() > 0 && email.length() > 0) {
             Customer customer = new Customer();
