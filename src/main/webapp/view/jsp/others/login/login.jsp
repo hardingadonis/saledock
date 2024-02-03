@@ -27,6 +27,11 @@
                                         </div>
                                         <div class="container">
                                             <c:choose>
+                                                <c:when test="${param.message eq 'success'}">
+                                                    <div class="alert alert-success text-center" role="alert">
+                                                        Thay đổi mật khẩu thành công.
+                                                    </div>
+                                                </c:when>
                                                 <c:when test="${param.message eq 'fail'}">
                                                     <div class="alert alert-danger text-center" role="alert">
                                                         Lỗi: Không thể hoàn thành hành động được yêu cầu.
@@ -40,6 +45,11 @@
                                                 <c:when test="${param.message eq 'notLogin'}">
                                                     <div class="alert alert-warning text-center" role="alert">
                                                         Vui lòng đăng nhập để truy cập.
+                                                    </div>
+                                                </c:when>
+                                                <c:when test="${param.message eq 'resetSuccess'}">
+                                                    <div class="alert alert-success text-center" role="alert">
+                                                        Password Reset Was Successful
                                                     </div>
                                                 </c:when>
                                             </c:choose>
@@ -58,7 +68,7 @@
                                                 </div>
                                                 <hr>
                                             </form>
-                                            <div class="text-center"><a class="small" href="forgot-password.html">Quên mật khẩu?</a></div>
+                                            <div class="text-center"><a class="small" href="./forgot-password">Quên mật khẩu?</a></div>
                                         </div>
                                     </div>
                                 </div>

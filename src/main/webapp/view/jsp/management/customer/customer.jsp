@@ -45,7 +45,10 @@
                                                     /view/assets/images/icons/customer.png">${customer.name}</td>
                                                     <td>${customer.code}</td>
                                                     <td>${customer.email}</td>
-                                                    <td class="text-start"><a class="btn btn-primary btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/customer-detail?id=${customer.ID}"><i class="la la-info-circle"></i></a><button class="btn btn-warning btn-sm" data-bs-toggle="tooltip" data-bss-tooltip="" type="button" style="margin: 2px;" title="Chỉnh sửa"><i class="la la-edit"></i></button></td>
+                                                    <td class="text-start">
+                                                        <a class="btn btn-primary btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/customer-detail?id=${customer.ID}"><i class="la la-info-circle"></i></a>
+                                                        <button class="btn btn-warning btn-sm" data-bs-toggle="tooltip" data-bss-tooltip="" type="button" style="margin: 2px;" title="Chỉnh sửa"><i class="la la-edit"></i></button>
+                                                    </td>
                                                 </tr>
 
                                             </tbody>

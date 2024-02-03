@@ -1,7 +1,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 
 <%@page import="io.hardingadonis.saledock.utils.Singleton" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -9,7 +9,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <title>Sale Dock -THÊM SẢN PHẨM</title>
+        <title>Sale Dock - Thêm sản phẩm</title>
         <link rel="icon" type="image/png" sizes="512x512" href="<%=request.getContextPath()%>/view/assets/images/favicon/favicon.png">
 
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/bootstrap.min.css">
@@ -40,24 +40,29 @@
                                                 <form action="./add-product" method="post">
                                                     <div class="row">
                                                         <div class="col">
+                                                            <div class="mb-3"><label class="form-label" for="code"><strong>Mã sản phẩm</strong></label><input class="form-control" type="text" id="code" placeholder="Nhập mã sản phẩm" name="code"></div>
+                                                        </div>
+                                                        <div class="col">
                                                             <div class="mb-3"><label class="form-label" for="name"><strong>tên sản phẩm</strong></label><input class="form-control" type="text" id="name" placeholder="Nhập tên sản phẩm" name="name"></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="mb-3"><label class="form-label" for="code"><strong>Mã sản phẩm</strong></label><input class="form-control" type="text" id="code" placeholder="Mã sản phẩm" name="code"></div>
+                                                            <div class="mb-3"><label class="form-label" for="description"><strong>Sự miêu tả</strong></label><input class="form-control" type="text" id="description" placeholder="Nhập mô tả sản phẩm" name="description"></div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="mb-3"><label class="form-label" for="price"><strong>Giá sản phẩm</strong></label><input class="form-control" type="text" id="price" placeholder="Nhập giá sản phẩm" name="price"></div>
+                                                        </div>
+                                                        <div class="col">
+                                                        	<div class="mb-3">
+                                                        		<label class="form-label" for="category"><strong>danh mục sản phẩm</strong></label>
+                                                        		<select id="category" name="category" placeholder="Chọn danh mục sản phẩm">
+                                                        			<c:forEach items="${requestScope.categories}" var="category">
+                                                        				<option value="${category.ID}">${category.name}</option>
+                                                        			</c:forEach>
+                                                        		</select>
+                                                        	</div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <div class="mb-3"><label class="form-label" for="description"><strong>Sự miêu tả</strong></label><input class="form-control" type="text" id="description" placeholder="Nhập mô tả sản phẩm" name="description"></div>
-                                                        <div class="mb-3"><label class="form-label" for="price"><strong>giá</strong></label><input class="form-control" type="number" id="price" placeholder="Nhập giá" name="price"></div>
-                                                        <lable class="form-lable" for="category"><strong>Loại</strong></strong></lable>
-                                                        <select id="category" name="category" placeholder="Select product category">
-                                                        <c:forEach items="${requestScope.categories}" var="category">
-                                                          <option value="${category.ID}">${category.name}</option>
-                                                        </c:forEach>
-                                                        </select>
-                                                        <br>
-                                                        <br>
-                                                        <br>
                                                         <button class="btn btn-primary btn-sm" type="submit">Lưu lại</button>
                                                     </div>
                                                 </form>
