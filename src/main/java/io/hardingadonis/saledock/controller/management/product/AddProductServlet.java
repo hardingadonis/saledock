@@ -59,7 +59,7 @@ public class AddProductServlet extends HttpServlet {
 //        }
         
         Product p = new Product();
-        p.setCode(codePro);
+        p.setCode(codePro.toUpperCase());
         p.setName(namePro);
         p.setCategory(cat.get());
         p.setPrice(pricePro);
