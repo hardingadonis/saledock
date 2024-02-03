@@ -96,8 +96,6 @@ public class CustomerDAOImpl implements ICustomerDAO {
             System.err.println(ex.getMessage());
         }
 
-        System.out.println(json.toJSONString());
-
         return json.toJSONString();
     }
 
