@@ -1,4 +1,4 @@
-package io.hardingadonis.saledock.controller.management.customer;
+package io.hardingadonis.saledock.controller.management.order;
 
 import io.hardingadonis.saledock.model.*;
 import io.hardingadonis.saledock.utils.*;
@@ -6,10 +6,10 @@ import java.io.*;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
-import java.util.*;
+import java.util.Optional;
 
-@WebServlet(name = "CustomerDetailServlet", urlPatterns = {"/customer-detail"})
-public class CustomerDetailServlet extends HttpServlet {
+@WebServlet(name = "OrderDetailServlet", urlPatterns = {"/order-detail"})
+public class OrderDetailServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -17,7 +17,7 @@ public class CustomerDetailServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
-        request.setAttribute("page", "customer");
+        request.setAttribute("page", "order");
 
         String id = request.getParameter("id");
         if (id == null) {
@@ -25,17 +25,18 @@ public class CustomerDetailServlet extends HttpServlet {
             return;
         }
 
-        Integer id_customer = Integer.valueOf(id);
-        Optional<Customer> customer = Singleton.customerDAO.getByID(id_customer);
+        Integer id_order = Integer.parseInt(id);
+        Optional<Order> order = Singleton.orderDAO.getByID(id_order);
 
-        if (customer.isPresent()) {
-            var cus = customer.get();
+        if (order.isPresent()) {
+            var ord = order.get();
+            request.setAttribute("ord", ord);
 
-            request.setAttribute("cus", cus);
-            request.getRequestDispatcher("/view/jsp/management/customer/customer-detail.jsp").forward(request, response);
+            request.getRequestDispatcher("/view/jsp/management/order/order-detail.jsp").forward(request, response);
         } else {
-            response.sendRedirect(request.getContextPath() + "/customer");
+            response.sendRedirect(request.getContextPath() + "/order");
         }
+
     }
 
     @Override

@@ -79,17 +79,13 @@ docker-compose up -d
       <td align="center" valign="top" width="20%"><a href="https://allcontributors.org"><img src="https://avatars.githubusercontent.com/u/46410174?v=4" width="100px;" alt=""/><br /><sub><b>All Contributors</b></sub></a></td>
       <td align="center" valign="top" width="20%"><a href="https://imgbot.net"><img src="https://avatars.githubusercontent.com/u/31427850?v=4" width="100px;" alt=""/><br /><sub><b>Imgbot</b></sub></a></td>
       <td align="center" valign="top" width="20%"><a href="https://www.codefactor.io"><img src="https://avatars.githubusercontent.com/u/13309880?v=4" width="100px;" alt=""/><br /><sub><b>Automated code reviews</b></sub></a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/AnkitaGhosh2000"><img src="https://avatars.githubusercontent.com/u/152983487?v=4" width="100px;" alt=""/><br /><sub><b>AnkitaGhosh2000</b></sub></a></td>
+	</tr>
+	<tr>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/SaibalCts23"><img src="https://avatars.githubusercontent.com/u/153187590?v=4" width="100px;" alt=""/><br /><sub><b>SaibalCts23</b></sub></a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/AdrishOfHogwarts"><img src="https://avatars.githubusercontent.com/u/152976845?v=4" width="100px;" alt=""/><br /><sub><b>Adrish Bose</b></sub></a></td>
     </tr>
   </tbody>
-  <tfoot>
-    <tr>
-      <td align="center" size="13px" colspan="5">
-        <img src="https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg">
-          <a href="https://all-contributors.js.org/docs/en/bot/usage">Add your contributions</a>
-        </img>
-      </td>
-    </tr>
-  </tfoot>
 </table>
 
 <!-- markdownlint-restore -->

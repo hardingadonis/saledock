@@ -15,7 +15,7 @@
                     </a>
                     
                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                        <a class="dropdown-item" href="<%=request.getContextPath()%>/logout">
+                        <a class="dropdown-item" href="<%=request.getContextPath()%>/login">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout
                         </a>
                     </div>

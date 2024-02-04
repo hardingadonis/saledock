@@ -108,6 +108,33 @@
         "bug",
         "review"
       ]
+    },
+    {
+      "login": "SaibalCts23",
+      "name": "SaibalCts23",
+      "avatar_url": "https://avatars.githubusercontent.com/u/153187590?v=4",
+      "profile": "https://github.com/SaibalCts23",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "AdrishOfHogwarts",
+      "name": "Adrish Bose",
+      "avatar_url": "https://avatars.githubusercontent.com/u/152976845?v=4",
+      "profile": "https://github.com/AdrishOfHogwarts",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "AnkitaGhosh2000",
+      "name": "AnkitaGhosh2000",
+      "avatar_url": "https://avatars.githubusercontent.com/u/152983487?v=4",
+      "profile": "https://github.com/AnkitaGhosh2000",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitType": "docs",

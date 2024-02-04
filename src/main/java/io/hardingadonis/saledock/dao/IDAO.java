@@ -10,7 +10,7 @@ public interface IDAO<T> {
 
     public List<T> getAll();
 
-    default Long count() {
-        return 0L;
+    default Integer count() {
+        return 0;
     }
 }

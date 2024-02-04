@@ -30,3 +30,8 @@ target/
 nbproject/
 nb-configuration.xml
 server/*.war
+
+## Eclipse
+.settings/
+.classpath
+.project
