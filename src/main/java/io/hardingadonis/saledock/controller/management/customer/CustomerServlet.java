@@ -18,7 +18,7 @@ public class CustomerServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
 
         List<Customer> customers = Singleton.customerDAO.getAll();
-        Long customerCount = Singleton.customerDAO.count();
+        Integer customerCount = Singleton.customerDAO.count();
         request.setAttribute("customerCount", customerCount);
         request.setAttribute("customers", customers);
         request.setAttribute("page", "customer");
