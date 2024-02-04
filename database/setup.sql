@@ -32,7 +32,7 @@ USE `saledock`;
 --
 
 CREATE TABLE `category` (
-  `id` bigint(20) NOT NULL,
+  `id` int(20) NOT NULL,
   `created_at` datetime(6) DEFAULT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -53,7 +53,7 @@ INSERT INTO `category` (`id`, `created_at`, `name`) VALUES
 --
 
 CREATE TABLE `customer` (
-  `id` bigint(20) NOT NULL,
+  `id` int(20) NOT NULL,
   `address` varchar(255) NOT NULL,
   `code` varchar(255) NOT NULL,
   `created_at` datetime(6) DEFAULT NULL,
@@ -78,7 +78,7 @@ INSERT INTO `customer` (`id`, `address`, `code`, `created_at`, `email`, `name`, 
 --
 
 CREATE TABLE `employee` (
-  `id` bigint(20) NOT NULL,
+  `id` int(20) NOT NULL,
   `code` varchar(255) NOT NULL,
   `created_at` datetime(6) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
@@ -106,15 +106,15 @@ INSERT INTO `employee` (`id`, `code`, `created_at`, `email`, `name`, `password`,
 --
 
 CREATE TABLE `order` (
-  `id` bigint(20) NOT NULL,
+  `id` int(20) NOT NULL,
   `code` varchar(255) NOT NULL,
   `created_at` datetime(6) DEFAULT NULL,
   `note` longtext DEFAULT NULL,
   `status` enum('PENDING','SHIPPING','DONE','CANCELLED') NOT NULL,
   `total` double NOT NULL,
   `updated_at` datetime(6) DEFAULT NULL,
-  `customer_id` bigint(20) NOT NULL,
-  `employee_id` bigint(20) NOT NULL
+  `customer_id` int(20) NOT NULL,
+  `employee_id` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -133,8 +133,8 @@ INSERT INTO `order` (`id`, `code`, `created_at`, `note`, `status`, `total`, `upd
 
 CREATE TABLE `order_detail` (
   `quantity` int(11) NOT NULL,
-  `order_id` bigint(20) NOT NULL,
-  `product_id` bigint(20) NOT NULL
+  `order_id` int(20) NOT NULL,
+  `product_id` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -155,7 +155,7 @@ INSERT INTO `order_detail` (`quantity`, `order_id`, `product_id`) VALUES
 --
 
 CREATE TABLE `product` (
-  `id` bigint(20) NOT NULL,
+  `id` int(20) NOT NULL,
   `code` varchar(255) NOT NULL,
   `created_at` datetime(6) DEFAULT NULL,
   `description` longtext DEFAULT NULL,
@@ -163,7 +163,7 @@ CREATE TABLE `product` (
   `name` varchar(255) NOT NULL,
   `price` double NOT NULL,
   `updated_at` datetime(6) DEFAULT NULL,
-  `category_id` bigint(20) NOT NULL
+  `category_id` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -238,31 +238,31 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

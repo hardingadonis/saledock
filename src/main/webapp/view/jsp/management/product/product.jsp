@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
+
 <html data-bs-theme="light" lang="en">
 
     <head>
@@ -59,7 +60,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 align-self-center">
-                                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Hiển thị <%= request.getAttribute("productCount") %> trên <%= request.getAttribute("productCount") %> sản phẩm</p>
+                                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Hiển thị ${requestScope.productCount} trên ${requestScope.productCount} sản phẩm</p>
                                     </div>
                                     <div class="col-md-6">
                                         <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
@@ -77,9 +78,10 @@
                         </div>
                     </div>
                 </div>
-
+              
                 <%@include file="../../../common/_footer.jsp" %>                         
             </div>
+          
             <%@include file="../../../common/_goback.jsp" %>
         </div>
 
@@ -87,5 +89,5 @@
         <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
     </body>
-
+  
 </html>

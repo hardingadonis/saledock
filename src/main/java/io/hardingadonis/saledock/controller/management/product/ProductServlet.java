@@ -2,10 +2,10 @@ package io.hardingadonis.saledock.controller.management.product;
 
 import io.hardingadonis.saledock.model.*;
 import io.hardingadonis.saledock.utils.*;
-import java.io.*;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
+import java.io.*;
 import java.util.*;
 
 @WebServlet(name = "ProductServlet", urlPatterns = {"/product"})
@@ -29,5 +29,6 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
     }
 }

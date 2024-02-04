@@ -6,6 +6,7 @@ import io.hardingadonis.saledock.utils.*;
 import java.sql.*;
 import java.util.*;
 import org.hibernate.*;
+import org.hibernate.query.Query;
 import org.json.simple.*;
 
 public class OrderDAOImpl implements IOrderDAO {
@@ -42,8 +43,8 @@ public class OrderDAOImpl implements IOrderDAO {
     }
 
     @Override
-    public Long count() {
-        Long count = 0L;
+    public Integer count() {
+        Integer count = 0;
 
         try {
             Connection conn = Singleton.dbContext.getConnection();
@@ -53,7 +54,7 @@ public class OrderDAOImpl implements IOrderDAO {
             ResultSet rs = smt.executeQuery();
 
             if (rs.next()) {
-                count = rs.getLong(1);
+                count = rs.getInt(1);
             }
 
             Singleton.dbContext.closeConnection(conn);
@@ -65,8 +66,8 @@ public class OrderDAOImpl implements IOrderDAO {
     }
 
     @Override
-    public Long countOrderInProcess() {
-        Long count = 0L;
+    public Integer countOrderInProcess() {
+        Integer count = 0;
 
         try {
             Connection conn = Singleton.dbContext.getConnection();
@@ -76,7 +77,7 @@ public class OrderDAOImpl implements IOrderDAO {
             ResultSet rs = smt.executeQuery();
 
             if (rs.next()) {
-                count = rs.getLong(1);
+                count = rs.getInt(1);
             }
 
             Singleton.dbContext.closeConnection(conn);
@@ -153,5 +154,21 @@ public class OrderDAOImpl implements IOrderDAO {
         }
 
         return json.toJSONString();
+    }
+
+    @Override
+    public List<Order> pagination(Integer offset, Integer limit) {
+        try (Session session = sessionFactory.openSession()) {
+            Query<Order> query = session.createQuery("FROM Order", Order.class);
+            query.setFirstResult(offset);
+            query.setMaxResults(limit);
+
+            return query.getResultList();
+        }
+    }
+
+    @Override
+    public Integer totalPages(Integer limit) {
+        return (int) Math.ceil((double) this.count() / limit);
     }
 }

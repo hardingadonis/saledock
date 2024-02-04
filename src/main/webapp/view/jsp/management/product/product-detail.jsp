@@ -46,7 +46,7 @@
                                                                 <label class="form-label" for="username">
                                                                     <strong>Mã sản phẩm</strong>
                                                                 </label>
-                                                                <input class="form-control" type="text" id="username" placeholder="${requestScope.pro.code}" name="username" readonly="">
+                                                                <input class="form-control" type="text" id="username" value="${requestScope.pro.code}" name="username" readonly="">
                                                             </div>
                                                         </div>
                                                         <div class="col">
@@ -54,7 +54,7 @@
                                                                 <label class="form-label" for="email">
                                                                     <strong>Tên sản phẩm</strong>
                                                                 </label>
-                                                                <input class="form-control" type="email" id="email" placeholder="${requestScope.pro.name}" name="email" readonly="">
+                                                                <input class="form-control" type="email" id="email" value="${requestScope.pro.name}" name="email" readonly="">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -64,7 +64,7 @@
                                                                 <label class="form-label" for="username">
                                                                     <strong>Phân loại</strong>
                                                                 </label>
-                                                                <input class="form-control" type="email" id="email" placeholder="${requestScope.cat.name}" name="email" readonly="">
+                                                                <input class="form-control" type="email" id="email" value="${requestScope.cat.name}" name="email" readonly="">
                                                             </div>
                                                         </div>
                                                         <div class="col">
@@ -72,12 +72,12 @@
                                                                 <label class="form-label" for="email">
                                                                     <strong>Giá tiền</strong>
                                                                 </label>                                  
-                                                                <input class="form-control" type="email" id="email-1" placeholder="${requestScope.pro.price}" name="email" readonly="">
+                                                                <input class="form-control" type="email" id="email-1" value="${requestScope.pro.price}" name="email" readonly="">
                                                                 <script>
                                                                     let inputElement = document.getElementById("email-1");
-                                                                    let placeholderText = inputElement.placeholder;
-                                                                    let formattedNum = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(placeholderText);
-                                                                    inputElement.placeholder = formattedNum;
+                                                                    let valueText = inputElement.value;
+                                                                    let formattedNum = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(valueText);
+                                                                    inputElement.value = formattedNum;
                                                                 </script>
                                                             </div>
                                                         </div>
@@ -112,7 +112,7 @@
                                                             <label class="form-label" for="country">
                                                                 <strong>Mô tả chi tiết</strong>
                                                             </label>
-                                                            <textarea class="form-control" placeholder="${requestScope.pro.description}" readonly=""></textarea>
+                                                            <textarea class="form-control" value="${requestScope.pro.description}" readonly="">${requestScope.pro.description}</textarea>
                                                         </div>
                                                         <a class="back" href="<%=request.getContextPath()%>/product">
                                                             <button class="btn btn-primary btn-sm" type="button">
