@@ -8,7 +8,17 @@ import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import java.util.*;
 
-@WebServlet(name = "AddProductServlet", urlPatterns = {"/add-product"})
+import io.hardingadonis.saledock.model.Category;
+import io.hardingadonis.saledock.model.Product;
+import io.hardingadonis.saledock.utils.Singleton;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "AddProductServlet", urlPatterns = { "/add-product" })
 public class AddProductServlet extends HttpServlet {
 
     @Override

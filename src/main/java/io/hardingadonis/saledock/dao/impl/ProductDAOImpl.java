@@ -6,6 +6,7 @@ import io.hardingadonis.saledock.utils.*;
 import java.sql.*;
 import java.util.*;
 import org.hibernate.*;
+import org.hibernate.query.*;
 import org.json.simple.*;
 
 public class ProductDAOImpl implements IProductDAO {
@@ -42,8 +43,8 @@ public class ProductDAOImpl implements IProductDAO {
     }
 
     @Override
-    public Long count() {
-        Long count = 0L;
+    public Integer count() {
+        Integer count = 0;
 
         try {
             Connection conn = Singleton.dbContext.getConnection();
@@ -53,7 +54,7 @@ public class ProductDAOImpl implements IProductDAO {
             ResultSet rs = smt.executeQuery();
 
             if (rs.next()) {
-                count = rs.getLong(1);
+                count = rs.getInt(1);
             }
 
             Singleton.dbContext.closeConnection(conn);
@@ -95,8 +96,22 @@ public class ProductDAOImpl implements IProductDAO {
             System.err.println(ex.getMessage());
         }
 
-        System.out.println(json.toJSONString());
-
         return json.toJSONString();
+    }
+
+    @Override
+    public List<Product> pagination(Integer offset, Integer limit) {
+        try (Session session = sessionFactory.openSession()) {
+            Query<Product> query = session.createQuery("FROM Product", Product.class);
+            query.setFirstResult(offset);
+            query.setMaxResults(limit);
+
+            return query.getResultList();
+        }
+    }
+
+    @Override
+    public Integer totalPages(Integer limit) {
+        return (int) Math.ceil((double) this.count() / limit);
     }
 }

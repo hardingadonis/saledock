@@ -153,8 +153,26 @@ Validator.isEmail = function (selector, message) {
     return {
         selector: selector,
         test: function (value) {
-            var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            return regex.test(value) ? undefined : message || 'This field must be email!';
+            // Regular expression for a strict email validation
+            var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+            if (!regex.test(value)) {
+                return message || 'This field must be a valid email address!';
+            }
+
+            // Additional checks for email address
+            var parts = value.split('@');
+            var domain = parts[1];
+
+            // Check for valid domain
+            if (domain) {
+                var domainParts = domain.split('.');
+                if (domainParts.length < 2 || domainParts[domainParts.length - 1].length < 2) {
+                    return message || 'Invalid email address - invalid domain!';
+                }
+            }
+
+            return undefined; // Email is valid
         }
     };
 };
