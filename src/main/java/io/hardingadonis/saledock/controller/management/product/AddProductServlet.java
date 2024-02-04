@@ -1,8 +1,12 @@
 package io.hardingadonis.saledock.controller.management.product;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
+import io.hardingadonis.saledock.model.*;
+import io.hardingadonis.saledock.utils.*;
+import java.io.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.*;
+import jakarta.servlet.http.*;
+import java.util.*;
 
 import io.hardingadonis.saledock.model.Category;
 import io.hardingadonis.saledock.model.Product;
@@ -17,46 +21,61 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name = "AddProductServlet", urlPatterns = { "/add-product" })
 public class AddProductServlet extends HttpServlet {
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
 
-		List<Category> categories = Singleton.categoryDAO.getAll();
-		request.setAttribute("categories", categories);
-		request.setAttribute("page", "add-product");
+        request.setAttribute("page", "product");
 
-		RequestDispatcher requestDispatcher = request
-				.getRequestDispatcher("/view/jsp/management/product/add-product.jsp");
-		requestDispatcher.forward(request, response);
-	}
+        List<Category> cat = Singleton.categoryDAO.getAll();
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String name = request.getParameter("name");
-		String code = request.getParameter("code");
-		String description = request.getParameter("description");
-		String price = request.getParameter("price");
-		String categoryId = request.getParameter("category");
+        request.setAttribute("categories", cat);
+        System.out.println(cat);
 
-		if (name.length() > 0 && code.length() > 0 && description.length() > 0 && price.length() > 0
-				&& categoryId.length() > 0) {
-			Product product = new Product();
-			product.setCode(code);
-			product.setName(name);
-			product.setDescription(description);
-			product.setPrice(Double.valueOf(price));
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/jsp/management/product/add-product.jsp");
+        requestDispatcher.forward(request, response);
+    }
 
-			Optional<Category> productCategory = Singleton.categoryDAO.getByID(Integer.parseInt(categoryId));
-			product.setCategory(productCategory.get());
-			Singleton.productDAO.save(product);
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String codePro = request.getParameter("codeP");
+        String namePro = request.getParameter("nameP");
 
-			response.sendRedirect(request.getContextPath() + "/product");
-			return;
-		}
+        int catPro = Integer.parseInt(request.getParameter("categoryP"));
+        Optional<Category> cat = Singleton.categoryDAO.getByID(catPro);
 
-		response.sendRedirect(request.getContextPath() + "/add-product");
-	}
+        double pricePro = Double.parseDouble(request.getParameter("priceP"));
+        String desPro = request.getParameter("descriptionP");
+
+//        try {
+//            List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+//            for (FileItem item : items) {
+//                if (!item.isFormField() && item.getFieldName().equals("imageUpload")) {
+//                    // item is the file (and not a field)
+//                    InputStream fileContent = item.getInputStream();
+//                    // assuming you have a connection (conn) to your database
+//                    PreparedStatement stmt = conn.prepareStatement("INSERT INTO images (content) VALUES (?)");
+//                    stmt.setBlob(1, fileContent);
+//                    stmt.executeUpdate();
+//                    break; // we only process one image, so break the loop after the first file
+//                }
+//            }
+//        } catch (Exception e) {
+//            throw new ServletException("Cannot parse multipart request.", e);
+//        }
+        
+        Product p = new Product();
+        p.setCode(codePro.toUpperCase());
+        p.setName(namePro);
+        p.setCategory(cat.get());
+        p.setPrice(pricePro);
+        p.setDescription(desPro);
+        Singleton.productDAO.save(p);
+
+        response.sendRedirect("product");
+    }
+
 }

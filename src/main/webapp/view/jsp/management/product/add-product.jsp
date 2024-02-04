@@ -1,7 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="io.hardingadonis.saledock.utils.Singleton" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -37,33 +36,61 @@
                                                 <p class="text-primary m-0 fw-bold">Thêm sản phẩm mới</p>
                                             </div>
                                             <div class="card-body">
-                                                <form action="./add-product" method="post">
+                                                <form id="add-product" action="add-product" method="post">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <div class="mb-3"><label class="form-label" for="code"><strong>Mã sản phẩm</strong></label><input class="form-control" type="text" id="code" placeholder="Nhập mã sản phẩm" name="code"></div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="username">
+                                                                    <strong>Mã sản phẩm</strong>
+                                                                </label>
+                                                                <input class="form-control" type="text" id="codeP" placeholder="Nhập mã sản phẩm" name="codeP" required oninvalid="this.setCustomValidity('Vui lòng nhập Mã sản phẩm.')" oninput="this.setCustomValidity('')">
+                                                            </div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="mb-3"><label class="form-label" for="name"><strong>tên sản phẩm</strong></label><input class="form-control" type="text" id="name" placeholder="Nhập tên sản phẩm" name="name"></div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="email">
+                                                                    <strong>Tên sản phẩm</strong>
+                                                                </label>
+                                                                <input class="form-control" type="text" id="nameP" placeholder="Nhập tên sản phẩm" name="nameP" required oninvalid="this.setCustomValidity('Vui lòng nhập Tên sản phẩm.')" oninput="this.setCustomValidity('')">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="username">
+                                                                    <strong>Phân loại sản phẩm</strong>
+                                                                </label>
+                                                                <select class="form-control" name="categoryP" id="exampleFormControlSelect1" required="">
+                                                                    <c:forEach items="${requestScope.categories}" var="cat">
+                                                                        <option value="${cat.ID}">${cat.name}</option>
+                                                                    </c:forEach>
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="mb-3"><label class="form-label" for="description"><strong>Sự miêu tả</strong></label><input class="form-control" type="text" id="description" placeholder="Nhập mô tả sản phẩm" name="description"></div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="mb-3"><label class="form-label" for="price"><strong>Giá sản phẩm</strong></label><input class="form-control" type="text" id="price" placeholder="Nhập giá sản phẩm" name="price"></div>
-                                                        </div>
-                                                        <div class="col">
-                                                        	<div class="mb-3">
-                                                        		<label class="form-label" for="category"><strong>danh mục sản phẩm</strong></label>
-                                                        		<select id="category" name="category" placeholder="Chọn danh mục sản phẩm">
-                                                        			<c:forEach items="${requestScope.categories}" var="category">
-                                                        				<option value="${category.ID}">${category.name}</option>
-                                                        			</c:forEach>
-                                                        		</select>
-                                                        	</div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="email">
+                                                                    <strong>Giá tiền</strong>
+                                                                </label>
+                                                                <input class="form-control" type="number" id="priceP" placeholder="Nhập giá tiền sản phẩm" name="priceP" required min="0" oninvalid="this.setCustomValidity('Vui lòng nhập Giá sản phẩm.')" oninput="this.setCustomValidity('')">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <button class="btn btn-primary btn-sm" type="submit">Lưu lại</button>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="imageUpload">
+                                                                <strong>Ảnh sản phẩm</strong>
+                                                            </label>
+                                                            <input class="form-control" type="file" id="imageUpload" name="imageUpload" accept="image/*">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="country">
+                                                                <strong>Mô tả chi tiết</strong>
+                                                            </label>
+                                                            <textarea class="form-control" id="descriptionP"></textarea>
+                                                        </div>
+                                                        <button class="btn btn-primary btn-sm" type="submit">Lưu sản phẩm</button>
                                                     </div>
                                                 </form>
                                             </div>
