@@ -34,7 +34,8 @@
                                             <tr>
                                                 <th>Mã đặt hàng</th>
                                                 <th>Tên khách hàng</th>
-                                                <th>Tình trạng đặt hàng</th>
+                                                <th>Tổng tiền</th>
+                                                <th>Thao tác</th>
                                             </tr>
                                         </thead>
                                         <c:forEach items="${requestScope.orders}" var="order">
@@ -42,8 +43,9 @@
                                                 <tr>
                                                     <td><img class="rounded-circle me-2" width="40" height="40" src="<%=request.getContextPath()%>/view/assets/images/icons/order.png">${order.code}</td>
                                                     <td>${order.customer.name}</td>
-                                                    <td>${order.status}</td>
+                                                    <td>${order.getTotalToString()}</td>
                                                     <td class="text-start"><a class="btn btn-primary btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/order-detail?id=${order.ID}"><i class="la la-info-circle"></i></a><button class="btn btn-warning btn-sm" data-bs-toggle="tooltip" data-bss-tooltip="" type="button" style="margin: 2px;" title="Chỉnh sửa"><i class="la la-edit"></i></button></td>
+
                                                 </tr>
 
                                             </tbody>
