@@ -78,8 +78,4 @@ public class SendEmailUtil {
                 + "</html>";
         sendEmail(to, title, message);
     }
-
-    public static void main(String[] args) {
-//        sendEmail("htn10a2@gmail.com", "Test send email", "Lmao");
-    }
 }

@@ -18,7 +18,7 @@ public class ProductServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
 
         List<Product> products = Singleton.productDAO.getAll();
-        Integer productCount = Singleton.productDAO.count(); 
+        Integer productCount = Singleton.productDAO.count();
         request.setAttribute("productCount", productCount);
         request.setAttribute("products", products);
         request.setAttribute("page", "product");
@@ -29,6 +29,6 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	
+
     }
 }
