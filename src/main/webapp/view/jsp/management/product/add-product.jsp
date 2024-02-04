@@ -41,15 +41,17 @@
                                                         <div class="col">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="username">
-                                                                    <strong>Mã sản phẩm</strong></label>
-                                                                <input class="form-control" type="text" id="codeP" placeholder="Nhập mã sản phẩm" name="codeP">
+                                                                    <strong>Mã sản phẩm</strong>
+                                                                </label>
+                                                                <input class="form-control" type="text" id="codeP" placeholder="Nhập mã sản phẩm" name="codeP" required oninvalid="this.setCustomValidity('Vui lòng nhập Mã sản phẩm.')" oninput="this.setCustomValidity('')">
                                                             </div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="email">
-                                                                    <strong>Tên sản phẩm</strong></label>
-                                                                <input class="form-control" type="email" id="nameP" placeholder="Nhập tên sản phẩm" name="nameP">
+                                                                    <strong>Tên sản phẩm</strong>
+                                                                </label>
+                                                                <input class="form-control" type="text" id="nameP" placeholder="Nhập tên sản phẩm" name="nameP" required oninvalid="this.setCustomValidity('Vui lòng nhập Tên sản phẩm.')" oninput="this.setCustomValidity('')">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -69,8 +71,9 @@
                                                         <div class="col">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="email">
-                                                                    <strong>Giá tiền</strong></label>
-                                                                <input class="form-control" type="email" id="priceP" placeholder="Nhập giá tiền sản phẩm" name="priceP">
+                                                                    <strong>Giá tiền</strong>
+                                                                </label>
+                                                                <input class="form-control" type="number" id="priceP" placeholder="Nhập giá tiền sản phẩm" name="priceP" required min="0" oninvalid="this.setCustomValidity('Vui lòng nhập Giá sản phẩm.')" oninput="this.setCustomValidity('')">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -87,7 +90,7 @@
                                                             </label>
                                                             <textarea class="form-control" id="descriptionP"></textarea>
                                                         </div>
-                                                        <button class="btn btn-primary btn-sm" type="button">Lưu sản phẩm</button>
+                                                        <button class="btn btn-primary btn-sm" type="submit">Lưu sản phẩm</button>
                                                     </div>
                                                 </form>
                                             </div>

@@ -6,7 +6,6 @@ import java.io.*;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @WebServlet(name = "AddProductServlet", urlPatterns = {"/add-product"})
