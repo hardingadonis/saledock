@@ -21,10 +21,10 @@ public class CustomerDetailServlet extends HttpServlet {
 
         String id = request.getParameter("id");
         if (id == null) {
-            response.sendError(404);      
+            response.sendError(404);
             return;
         }
-                
+
         Integer id_customer = Integer.valueOf(id);
         Optional<Customer> customer = Singleton.customerDAO.getByID(id_customer);
 

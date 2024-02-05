@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "AddProductServlet", urlPatterns = { "/add-product" })
+@WebServlet(name = "AddProductServlet", urlPatterns = {"/add-product"})
 public class AddProductServlet extends HttpServlet {
 
     @Override
@@ -66,7 +66,6 @@ public class AddProductServlet extends HttpServlet {
 //        } catch (Exception e) {
 //            throw new ServletException("Cannot parse multipart request.", e);
 //        }
-        
         Product p = new Product();
         p.setCode(codePro.toUpperCase());
         p.setName(namePro);

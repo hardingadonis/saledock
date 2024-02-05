@@ -1,6 +1,7 @@
 package io.hardingadonis.saledock.utils;
 
 public class OtpUltil {
+
     public static String generateRandomOTP() {
         int otpLength = 6;
         String allowedDigits = "0123456789";

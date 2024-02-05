@@ -1,7 +1,7 @@
 package io.hardingadonis.saledock.model;
 
 import jakarta.persistence.*;
-import java.text.DecimalFormat;
+import java.text.*;
 import java.time.*;
 import java.util.*;
 import lombok.*;
@@ -87,9 +87,9 @@ public class Order {
 
         return uuid.toString().toUpperCase().replace("-", "").substring(0, 15);
     }
-    
-     public String getTotalToString() {
-         DecimalFormat decimalFormat = new DecimalFormat("#,###.#");
+
+    public String getTotalToString() {
+        DecimalFormat decimalFormat = new DecimalFormat("#,###.#");
         return decimalFormat.format(this.total);
     }
 }
