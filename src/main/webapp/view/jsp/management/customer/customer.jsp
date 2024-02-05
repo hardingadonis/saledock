@@ -41,13 +41,17 @@
                                         <c:forEach items="${requestScope.customers}" var="customer">
                                             <tbody>                                        
                                                 <tr>
-                                                    <td><img class="rounded-circle me-2" width="30" height="30" src="<%=request.getContextPath()%>
-                                                    /view/assets/images/icons/customer.png">${customer.name}</td>
+                                                    <td><img class="rounded-circle me-2" width="30" height="30" src="<%=request.getContextPath()%>/view/assets/images/icons/customer.png">${customer.name}</td>
                                                     <td>${customer.code}</td>
                                                     <td>${customer.email}</td>
                                                     <td class="text-start">
-                                                        <a class="btn btn-primary btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/customer-detail?id=${customer.ID}"><i class="la la-info-circle"></i></a>
-                                                        <button class="btn btn-warning btn-sm" data-bs-toggle="tooltip" data-bss-tooltip="" type="button" style="margin: 2px;" title="Chỉnh sửa"><i class="la la-edit"></i></button>
+                                                        <a class="btn btn-primary btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/customer-detail?id=${customer.ID}">
+                                                            <i class="la la-info-circle"></i>
+                                                        </a>
+                                                        <a class="btn btn-warning btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/update-customer?id=${customer.ID}">
+                                                            <i class="la la-edit"></i>
+                                                        </a>
+
                                                     </td>
                                                 </tr>
 
@@ -62,11 +66,25 @@
                                     <div class="col-md-6">
                                         <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                             <ul class="pagination">
-                                                <li class="page-item disabled"><a class="page-link" aria-label="Previous" href="<%=request.getContextPath()%>#"><span aria-hidden="true">«</span></a></li>
-                                                <li class="page-item active"><a class="page-link" href="<%=request.getContextPath()%>#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>#">3</a></li>
-                                                <li class="page-item"><a class="page-link" aria-label="Next" href="<%=request.getContextPath()%>#"><span aria-hidden="true">»</span></a></li>
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" aria-label="Previous" href="<%=request.getContextPath()%>#">
+                                                        <span aria-hidden="true">«</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item active">
+                                                    <a class="page-link" href="<%=request.getContextPath()%>#">1</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="<%=request.getContextPath()%>#">2</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="<%=request.getContextPath()%>#">3</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" aria-label="Next" href="<%=request.getContextPath()%>#">
+                                                        <span aria-hidden="true">»</span>
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </nav>
                                     </div>
