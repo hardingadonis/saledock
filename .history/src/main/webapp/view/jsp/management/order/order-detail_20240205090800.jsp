@@ -1,5 +1,9 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<<<<<<< HEAD
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+=======
+
+>>>>>>> 34617db1c335c459baa5b86a8dd0d1839a565a08
 <%@page import="io.hardingadonis.saledock.utils.Singleton" %>
 
 <!DOCTYPE html>
@@ -8,7 +12,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<<<<<<< HEAD
         <title>Sale Dock - Chi tiết đơn hàng</title>
+=======
+        <title>Sale Dock - Thông tin đặt hàng</title>
+>>>>>>> 34617db1c335c459baa5b86a8dd0d1839a565a08
         <link rel="icon" type="image/png" sizes="512x512" href="<%=request.getContextPath()%>/view/assets/images/favicon/favicon.png">
 
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/bootstrap.min.css">
@@ -25,6 +33,7 @@
                 <div id="content">
                     <%@include file="../../../common/_nav.jsp" %>
                     <div class="container-fluid">
+<<<<<<< HEAD
                         <h3 class="text-dark mb-4">Thông tin đơn hàng</h3>
                         <div class="row justify-content-center mb-3">
                             <div class="col-lg-8 col-xxl-10">
@@ -63,18 +72,44 @@
                                         <div class="card shadow mb-3">
                                             <div class="card-header py-3">
                                                 <p class="text-primary m-0 fw-bold">Thông tin đơn hàng</p>
+=======
+                        <h3 class="text-dark mb-4">Thông tin đặt hàng</h3>
+                        <div class="row justify-content-center mb-3">
+                            <div class="col-lg-8">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card shadow mb-3">
+                                            <div class="card-header py-3">
+                                                <p class="text-primary m-0 fw-bold">Thông tin đặt hàng</p>
+>>>>>>> 34617db1c335c459baa5b86a8dd0d1839a565a08
                                             </div>
                                             <div class="card-body">
                                                 <form>
                                                     <div class="row">
+<<<<<<< HEAD
                                                         <div class="col">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="username"><strong>Mã đơn hàng</strong></label>
                                                                 <input class="form-control" type="text" id="username" value ="${requestScope.ord.code}" name="username" readonly="">
+=======
+
+                                                        <div class="col">
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="code"><strong>Mã đặt hàng</strong></label>
+                                                                <input class="form-control" type="text" id="code" placeholder="${requestScope.ord.code}" name="code" readonly="">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col">
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="customername"><strong>Tên khách hàng</strong></label>
+                                                                <input class="form-control" type="text" id="customername" placeholder="${requestScope.ord.customer.name}" name="customername" readonly="">
+>>>>>>> 34617db1c335c459baa5b86a8dd0d1839a565a08
                                                             </div>
                                                         </div>
 
                                                         <div class="col">
+<<<<<<< HEAD
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="email"><strong>Ngày tạo</strong></label>
                                                                 <input class="form-control" type="email" id="createAt" value ="${requestScope.ord.createdAt}" name="email" readonly="">
@@ -158,11 +193,32 @@
                                                     <div class="mb-3">
                                                         <div class="mb-3">
                                                             <label class="form-label" for="country"><strong>Ghi chú</strong></label><textarea class="form-control" readonly=""></textarea>
+=======
+                                                            <div class="mb-3"><label class="form-label" for="status"><strong>Tình trạng đặt hàng</strong></label>
+                                                                <input class="form-control" type="text" id="status" placeholder="${requestScope.ord.status}" name="status" readonly="">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="mb-3">
+
+                                                        <div class="mb-3"><label class="form-label" for="total"><strong>Tổng cộng</strong></label>
+                                                            <input class="form-control" type="text" id="total" placeholder="${requestScope.ord.total}" name="total" readonly="">
+                                                        </div>
+
+                                                        <div class="mb-3"><label class="form-label" for="note"><strong>Ghi chú</strong></label>
+                                                            <input class="form-control" type="text" id="note" placeholder="${requestScope.ord.note}" name="note" readonly="">
+>>>>>>> 34617db1c335c459baa5b86a8dd0d1839a565a08
                                                         </div>
 
                                                         <button class="btn btn-primary btn-sm" type="button">
                                                             <a class="back" href="<%=request.getContextPath()%>/order" style="color: white; text-decoration: none;">Quay lại</a>
                                                         </button>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 34617db1c335c459baa5b86a8dd0d1839a565a08
                                                     </div>
                                                 </form>
                                             </div>
@@ -180,7 +236,13 @@
         <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
+<<<<<<< HEAD
         <script src="<%=request.getContextPath()%>/view/assets/js/management/order/order-detail.js"></script>
     </body>
 
 </html>
+=======
+    </body>
+
+</html>
+>>>>>>> 34617db1c335c459baa5b86a8dd0d1839a565a08
