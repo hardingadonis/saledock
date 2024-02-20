@@ -36,7 +36,7 @@
                                                 <p class="text-primary m-0 fw-bold">Thêm sản phẩm mới</p>
                                             </div>
                                             <div class="card-body">
-                                                <form id="add-product" action="add-product" method="post">
+                                                <form id="add-product" enctype="multipart/form-data" action="add-product" method="post">
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="mb-3">
@@ -82,7 +82,7 @@
                                                             <label class="form-label" for="imageUpload">
                                                                 <strong>Ảnh sản phẩm</strong>
                                                             </label>
-                                                            <input class="form-control" type="file" id="imageUpload" name="imageUpload" accept="image/*">
+                                                            <input class="form-control" type="file" id="imageUpload" name="imageUpload" accept="image/*" required oninvalid="this.setCustomValidity('Vui lòng tải lên Ảnh mô tả sản phẩm.')" oninput="this.setCustomValidity('')">
                                                         </div>
                                                         <div class="mb-3">
                                                             <label class="form-label" for="country">
@@ -90,6 +90,8 @@
                                                             </label>
                                                             <textarea class="form-control" id="descriptionP"></textarea>
                                                         </div>
+
+                                                        <a class="btn btn-primary btn-sm" href="product">Quay lại</a>
                                                         <button class="btn btn-primary btn-sm" type="submit">Lưu sản phẩm</button>
                                                     </div>
                                                 </form>
