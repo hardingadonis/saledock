@@ -1,6 +1,6 @@
 package io.hardingadonis.saledock.utils;
 
-public class OtpUltil {
+public class OtpUtil {
 
     public static String generateRandomOTP() {
         int otpLength = 6;

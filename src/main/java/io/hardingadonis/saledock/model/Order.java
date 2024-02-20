@@ -76,7 +76,7 @@ public class Order {
         this.orderDetails.add(detail);
 
         if (this.total == null) {
-            this.total = Double.valueOf(0);
+            this.total = 0.0;
         }
 
         this.total += product.getPrice() * quantity;
