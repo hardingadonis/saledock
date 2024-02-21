@@ -1,6 +1,5 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
-
-<%@page import="io.hardingadonis.saledock.utils.Singleton" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -14,8 +13,11 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/fonts/fontawesome-all.min.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/fonts/line-awesome.min.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/animate.min.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/validate/validator.css">
 
     </head>
 
@@ -26,24 +28,101 @@
                 <div id="content">
                     <%@include file="../../../common/_nav.jsp" %>
                     <div class="container-fluid">
-                        <h3 class="text-dark mb-4">Thêm đơn đặt hàng mới</h3>
+                        <h3 class="text-dark mb-4">Thêm đơn hàng mới</h3>
                         <div class="row justify-content-center mb-3">
-                            <div class="col-lg-8">
+                            <div class="col-lg-8 col-xxl-10">
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-xxl-12">
                                         <div class="card shadow mb-3">
                                             <div class="card-header py-3">
-                                                <p class="text-primary m-0 fw-bold">Thêm đơn đặt hàng mới</p>
+                                                <p class="text-primary m-0 fw-bold">Thông tin đơn hàng</p>
                                             </div>
                                             <div class="card-body">
-                                                <form action="./add-order" method="post">
+                                                <form id="form-add-order" method="post">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <div class="mb-3"><label class="form-label" for="customerID"><strong>ID khách hàng</strong></label><input class="form-control" type="text" id="customerID" placeholder="Nhập ID khách hàng" name="customerID"></div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="username"><strong>Mã đơn hàng</strong></label>
+                                                                <input class="form-control" type="text" id="username" name="username" readonly="" placeholder="Tự động tạo" readonly="">
+                                                            </div>
                                                         </div>
+                                                        <div class="col">
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="email"><strong>Ngày tạo</strong></label>
+                                                                <input class="form-control" type="email" id="email" name="email" placeholder="Tự động tạo" readonly="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="mb-3 form-group">
+                                                                <label class="form-label" for="username"><strong>Tên Khách hàng</strong></label>
+                                                                <input class="form-control" id="cus-name" name="customerName">
+                                                                <span class="form-message"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="mb-3 form-group">
+                                                                <label class="form-label" for="text"><strong>Nhân viên phụ trách</strong></label>
+                                                                <input class="form-control" id="emp-name" name="employeeName">
+                                                                <span class="form-message"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="mb-3 form-group">
+                                                                <label class="form-label" for="text"><strong>Tổng tiền</strong></label>
+                                                                <input class="form-control" type="text" id="total-cost" readonly="">
+                                                                <span class="form-message"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="mb-3 form-group">
+                                                                <label class="form-label" for="text"><strong>Trạng thái</strong></label>
+                                                                <input class="form-control" type="text" id="order-status" name="orderStatus" readonly="" placeholder="Pending">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label class="form-label" for="username"><strong>Danh sách sản phẩm</strong></label>
+                                                            <div class="table-responsive">
+                                                                <table class="table" id="add-product-table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>STT</th>
+                                                                            <th>Tên sản phẩm</th>
+                                                                            <th>Đơn giá</th>
+                                                                            <th>Số lượng</th>
+                                                                            <th>Thành tiền</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>1</td>
+                                                                            <td>Sản phẩm 1</td>
+                                                                            <td>Sản phẩm 1</td>
+                                                                            <td>Sản phẩm 1</td>
+                                                                            <td>Sản phẩm 1</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>2</td>
+                                                                            <td>Sản phẩm 2</td>
+                                                                            <td>Sản phẩm 2</td>
+                                                                            <td>Sản phẩm 2</td>
+                                                                            <td>Sản phẩm 2</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div><button class="btn btn-primary btn-sm" type="button" id="add-product-btn" style="margin-bottom: 15px;"><i class="la la-plus"></i></button>
+                                                        </div>
+                                                    </div>
                                                     <div class="mb-3">
-                                                        <div class="mb-3"><label class="form-label" for="address"><strong>ID sản phẩm</strong></label><input class="form-control" type="text" id="productID" placeholder="Nhập ID sản phẩm" name="productID"></div>
-                                                        <div class="mb-3"><label class="form-label" for="email"><strong>Số lượng</strong></label><input class="form-control" type="number" id="quantity" placeholder="Nhập số lượng" name="quantity"></div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="country"><strong>Ghi chú</strong></label>
+                                                            <textarea class="form-control"></textarea>
+                                                        </div>
                                                         <button class="btn btn-primary btn-sm" type="submit">Lưu lại</button>
                                                     </div>
                                                 </form>
@@ -54,14 +133,76 @@
                             </div>
                         </div>
                     </div>
+                    <%@include file="../../../common/_footer.jsp" %>
                 </div>
-                <%@include file="../../../common/_footer.jsp" %>
+                <%@include file="../../../common/_goback.jsp" %>
             </div>
-            <%@include file="../../../common/_goback.jsp" %>
-        </div>
-        <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
-        <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
-        <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
+            <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
+            <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
+            <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+            <script src="<%=request.getContextPath()%>/view/assets/js/validate/validator.js"></script>
+
+            <!--Danh sach goi y-->
+            <script>
+                //Danh sach goi y ten Khach hang
+                $(document).ready(function () {
+                    var availableTags = [
+                <c:forEach var="customer" items="${requestScope.customers}">
+                        "${customer.name}",
+                </c:forEach>
+                    ];
+                    $("#cus-name").autocomplete({
+                        source: availableTags
+                    });
+                });
+
+                //Danh sach goi y ten Nhan vien
+                $(document).ready(function () {
+                    var availableTags = [
+                <c:forEach var="employee" items="${requestScope.employees}">
+                        "${employee.fullName}",
+                </c:forEach>
+                    ];
+                    $("#emp-name").autocomplete({
+                        source: availableTags
+                    });
+                });
+            </script>
+
+            <!--Validate input-->
+            <script>
+                Validator({
+                    form: '#form-add-order',
+                    errorSelector: '.form-message',
+                    formGroupSelector: '.form-group',
+                    rules: [
+                        Validator.isRequired('#cus-name', 'Vui lòng nhập tên khách hàng!'),
+
+                        Validator.isRequired('#emp-name', 'Vui lòng nhập tên nhân viên phụ trách!')
+                    ]
+                });
+            </script>
+
+            <!--Them san pham vao order-->
+            <script>
+                $(document).ready(function () {
+                    $("#add-product-btn").click(function () {
+                        var rowCount = $('#product-table tbody tr').length + 1;
+                        var newRow = `
+            <tr>
+                <td>${rowCount}</td>
+                <td><input type="text" class="form-control" name="productName[]"></td>
+                <td><input type="text" class="form-control" name="productPrice[]"></td>
+                <td><input type="text" class="form-control" name="productQuantity[]"></td>
+                <td><input type="text" class="form-control" name="productTotal[]"></td>
+            </tr>
+        `;
+                        $("#product-table tbody").append(newRow);
+                    });
+                });
+            </script>
 
     </body>
 
