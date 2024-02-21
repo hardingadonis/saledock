@@ -87,7 +87,7 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <label class="form-label" for="username"><strong>Danh sách sản phẩm</strong></label>
-                                                            <div class="table-responsive">
+                                                            <div class="table-responsive form-add-product">
                                                                 <table class="table" id="add-product-table">
                                                                     <thead>
                                                                         <tr>
@@ -99,23 +99,13 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <tr>
-                                                                            <td>1</td>
-                                                                            <td>Sản phẩm 1</td>
-                                                                            <td>Sản phẩm 1</td>
-                                                                            <td>Sản phẩm 1</td>
-                                                                            <td>Sản phẩm 1</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>2</td>
-                                                                            <td>Sản phẩm 2</td>
-                                                                            <td>Sản phẩm 2</td>
-                                                                            <td>Sản phẩm 2</td>
-                                                                            <td>Sản phẩm 2</td>
-                                                                        </tr>
+
                                                                     </tbody>
                                                                 </table>
-                                                            </div><button class="btn btn-primary btn-sm" type="button" id="add-product-btn" style="margin-bottom: 15px;"><i class="la la-plus"></i></button>
+                                                            </div>
+                                                            <button class="btn btn-primary btn-sm" type="button" id="add-product-btn" style="margin-bottom: 15px;">
+                                                                <i class="la la-plus"></i>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
@@ -169,39 +159,137 @@
                         source: availableTags
                     });
                 });
+
+                //Danh sach goi y ten San pham
+                $(document).ready(function () {
+                var availableProducts = [
+                    <c:forEach var="product" items="${requestScope.products}">
+                        {
+                            name: "${product.name}",
+                            price: "${product.price}"
+                        },
+                    </c:forEach>
+                ];
+                $("#product-name").autocomplete({
+                    source: availableProducts.map(function (product) {
+                    return product.name;
+                }),
+                select: function (event, ui) {
+                    var selectedProduct = availableProducts.find(function (product) {
+                        return product.name === ui.item.value;
+                    });
+                    $("#product-price").val(formatCurrency(selectedProduct.price));
+                }
+                });
+                });
+
+                function formatCurrency(value) {
+                    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
+                }
             </script>
 
             <!--Validate input-->
             <script>
+                //Validate form add order
                 Validator({
-                    form: '#form-add-order',
-                    errorSelector: '.form-message',
-                    formGroupSelector: '.form-group',
-                    rules: [
-                        Validator.isRequired('#cus-name', 'Vui lòng nhập tên khách hàng!'),
-
-                        Validator.isRequired('#emp-name', 'Vui lòng nhập tên nhân viên phụ trách!')
-                    ]
+                form: '#form-add-order',
+                        errorSelector: '.form-message',
+                        formGroupSelector: '.form-group',
+                        rules: [
+                                Validator.isRequired('#cus-name', 'Vui lòng nhập tên khách hàng!'),
+                                Validator.isRequired('#emp-name', 'Vui lòng nhập tên nhân viên phụ trách!')
+                        ]
                 });
+                
+                var rowCount = $('#add-product-table tbody tr').length;
+                for (var i = 1; i <= rowCount; i++) {
+                    Validator({
+                        form: '#form-add-product',
+                        errorSelector: '.form-message',
+                        formGroupSelector: '.form-group',
+                        rules: [
+                            Validator.isRequired('#product-name-' + i, 'Vui lòng nhập tên sản phẩm!'),
+                            Validator.isRequired('#product-quantity-' + i, 'Vui lòng nhập số lượng sản phẩm!')
+                        ]
+                    });
+                }
             </script>
 
-            <!--Them san pham vao order-->
             <script>
-                $(document).ready(function () {
+                $(document).ready(function () {                    
                     $("#add-product-btn").click(function () {
-                        var rowCount = $('#product-table tbody tr').length + 1;
+                        var rowCount = $('#add-product-table tbody tr').length + 1;
                         var newRow = `
-            <tr>
-                <td>${rowCount}</td>
-                <td><input type="text" class="form-control" name="productName[]"></td>
-                <td><input type="text" class="form-control" name="productPrice[]"></td>
-                <td><input type="text" class="form-control" name="productQuantity[]"></td>
-                <td><input type="text" class="form-control" name="productTotal[]"></td>
-            </tr>
-        `;
-                        $("#product-table tbody").append(newRow);
+                            <tr>
+                                <td>` + rowCount + `</td>
+                                <td class="form-group">
+                                    <input type="text" class="form-control" id="product-name-` + rowCount + `" name="productName">
+                                    <span class="form-message"></span>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="product-price-` + rowCount + `" name="productPrice" readonly>
+                                </td>
+                                <td class="form-group">
+                                    <div class="input-group">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="decrementQuantity(this)">-</button>
+                                        <input type="number" class="form-control" id="product-quantity-` + rowCount + `" name="productQuantity" min="1" onchange="calculateTotal(this)">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="incrementQuantity(this)">+</button>
+                                    </div>
+                                    <span class="form-message"></span>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="product-total-` + rowCount + `" name="productTotal" readonly>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" type="button" onclick="deleteRow(this)">
+                                        <i class="la la-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                        $("#add-product-table tbody").append(newRow);
                     });
                 });
+
+                function incrementQuantity(button) {
+                    var input = $(button).siblings('input[name="productQuantity"]');
+                    var value = parseInt(input.val());
+                    input.val(value + 1);
+                    calculateTotal(input);
+                }
+
+                function decrementQuantity(button) {
+                    var input = $(button).siblings('input[name="productQuantity"]');
+                    var value = parseInt(input.val());
+                    if (value > 1) {
+                        input.val(value - 1);
+                        calculateTotal(input);
+                    }
+                }
+
+                function calculateTotal(input) {
+                    var quantity = parseInt(input.value);
+                    var price = parseFloat(input.closest('tr').querySelector('input[name="productPrice"]').value.replace(/[^0-9.-]+/g, ''));
+                    var total = quantity * price;
+                    input.closest('tr').querySelector('input[name="productTotal"]').value = formatCurrency(total);
+                }
+
+                function deleteRow(button) {
+                    var row = $(button).closest('tr');
+                    var rowCount = parseInt(row.find('td:first-child').text());
+                    row.remove();
+                    updateRowCount(rowCount);
+                }
+
+                function updateRowCount(startRow) {
+                    $('#add-product-table tbody tr').each(function (index, row) {
+                        var currentRow = $(row);
+                        var currentRowCount = parseInt(currentRow.find('td:first-child').text());
+                        if (currentRowCount > startRow) {
+                            currentRow.find('td:first-child').text(currentRowCount - 1);
+                        }
+                    });
+                }
             </script>
 
     </body>
