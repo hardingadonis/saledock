@@ -103,8 +103,8 @@
                                                                     </tbody>
                                                                 </table>
                                                             </div>
-                                                            <button class="btn btn-primary btn-sm" type="button" id="add-product-btn" style="margin-bottom: 15px;">
-                                                                <i class="la la-plus"></i>
+                                                            <button class="btn btn-primary btn-sm" type="button" id="add-product-btn" style="margin-bottom: 15px;" onclick="window.location.href = '<%=request.getContextPath()%>/add-product-into-order'">
+                                                                Thêm sản phẩm vào đơn hàng <i class="la la-plus"></i>
                                                             </button>
                                                         </div>
                                                     </div>
@@ -159,29 +159,6 @@
                         source: availableTags
                     });
                 });
-
-                // Tạo mảng chứa tên và giá của tất cả sản phẩm
-                var products = [
-                <c:forEach var="product" items="${requestScope.products}">
-                    {
-                        value: "${product.name}",
-                        price: "${product.price}"
-                    },
-                </c:forEach>
-                ];
-                // Tạo danh sách gợi ý tên sản phẩm
-                $(document).ready(function () {
-                    $("#add-product-btn").click(function () {
-                        var rowCount = $('#add-product-table tbody tr').length + 1;
-                        var productNameInput = $('#product-name-' + rowCount);
-                        productNameInput.autocomplete({
-                            source: products,
-                            select: function (event, ui) {
-                                $('#product-price-' + rowCount).val(ui.item.price);
-                            }
-                        });
-                    });
-                });
             </script>
 
             <!--Validate input-->
@@ -197,91 +174,6 @@
                     ]
                 });
             </script>
-
-            <script>
-                $(document).ready(function () {
-                    $("#add-product-btn").click(function () {
-                        var rowCount = $('#add-product-table tbody tr').length + 1;
-                        var newRow = `
-                            <tr class="form-add-product">
-                                <td>` + rowCount + `</td>
-                                <td class="form-group">
-                                    <input type="text" class="form-control" id="product-name-` + rowCount + `" name="productName">
-                                    <span class="form-message"></span>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" id="product-price-` + rowCount + `" name="productPrice" readonly>
-                                </td>
-                                <td class="form-group">
-                                    <div class="input-group">
-                                        <button class="btn btn-outline-secondary" type="button" onclick="decrementQuantity(this)">-</button>
-                                        <input type="number" class="form-control" id="product-quantity-` + rowCount + `" name="productQuantity" min="1" onchange="calculateTotal(this)">
-                                        <button class="btn btn-outline-secondary" type="button" onclick="incrementQuantity(this)">+</button>
-                                    </div>
-                                    <span class="form-message"></span>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" id="product-total-` + rowCount + `" name="productTotal" readonly>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger" type="button" onclick="deleteRow(this)">
-                                        <i class="la la-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        `;
-                        $("#add-product-table tbody").append(newRow);
-                    })
-                });
-                function incrementQuantity(button) {
-                    var input = $(button).siblings('input[name="productQuantity"]');
-                    var value = parseInt(input.val());
-                    input.val(value + 1);
-                    calculateTotal(input);
-                }
-
-                function decrementQuantity(button) {
-                    var input = $(button).siblings('input[name="productQuantity"]');
-                    var value = parseInt(input.val());
-                    if (value > 1) {
-                        input.val(value - 1);
-                        calculateTotal(input);
-                    }
-                }
-
-                function calculateTotal(input) {
-                    var quantity = parseInt(input.value);
-                    var price = parseFloat(input.closest('tr').querySelector('input[name="productPrice"]').value.replace(/[^0-9.-]+/g, ''));
-                    var total = quantity * price;
-                    input.closest('tr').querySelector('input[name="productTotal"]').value = formatCurrency(total);
-                }
-
-                function deleteRow(button) {
-                    var row = $(button).closest('tr');
-                    var rowCount = parseInt(row.find('td:first-child').text());
-                    row.remove();
-                    updateRowCount(rowCount);
-                }
-
-                function updateRowCount(startRow) {
-                    $('#add-product-table tbody tr').each(function (index, row) {
-                        var currentRow = $(row);
-                        var currentRowCount = parseInt(currentRow.find('td:first-child').text());
-                        if (currentRowCount > startRow) {
-                            currentRow.find('td:first-child').text(currentRowCount - 1);
-                            currentRow.find('input[id^="product-name-"]').attr('id', 'product-name-' + (currentRowCount - 1));
-                            currentRow.find('input[id^="product-price-"]').attr('id', 'product-price-' + (currentRowCount - 1));
-                            currentRow.find('input[id^="product-quantity-"]').attr('id', 'product-quantity-' + (currentRowCount - 1));
-                            currentRow.find('input[id^="product-total-"]').attr('id', 'product-total-' + (currentRowCount - 1));
-                            currentRow.find('button[onclick^="decrementQuantity"]').attr('onclick', 'decrementQuantity(this)');
-                            currentRow.find('button[onclick^="incrementQuantity"]').attr('onclick', 'incrementQuantity(this)');
-                            currentRow.find('button[onclick^="deleteRow"]').attr('onclick', 'deleteRow(this)');
-                        }
-                    });
-                }
-                ;
-            </script>
-
     </body>
 
 </html>

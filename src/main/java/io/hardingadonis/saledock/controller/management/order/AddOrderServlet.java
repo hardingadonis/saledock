@@ -19,11 +19,9 @@ public class AddOrderServlet extends HttpServlet {
         
         List<Customer> customers = Singleton.customerDAO.getAll();
         List<Employee> employees = Singleton.employeeDAO.getAll();
-        List<Product> products = Singleton.productDAO.getAll();
         
         request.setAttribute("customers", customers);
         request.setAttribute("employees", employees);
-        request.setAttribute("products", products);
 
         request.setAttribute("page", "order");
 
