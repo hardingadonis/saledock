@@ -87,7 +87,7 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <label class="form-label" for="username"><strong>Danh sách sản phẩm</strong></label>
-                                                            <div class="table-responsive form-add-product">
+                                                            <div class="table-responsive">
                                                                 <table class="table" id="add-product-table">
                                                                     <thead>
                                                                         <tr>
@@ -113,7 +113,7 @@
                                                             <label class="form-label" for="country"><strong>Ghi chú</strong></label>
                                                             <textarea class="form-control"></textarea>
                                                         </div>
-                                                        <button class="btn btn-primary btn-sm" type="submit">Lưu lại</button>
+                                                        <button class="btn btn-primary btn-sm" id="save-button" type="submit">Lưu lại</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -160,67 +160,50 @@
                     });
                 });
 
-                //Danh sach goi y ten San pham
-                $(document).ready(function () {
-                var availableProducts = [
-                    <c:forEach var="product" items="${requestScope.products}">
-                        {
-                            name: "${product.name}",
-                            price: "${product.price}"
-                        },
-                    </c:forEach>
+                // Tạo mảng chứa tên và giá của tất cả sản phẩm
+                var products = [
+                <c:forEach var="product" items="${requestScope.products}">
+                    {
+                        value: "${product.name}",
+                        price: "${product.price}"
+                    },
+                </c:forEach>
                 ];
-                $("#product-name").autocomplete({
-                    source: availableProducts.map(function (product) {
-                    return product.name;
-                }),
-                select: function (event, ui) {
-                    var selectedProduct = availableProducts.find(function (product) {
-                        return product.name === ui.item.value;
+                // Tạo danh sách gợi ý tên sản phẩm
+                $(document).ready(function () {
+                    $("#add-product-btn").click(function () {
+                        var rowCount = $('#add-product-table tbody tr').length + 1;
+                        var productNameInput = $('#product-name-' + rowCount);
+                        productNameInput.autocomplete({
+                            source: products,
+                            select: function (event, ui) {
+                                $('#product-price-' + rowCount).val(ui.item.price);
+                            }
+                        });
                     });
-                    $("#product-price").val(formatCurrency(selectedProduct.price));
-                }
                 });
-                });
-
-                function formatCurrency(value) {
-                    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
-                }
             </script>
 
             <!--Validate input-->
             <script>
                 //Validate form add order
                 Validator({
-                form: '#form-add-order',
-                        errorSelector: '.form-message',
-                        formGroupSelector: '.form-group',
-                        rules: [
-                                Validator.isRequired('#cus-name', 'Vui lòng nhập tên khách hàng!'),
-                                Validator.isRequired('#emp-name', 'Vui lòng nhập tên nhân viên phụ trách!')
-                        ]
+                    form: '#form-add-order',
+                    errorSelector: '.form-message',
+                    formGroupSelector: '.form-group',
+                    rules: [
+                        Validator.isRequired('#cus-name', 'Vui lòng nhập tên khách hàng!'),
+                        Validator.isRequired('#emp-name', 'Vui lòng nhập tên nhân viên phụ trách!')
+                    ]
                 });
-                
-                var rowCount = $('#add-product-table tbody tr').length;
-                for (var i = 1; i <= rowCount; i++) {
-                    Validator({
-                        form: '#form-add-product',
-                        errorSelector: '.form-message',
-                        formGroupSelector: '.form-group',
-                        rules: [
-                            Validator.isRequired('#product-name-' + i, 'Vui lòng nhập tên sản phẩm!'),
-                            Validator.isRequired('#product-quantity-' + i, 'Vui lòng nhập số lượng sản phẩm!')
-                        ]
-                    });
-                }
             </script>
 
             <script>
-                $(document).ready(function () {                    
+                $(document).ready(function () {
                     $("#add-product-btn").click(function () {
                         var rowCount = $('#add-product-table tbody tr').length + 1;
                         var newRow = `
-                            <tr>
+                            <tr class="form-add-product">
                                 <td>` + rowCount + `</td>
                                 <td class="form-group">
                                     <input type="text" class="form-control" id="product-name-` + rowCount + `" name="productName">
@@ -248,9 +231,8 @@
                             </tr>
                         `;
                         $("#add-product-table tbody").append(newRow);
-                    });
+                    })
                 });
-
                 function incrementQuantity(button) {
                     var input = $(button).siblings('input[name="productQuantity"]');
                     var value = parseInt(input.val());
@@ -287,9 +269,17 @@
                         var currentRowCount = parseInt(currentRow.find('td:first-child').text());
                         if (currentRowCount > startRow) {
                             currentRow.find('td:first-child').text(currentRowCount - 1);
+                            currentRow.find('input[id^="product-name-"]').attr('id', 'product-name-' + (currentRowCount - 1));
+                            currentRow.find('input[id^="product-price-"]').attr('id', 'product-price-' + (currentRowCount - 1));
+                            currentRow.find('input[id^="product-quantity-"]').attr('id', 'product-quantity-' + (currentRowCount - 1));
+                            currentRow.find('input[id^="product-total-"]').attr('id', 'product-total-' + (currentRowCount - 1));
+                            currentRow.find('button[onclick^="decrementQuantity"]').attr('onclick', 'decrementQuantity(this)');
+                            currentRow.find('button[onclick^="incrementQuantity"]').attr('onclick', 'incrementQuantity(this)');
+                            currentRow.find('button[onclick^="deleteRow"]').attr('onclick', 'deleteRow(this)');
                         }
                     });
                 }
+                ;
             </script>
 
     </body>
