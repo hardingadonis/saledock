@@ -114,4 +114,12 @@ public class ProductDAOImpl implements IProductDAO {
     public Integer totalPages(Integer limit) {
         return (int) Math.ceil((double) this.count() / limit);
     }
+
+    @Override
+    public Optional<Product> getByName(String productName) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "FROM Product WHERE name = :productName";
+            return Optional.ofNullable(session.createQuery(hql, Product.class).setParameter("productName", productName).uniqueResult());
+        }
+    }
 }

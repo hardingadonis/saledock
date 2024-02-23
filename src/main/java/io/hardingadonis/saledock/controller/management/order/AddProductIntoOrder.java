@@ -16,6 +16,12 @@ public class AddProductIntoOrder extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        String customerName = (String) SessionUtil.getInstance().getValue(request, "customerName");
+        String employeeName = (String) SessionUtil.getInstance().getValue(request, "employeeName");
+        
+        request.setAttribute("customerName", customerName);
+        request.setAttribute("employeeName", employeeName);
+        
         List<Product> products = Singleton.productDAO.getAll();
         request.setAttribute("products", products);
         
@@ -28,11 +34,14 @@ public class AddProductIntoOrder extends HttpServlet {
         String productName = request.getParameter("productName").trim();
         Integer productQuantity = Integer.parseInt(request.getParameter("productQuantity"));
         
-        List<Product> products = Singleton.productDAO.getAll();
-        for (Product product : products) {
-            if (productName.toLowerCase().equals(product.getName().toLowerCase())) {
-                
-            }
+        Optional<Product> product = Singleton.productDAO.getByName(productName);
+        
+        if (product.isPresent()) {
+            Cookie productCookie = new Cookie("product", product.get().getID() + ":" + productQuantity);
+            productCookie.setMaxAge(3600);
+            response.addCookie(productCookie);
+            
+            request.getRequestDispatcher("/view/jsp/management/order/add-order.jsp").forward(request, response);           
         }
     }
 }

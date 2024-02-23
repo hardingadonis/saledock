@@ -57,16 +57,27 @@
                                                         <div class="col">
                                                             <div class="mb-3 form-group">
                                                                 <label class="form-label" for="username"><strong>Tên Khách hàng</strong></label>
-                                                                <input class="form-control" id="cus-name" name="customerName">
+                                                                <input class="form-control" id="cus-name" name="customerName" value="${requestScope.customerName}">
                                                                 <span class="form-message"></span>
                                                             </div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="mb-3 form-group">
-                                                                <label class="form-label" for="text"><strong>Nhân viên phụ trách</strong></label>
-                                                                <input class="form-control" id="emp-name" name="employeeName">
-                                                                <span class="form-message"></span>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <div class="mb-3 form-group">
+                                                                        <label class="form-label" for="text"><strong>Nhân viên phụ trách</strong></label>
+                                                                        <input class="form-control" id="emp-name" name="employeeName" value="${requestScope.employeeName}">
+                                                                        <span class="form-message"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="mb-3 form-group">
+                                                                        <label class="form-label" for="text"><strong>Mã nhân viên</strong></label>
+                                                                        <input class="form-control" id="emp-code" name="employeeCode" readonly="">
+                                                                    </div>
+                                                                </div>
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -150,13 +161,18 @@
 
                 //Danh sach goi y ten Nhan vien
                 $(document).ready(function () {
-                    var availableTags = [
-                <c:forEach var="employee" items="${requestScope.employees}">
-                        "${employee.fullName}",
-                </c:forEach>
+                    var employees = [
+                        <c:forEach var="employee" items="${requestScope.employees}">
+                            { label: "${employee.fullName}", value: "${employee.code}" },
+                        </c:forEach>
                     ];
                     $("#emp-name").autocomplete({
-                        source: availableTags
+                        source: employees,
+                        select: function( event, ui ) {            
+                            $('#emp-name').val(ui.item.label);
+                            $('#emp-code').val(ui.item.value);
+                            return false;
+                        }
                     });
                 });
             </script>

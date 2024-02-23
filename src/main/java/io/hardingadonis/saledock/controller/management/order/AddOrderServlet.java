@@ -22,6 +22,12 @@ public class AddOrderServlet extends HttpServlet {
         
         request.setAttribute("customers", customers);
         request.setAttribute("employees", employees);
+        
+        String customerName = (String) SessionUtil.getInstance().getValue(request, "customerName");
+        String employeeName = (String) SessionUtil.getInstance().getValue(request, "employeeName");
+        
+        request.setAttribute("customerName", customerName);
+        request.setAttribute("employeeName", employeeName);
 
         request.setAttribute("page", "order");
 
@@ -31,8 +37,12 @@ public class AddOrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String customerName = request.getParameter("customerName");
+        String employeeName = request.getParameter("employeeName");
+        String employeeCode = request.getParameter("employeeCode");
         
-        
+        SessionUtil.getInstance().putValue(request, "customerName", customerName);
+        SessionUtil.getInstance().putValue(request, "employeeName", employeeName);
         
         
     }
