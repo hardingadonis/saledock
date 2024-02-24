@@ -6,6 +6,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import java.io.*;
+import java.net.*;
 import java.util.*;
 
 @WebServlet(name = "AddOrderServlet", urlPatterns = {"/add-order"})
@@ -16,19 +17,34 @@ public class AddOrderServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        
+
         List<Customer> customers = Singleton.customerDAO.getAll();
         List<Employee> employees = Singleton.employeeDAO.getAll();
+
+        String customerNameParam = request.getParameter("customerName");
+        String employeeNameParam = request.getParameter("employeeName");
+
+        if (customerNameParam != null) {
+            customerNameParam = URLDecoder.decode(customerNameParam, "UTF-8");
+        }
+
+        if (employeeNameParam != null) {
+            employeeNameParam = URLDecoder.decode(employeeNameParam, "UTF-8");
+        }
         
+        Order order = (Order) SessionUtil.getInstance().getValue(request, "order");
+
+        if (order == null) {
+            order = new Order();
+            SessionUtil.getInstance().putValue(request, "order", order);
+        }
+
         request.setAttribute("customers", customers);
         request.setAttribute("employees", employees);
+        request.setAttribute("customerNameParam", customerNameParam);
+        request.setAttribute("employeeNameParam", employeeNameParam);
+        request.setAttribute("order", order);
         
-        String customerName = (String) SessionUtil.getInstance().getValue(request, "customerName");
-        String employeeName = (String) SessionUtil.getInstance().getValue(request, "employeeName");
-        
-        request.setAttribute("customerName", customerName);
-        request.setAttribute("employeeName", employeeName);
-
         request.setAttribute("page", "order");
 
         request.getRequestDispatcher("/view/jsp/management/order/add-order.jsp").forward(request, response);
@@ -40,10 +56,5 @@ public class AddOrderServlet extends HttpServlet {
         String customerName = request.getParameter("customerName");
         String employeeName = request.getParameter("employeeName");
         String employeeCode = request.getParameter("employeeCode");
-        
-        SessionUtil.getInstance().putValue(request, "customerName", customerName);
-        SessionUtil.getInstance().putValue(request, "employeeName", employeeName);
-        
-        
     }
 }

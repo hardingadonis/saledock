@@ -57,7 +57,7 @@
                                                         <div class="col">
                                                             <div class="mb-3 form-group">
                                                                 <label class="form-label" for="username"><strong>Tên Khách hàng</strong></label>
-                                                                <input class="form-control" id="cus-name" name="customerName" value="${requestScope.customerName}">
+                                                                <input class="form-control" id="cus-name" name="customerName" value="${customerNameParam}">
                                                                 <span class="form-message"></span>
                                                             </div>
                                                         </div>
@@ -66,7 +66,7 @@
                                                                 <div class="col">
                                                                     <div class="mb-3 form-group">
                                                                         <label class="form-label" for="text"><strong>Nhân viên phụ trách</strong></label>
-                                                                        <input class="form-control" id="emp-name" name="employeeName" value="${requestScope.employeeName}">
+                                                                        <input class="form-control" id="emp-name" name="employeeName" value="${employeeNameParam}">
                                                                         <span class="form-message"></span>
                                                                     </div>
                                                                 </div>
@@ -77,7 +77,6 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -110,11 +109,19 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-
+                                                                        <c:forEach var="detail" items="${requestScope.order.orderDetails}" varStatus="loop">
+                                                                            <tr>
+                                                                                <td>${loop.index + 1}</td>
+                                                                                <td>${detail.product.name}</td>
+                                                                                <td>${detail.product.price}</td>
+                                                                                <td>${detail.quantity}</td>
+                                                                                <td>${detail.product.price * detail.quantity}</td>
+                                                                            </tr>
+                                                                        </c:forEach>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
-                                                            <button class="btn btn-primary btn-sm" type="button" id="add-product-btn" style="margin-bottom: 15px;" onclick="window.location.href = '<%=request.getContextPath()%>/add-product-into-order'">
+                                                            <button class="btn btn-primary btn-sm" type="button" id="add-product-btn" style="margin-bottom: 15px;" onclick="redirectToAddProductPage()">
                                                                 Thêm sản phẩm vào đơn hàng <i class="la la-plus"></i>
                                                             </button>
                                                         </div>
@@ -166,14 +173,27 @@
                             { label: "${employee.fullName}", value: "${employee.code}" },
                         </c:forEach>
                     ];
+
+                    var initialEmployeeName = '<%= request.getParameter("employeeName") %>';
+                    var initialEmployeeCode = '';
+
+                    for (var i = 0; i < employees.length; i++) {
+                        if (employees[i].label === initialEmployeeName) {
+                            initialEmployeeCode = employees[i].value;
+                            break;
+                        }
+                    }
+
                     $("#emp-name").autocomplete({
                         source: employees,
-                        select: function( event, ui ) {            
+                        select: function (event, ui) {
                             $('#emp-name').val(ui.item.label);
                             $('#emp-code').val(ui.item.value);
                             return false;
                         }
                     });
+                    
+                    $('#emp-code').val(initialEmployeeCode);
                 });
             </script>
 
@@ -189,6 +209,21 @@
                         Validator.isRequired('#emp-name', 'Vui lòng nhập tên nhân viên phụ trách!')
                     ]
                 });
+            </script>
+            
+            <script>
+                function redirectToAddProductPage() {
+                    var customerName = encodeURIComponent($('#cus-name').val());
+                    var employeeName = encodeURIComponent($('#emp-name').val());
+
+                    window.location.href = '<%=request.getContextPath()%>/add-product-into-order?customerName=' + customerName + '&employeeName=' + employeeName;
+                }
+            </script>
+            
+            <script>
+                function formatCurrency(number) {
+                    return number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ' VNĐ';
+                }
             </script>
     </body>
 
