@@ -7,7 +7,6 @@ import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import java.nio.file.*;
-import static java.nio.file.Files.exists;
 import java.util.*;
 
 @WebServlet(name = "AddProductServlet", urlPatterns = {"/add-product"})
@@ -37,38 +36,6 @@ public class AddProductServlet extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        request.setCharacterEncoding("UTF-8");
-//        response.setContentType("text/html; charset=UTF-8");
-//
-//        String namePro = request.getParameter("nameP");
-//        int catPro = Integer.parseInt(request.getParameter("categoryP"));
-//        Optional<Category> cat = Singleton.categoryDAO.getByID(catPro);
-//        double pricePro = Double.parseDouble(request.getParameter("priceP"));
-//        String desPro = request.getParameter("descriptionP");
-//
-//        Part part = request.getPart("imageUpload");
-//        String realPath = request.getServletContext().getRealPath("/product_img");
-//        String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-//        String imgURL = "product_img/" + fileName;
-//        if (!Files.exists(Paths.get(realPath))) {
-//            Files.createDirectories(Paths.get(realPath));
-//        }
-//
-//        part.write(realPath + "/" + fileName);
-//
-//        Product pro = new Product();
-//        pro.setName(namePro);
-//        pro.setCategory(cat.get());
-//        pro.setPrice(pricePro);
-//        pro.setImageURL(imgURL);
-//        pro.setDescription(desPro);
-//        Singleton.productDAO.save(pro);
-//                    
-//        response.sendRedirect("product");
-//    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
