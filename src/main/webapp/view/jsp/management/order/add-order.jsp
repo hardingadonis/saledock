@@ -41,20 +41,6 @@
                                                 <form id="form-add-order" method="post">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <div class="mb-3">
-                                                                <label class="form-label" for="username"><strong>Mã đơn hàng</strong></label>
-                                                                <input class="form-control" type="text" id="username" name="username" readonly="" placeholder="Tự động tạo" readonly="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="mb-3">
-                                                                <label class="form-label" for="email"><strong>Ngày tạo</strong></label>
-                                                                <input class="form-control" type="email" id="email" name="email" placeholder="Tự động tạo" readonly="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
                                                             <div class="mb-3 form-group">
                                                                 <label class="form-label" for="username"><strong>Tên Khách hàng</strong></label>
                                                                 <input class="form-control" id="cus-name" name="customerName" value="${customerNameParam}">
@@ -63,34 +49,10 @@
                                                         </div>
                                                         <div class="col">
                                                             <div class="row">
-                                                                <div class="col">
-                                                                    <div class="mb-3 form-group">
-                                                                        <label class="form-label" for="text"><strong>Nhân viên phụ trách</strong></label>
-                                                                        <input class="form-control" id="emp-name" name="employeeName" value="${employeeNameParam}">
-                                                                        <span class="form-message"></span>
-                                                                    </div>
+                                                                <div class="mb-3 form-group">
+                                                                    <label class="form-label" for="text"><strong>Tổng tiền</strong></label>
+                                                                    <input class="form-control" type="text" id="total-cost" readonly="">
                                                                 </div>
-                                                                <div class="col">
-                                                                    <div class="mb-3 form-group">
-                                                                        <label class="form-label" for="text"><strong>Mã nhân viên</strong></label>
-                                                                        <input class="form-control" id="emp-code" name="employeeCode" readonly="">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <div class="mb-3 form-group">
-                                                                <label class="form-label" for="text"><strong>Tổng tiền</strong></label>
-                                                                <input class="form-control" type="text" id="total-cost" readonly="">
-                                                                <span class="form-message"></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="mb-3 form-group">
-                                                                <label class="form-label" for="text"><strong>Trạng thái</strong></label>
-                                                                <input class="form-control" type="text" id="order-status" name="orderStatus" readonly="" placeholder="Pending">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -109,14 +71,21 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <c:forEach var="detail" items="${requestScope.order.orderDetails}" varStatus="loop">
-                                                                            <tr>
-                                                                                <td>${loop.index + 1}</td>
-                                                                                <td>${detail.product.name}</td>
-                                                                                <td>${detail.product.price}</td>
-                                                                                <td>${detail.quantity}</td>
-                                                                                <td>${detail.product.price * detail.quantity}</td>
-                                                                            </tr>
+                                                                        <c:forEach var="entry" items="${productMap}">
+                                                                            <c:set var="productId" value="${entry.key}" />
+                                                                            <c:set var="quantity" value="${entry.value}" />
+
+                                                                            <c:forEach var="product" items="${products}">
+                                                                                <c:if test="${product.ID eq productId}">
+                                                                                    <tr>
+                                                                                        <td class="stt"></td>
+                                                                                        <td>${product.name}</td>
+                                                                                        <td><fmt:formatNumber type="currency" value="${product.price}" currencySymbol="₫" /></td>
+                                                                                        <td>${quantity}</td>
+                                                                                        <td><fmt:formatNumber type="currency" value="${product.price * quantity}" currencySymbol="₫" /></td>
+                                                                                    </tr>
+                                                                                </c:if>
+                                                                            </c:forEach>
                                                                         </c:forEach>
                                                                     </tbody>
                                                                 </table>
@@ -165,36 +134,6 @@
                         source: availableTags
                     });
                 });
-
-                //Danh sach goi y ten Nhan vien
-                $(document).ready(function () {
-                    var employees = [
-                        <c:forEach var="employee" items="${requestScope.employees}">
-                            { label: "${employee.fullName}", value: "${employee.code}" },
-                        </c:forEach>
-                    ];
-
-                    var initialEmployeeName = '<%= request.getParameter("employeeName") %>';
-                    var initialEmployeeCode = '';
-
-                    for (var i = 0; i < employees.length; i++) {
-                        if (employees[i].label === initialEmployeeName) {
-                            initialEmployeeCode = employees[i].value;
-                            break;
-                        }
-                    }
-
-                    $("#emp-name").autocomplete({
-                        source: employees,
-                        select: function (event, ui) {
-                            $('#emp-name').val(ui.item.label);
-                            $('#emp-code').val(ui.item.value);
-                            return false;
-                        }
-                    });
-                    
-                    $('#emp-code').val(initialEmployeeCode);
-                });
             </script>
 
             <!--Validate input-->
@@ -205,8 +144,7 @@
                     errorSelector: '.form-message',
                     formGroupSelector: '.form-group',
                     rules: [
-                        Validator.isRequired('#cus-name', 'Vui lòng nhập tên khách hàng!'),
-                        Validator.isRequired('#emp-name', 'Vui lòng nhập tên nhân viên phụ trách!')
+                        Validator.isRequired('#cus-name', 'Vui lòng nhập tên khách hàng!')
                     ]
                 });
             </script>
@@ -214,17 +152,28 @@
             <script>
                 function redirectToAddProductPage() {
                     var customerName = encodeURIComponent($('#cus-name').val());
-                    var employeeName = encodeURIComponent($('#emp-name').val());
 
-                    window.location.href = '<%=request.getContextPath()%>/add-product-into-order?customerName=' + customerName + '&employeeName=' + employeeName;
+                    window.location.href = '<%=request.getContextPath()%>/add-product-into-order?customerName=' + customerName;
                 }
             </script>
             
             <script>
                 function formatCurrency(number) {
-                    return number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ' VNĐ';
+                    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
                 }
             </script>
+            
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var rows = document.querySelectorAll('#add-product-table tbody tr');
+
+                    rows.forEach(function (row, index) {
+                        var sttCell = row.querySelector('.stt');
+                        sttCell.textContent = index + 1;
+                    });
+                });
+            </script>
+
     </body>
 
 </html>

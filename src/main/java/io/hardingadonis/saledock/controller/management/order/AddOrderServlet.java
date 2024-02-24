@@ -19,32 +19,25 @@ public class AddOrderServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
 
         List<Customer> customers = Singleton.customerDAO.getAll();
-        List<Employee> employees = Singleton.employeeDAO.getAll();
+        List<Product> products = Singleton.productDAO.getAll();
 
         String customerNameParam = request.getParameter("customerName");
-        String employeeNameParam = request.getParameter("employeeName");
 
         if (customerNameParam != null) {
             customerNameParam = URLDecoder.decode(customerNameParam, "UTF-8");
         }
 
-        if (employeeNameParam != null) {
-            employeeNameParam = URLDecoder.decode(employeeNameParam, "UTF-8");
-        }
-        
-        Order order = (Order) SessionUtil.getInstance().getValue(request, "order");
-
-        if (order == null) {
-            order = new Order();
-            SessionUtil.getInstance().putValue(request, "order", order);
+        Map<Integer, Integer> productMap = (Map<Integer, Integer>) SessionUtil.getInstance().getValue(request, "productMap");
+        if (productMap == null) {
+            productMap = new HashMap<>();
+            SessionUtil.getInstance().putValue(request, "productMap", productMap);
         }
 
         request.setAttribute("customers", customers);
-        request.setAttribute("employees", employees);
+        request.setAttribute("products", products);
         request.setAttribute("customerNameParam", customerNameParam);
-        request.setAttribute("employeeNameParam", employeeNameParam);
-        request.setAttribute("order", order);
-        
+        request.setAttribute("productMap", productMap);
+
         request.setAttribute("page", "order");
 
         request.getRequestDispatcher("/view/jsp/management/order/add-order.jsp").forward(request, response);
@@ -54,7 +47,5 @@ public class AddOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String customerName = request.getParameter("customerName");
-        String employeeName = request.getParameter("employeeName");
-        String employeeCode = request.getParameter("employeeCode");
     }
 }

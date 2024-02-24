@@ -30,17 +30,26 @@ public class AddProductIntoOrder extends HttpServlet {
         Optional<Product> product = Singleton.productDAO.getByName(productName);
 
         if (product.isPresent()) {
-            Order order = (Order) SessionUtil.getInstance().getValue(request, "order");
-            if (order == null) {
-                order = new Order();
-                SessionUtil.getInstance().putValue(request, "order", order);
+            Map<Integer, Integer> productMap = (Map<Integer, Integer>) SessionUtil.getInstance().getValue(request, "productMap");
+
+            if (productMap == null) {
+                productMap = new HashMap<>();
+                SessionUtil.getInstance().putValue(request, "productMap", productMap);
             }
 
-            order.addProduct(product.get(), productQuantity);
+            Integer productId = product.get().getID();
 
+            if (productMap.containsKey(productId)) {
+                Integer currentQuantity = productMap.get(productId);
+                productMap.put(productId, currentQuantity + productQuantity);
+            } else {
+                productMap.put(productId, productQuantity);
+            }
+
+            SessionUtil.getInstance().putValue(request, "productMap", productMap);
             String customerName = request.getParameter("customerName");
-            String employeeName = request.getParameter("employeeName");
-            response.sendRedirect("./add-order?customerName=" + URLEncoder.encode(customerName, "UTF-8") + "&employeeName=" + URLEncoder.encode(employeeName, "UTF-8"));
+            response.sendRedirect("./add-order?customerName=" + URLEncoder.encode(customerName, "UTF-8"));
         }
+
     }
 }
