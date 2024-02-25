@@ -36,6 +36,33 @@
                                 <div class="row">
                                     <div class="col-xxl-12">
                                         <div class="card shadow mb-3">
+                                            <c:choose>
+                                                <c:when test="${param.message eq 'addSuccess'}">
+                                                    <div class="alert alert-success text-center" role="alert">
+                                                        Thêm sản phẩm thành công.
+                                                    </div>
+                                                </c:when>
+                                                <c:when test="${param.message eq 'deleteSuccess'}">
+                                                    <div class="alert alert-success text-center" role="alert">
+                                                        Xoá sản phẩm thành công.
+                                                    </div>
+                                                </c:when>
+                                                <c:when test="${requestScope.message eq 'emptyProduct'}">
+                                                    <div class="alert alert-danger text-center" role="alert">
+                                                        Chưa có sản phẩm nào được thêm. Vui lòng thêm sản phẩm vào đơn hàng.
+                                                    </div>
+                                                </c:when>
+                                                <c:when test="${requestScope.message eq 'productNotExist'}">
+                                                    <div class="alert alert-danger text-center" role="alert">
+                                                        Sản phẩm không tồn tại. Vui lòng kiểm tra lại thông tin sản phẩm.
+                                                    </div>
+                                                </c:when>
+                                                <c:when test="${requestScope.message eq 'invalidCustomer'}">
+                                                    <div class="alert alert-danger text-center" role="alert">
+                                                        Người dùng không hợp lệ. Vui lòng kiểm tra lại.
+                                                    </div>
+                                                </c:when>
+                                            </c:choose>
                                             <div class="card-header py-3">
                                                 <p class="text-primary m-0 fw-bold">Thông tin đơn hàng</p>
                                             </div>
@@ -44,8 +71,9 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="mb-3 form-group">
+                                                                <input type="hidden" id="cus-id" name="customerId" value="${customerId} />
                                                                 <label class="form-label" for="username"><strong>Tên Khách hàng</strong></label>
-                                                                <input class="form-control" id="cus-name" name="customerName" value="${customerNameParam}">
+                                                                <input class="form-control" id="cus-name" name="customerName"">
                                                                 <span class="form-message"></span>
                                                             </div>
                                                         </div>
@@ -107,7 +135,7 @@
                                                     <div class="mb-3">
                                                         <div class="mb-3">
                                                             <label class="form-label" for="country"><strong>Ghi chú</strong></label>
-                                                            <textarea class="form-control"></textarea>
+                                                            <textarea class="form-control" name="note"></textarea>
                                                         </div>
                                                         <button class="btn btn-primary btn-sm" id="save-button" type="submit">Lưu lại</button>
                                                     </div>
@@ -134,16 +162,44 @@
 
             <!--Danh sach goi y-->
             <script>
-                //Danh sach goi y ten Khach hang
                 $(document).ready(function () {
-                    var availableTags = [
-                <c:forEach var="customer" items="${requestScope.customers}">
-                        "${customer.name}",
-                </c:forEach>
+                    var customerIdParam = '<%= request.getParameter("customerId") %>';
+                    var customers = [
+                        <c:forEach var="customer" items="${requestScope.customers}">
+                            { label: "${customer.name}", value: "${customer.ID}" },
+                        </c:forEach>
                     ];
+
                     $("#cus-name").autocomplete({
-                        source: availableTags
+                        source: function (request, response) {
+                            var term = request.term.toLowerCase();
+                            var suggestions = customers.filter(function (customer) {
+                                return customer.label.toLowerCase().indexOf(term) !== -1;
+                            });
+                            response(suggestions);
+                        },
+                        select: function (event, ui) {
+                            $('#cus-name').val(ui.item.label);
+                            $('#cus-id').val(ui.item.value);
+                            return false;
+                        }
                     });
+
+                    if (customerIdParam && customerIdParam.trim() !== '') {
+                        var selectedCustomer = customers.find(function (customer) {
+                            return customer.value === customerIdParam;
+                        });
+                        if (selectedCustomer) {
+                            $('#cus-name').val(selectedCustomer.label);
+                            $('#cus-id').val(selectedCustomer.value);
+                        } else {
+                            $('#cus-name').val('');
+                            $('#cus-id').val('');
+                        }
+                    } else {
+                        $('#cus-name').val('');
+                        $('#cus-id').val('');
+                    }
                 });
             </script>
 
@@ -162,9 +218,9 @@
             
             <script>
                 function redirectToAddProductPage() {
-                    var customerName = encodeURIComponent($('#cus-name').val());
+                    var customerId = encodeURIComponent($('#cus-id').val());
 
-                    window.location.href = '<%=request.getContextPath()%>/add-product-into-order?customerName=' + customerName;
+                    window.location.href = '<%=request.getContextPath()%>/add-product-into-order?customerId=' + customerId;
                 }
             </script>
             

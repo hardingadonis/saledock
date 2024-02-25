@@ -54,12 +54,4 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
             return Optional.ofNullable(session.createQuery(hql, Employee.class).setParameter("email", email).uniqueResult());
         }
     }
-
-    @Override
-    public Optional<Employee> getByName(String name) {
-        try (Session session = sessionFactory.openSession()) {
-            String hql = "FROM Employee WHERE name = :name";
-            return Optional.ofNullable(session.createQuery(hql, Employee.class).setParameter("name", name).uniqueResult());
-        }
-    }
 }

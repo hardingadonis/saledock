@@ -6,7 +6,6 @@ import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import java.io.*;
-import java.net.*;
 import java.util.*;
 
 @WebServlet(name = "AddProductIntoOrder", urlPatterns = {"/add-product-into-order"})
@@ -24,10 +23,21 @@ public class AddProductIntoOrder extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String productName = request.getParameter("productName").trim();
+        Integer productId = Integer.parseInt(request.getParameter("productId"));
         Integer productQuantity = Integer.parseInt(request.getParameter("productQuantity"));
+        Integer customerId = Integer.parseInt(request.getParameter("customerId"));
+        
+        if (productId == null) {
+            request.setAttribute("message", "notInputProduct");
+            this.doGet(request, response);
+        }
+        
+        if (productQuantity == null) {
+            request.setAttribute("message", "notInputProduct");
+            this.doGet(request, response);
+        }
 
-        Optional<Product> product = Singleton.productDAO.getByName(productName);
+        Optional<Product> product = Singleton.productDAO.getByID(productId);
 
         if (product.isPresent()) {
             Map<Integer, Integer> productMap = (Map<Integer, Integer>) SessionUtil.getInstance().getValue(request, "productMap");
@@ -36,9 +46,7 @@ public class AddProductIntoOrder extends HttpServlet {
                 productMap = new HashMap<>();
                 SessionUtil.getInstance().putValue(request, "productMap", productMap);
             }
-
-            Integer productId = product.get().getID();
-
+            
             if (productMap.containsKey(productId)) {
                 Integer currentQuantity = productMap.get(productId);
                 productMap.put(productId, currentQuantity + productQuantity);
@@ -47,8 +55,10 @@ public class AddProductIntoOrder extends HttpServlet {
             }
 
             SessionUtil.getInstance().putValue(request, "productMap", productMap);
-            String customerName = request.getParameter("customerName");
-            response.sendRedirect("./add-order?customerName=" + URLEncoder.encode(customerName, "UTF-8"));
+            response.sendRedirect("./add-order?customerId=" + customerId + "&message=addSuccess");
+        } else {
+            request.setAttribute("message", "productNotExist");
+            this.doGet(request, response);
         }
 
     }

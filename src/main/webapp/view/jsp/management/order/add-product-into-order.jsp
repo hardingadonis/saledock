@@ -35,6 +35,28 @@
                                 <div class="row">
                                     <div class="col-xxl-12">
                                         <div class="card shadow mb-3">
+                                            <c:choose>
+                                                <c:when test="${requestScope.message eq 'productNotExist'}">
+                                                    <div class="alert alert-danger text-center" role="alert">
+                                                        Sản phẩm không tồn tại. Vui lòng kiểm tra lại thông tin sản phẩm.
+                                                    </div>
+                                                </c:when>
+                                                <c:when test="${requestScope.message eq 'notInputProduct'}">
+                                                    <div class="alert alert-danger text-center" role="alert">
+                                                        Chưa nhập tên sản phẩm. Vui lòng kiểm tra lại.
+                                                    </div>
+                                                </c:when>
+                                                <c:when test="${requestScope.message eq 'productNotExist'}">
+                                                    <div class="alert alert-danger text-center" role="alert">
+                                                        Chưa nhập số lượng sản phẩm cần mua. Vui lòng kiểm tra lại.
+                                                    </div>
+                                                </c:when>
+                                                <c:when test="${requestScope.message eq 'missingCustomer'}">
+                                                    <div class="alert alert-danger text-center" role="alert">
+                                                        Tên người dùng bị trống. Vui lòng kiểm tra và nhập vào.
+                                                    </div>
+                                                </c:when>
+                                            </c:choose>
                                             <div class="card-header py-3">
                                                 <p class="text-primary m-0 fw-bold">Thông tin sản phẩm</p>
                                             </div>
@@ -43,6 +65,7 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="mb-3 form-group">
+                                                                <input type="hidden" id="product-id" name="productId" />
                                                                 <label class="form-label"><strong>Tên sản phẩm</strong></label>
                                                                 <input class="form-control" type="text" id="product-name" name="productName">
                                                                 <span class="form-message"></span>
@@ -111,6 +134,7 @@
                             var selectedProduct = ui.item.value;
                             <c:forEach var="product" items="${requestScope.products}">
                                 if("${product.name}" === selectedProduct) {
+                                    $('#product-id').val("${product.ID}");
                                     $('#product-price').val("${product.price}");
                                     $('#product-quantity').val(1);
                                 }

@@ -6,7 +6,6 @@ import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import java.io.*;
-import java.net.*;
 import java.util.*;
 
 @WebServlet(name = "AddOrderServlet", urlPatterns = {"/add-order"})
@@ -21,8 +20,8 @@ public class AddOrderServlet extends HttpServlet {
         List<Customer> customers = Singleton.customerDAO.getAll();
         List<Product> products = Singleton.productDAO.getAll();
 
-        String customerNameParam = request.getParameter("customerName");
         String action = request.getParameter("action");
+        String customerIdParam = request.getParameter("customerId");
 
         if (action != null) {
             switch (action) {
@@ -34,17 +33,13 @@ public class AddOrderServlet extends HttpServlet {
             }
         }
 
-        if (customerNameParam != null) {
-            customerNameParam = URLDecoder.decode(customerNameParam, "UTF-8");
-        }
-
         Map<Integer, Integer> productMap = getProductMap(request);
 
         double totalCost = calculateTotalCost(productMap, Singleton.productDAO.getAll());
 
         request.setAttribute("customers", customers);
         request.setAttribute("products", products);
-        request.setAttribute("customerNameParam", customerNameParam);
+        request.setAttribute("customerId", customerIdParam);
         request.setAttribute("productMap", productMap);
         request.setAttribute("totalCost", totalCost);
 
@@ -56,7 +51,38 @@ public class AddOrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String customerName = request.getParameter("customerName");
+        Integer customerId = Integer.parseInt(request.getParameter("customerId"));
+        String note = request.getParameter("note");
+        Employee employee = (Employee) SessionUtil.getInstance().getValue(request, "employee");
+
+        Optional<Customer> customer = Singleton.customerDAO.getByID(customerId);
+
+        if (customer.isPresent()) {
+            Order order = new Order();
+
+            order.setCustomer(customer.get());
+            order.setEmployee(employee);
+            order.setNote(note);
+
+            Map<Integer, Integer> productMap = getProductMap(request);
+
+            if (productMap.isEmpty()) {
+                response.sendRedirect("./add-order?customerId=" + customerId + "&message=emptyProduct");
+            } else {
+                for (Integer productId : productMap.keySet()) {
+                    Optional<Product> product = Singleton.productDAO.getByID(productId);
+
+                    if (product.isPresent()) {
+                        order.addProduct(product.get(), productMap.get(productId));
+                    } else {
+                        response.sendRedirect("./add-order?customerId=" + customerId + "&message=productNotExist");
+                    }
+                }
+            }
+            Singleton.orderDAO.save(order);
+            SessionUtil.getInstance().removeValue(request, "productMap");
+            response.sendRedirect("./order");
+        }
     }
 
     private void deleteProductFromOrder(HttpServletRequest request, HttpServletResponse response)
@@ -75,7 +101,7 @@ public class AddOrderServlet extends HttpServlet {
                 request.setAttribute("totalCost", totalCost);
 
                 SessionUtil.getInstance().putValue(request, "productMap", productMap);
-                
+
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }

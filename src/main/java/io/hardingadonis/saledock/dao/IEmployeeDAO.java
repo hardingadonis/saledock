@@ -7,7 +7,5 @@ public interface IEmployeeDAO extends IDAO<Employee> {
 
     public Optional<Employee> getByCode(String code);
 
-    public Optional<Employee> getByEmail(String email);
-    
-    public Optional<Employee> getByName(String name);
+    public Optional<Employee> getByEmail(String email);    
 }

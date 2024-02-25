@@ -114,12 +114,4 @@ public class CustomerDAOImpl implements ICustomerDAO {
     public Integer totalPages(Integer limit) {
         return (int) Math.ceil((double) this.count() / limit);
     }
-
-    @Override
-    public Optional<Customer> getByName(String customerName) {
-        try (Session session = sessionFactory.openSession()) {
-            String hql = "FROM Customer WHERE name = :customerName";
-            return Optional.ofNullable(session.createQuery(hql, Customer.class).setParameter("customerName", customerName).uniqueResult());
-        }
-    }
 }
