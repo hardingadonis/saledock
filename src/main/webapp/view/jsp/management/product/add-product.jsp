@@ -103,10 +103,13 @@
             </div>
             <%@include file="../../../common/_goback.jsp" %>
         </div>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
-
+        <script src="<%=request.getContextPath()%>/view/assets/js/management/product/add-product.js"></script>
     </body>
-
 </html>

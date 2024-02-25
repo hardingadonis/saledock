@@ -61,9 +61,9 @@ public class Product {
         String orderCode;
 
         do {
-            char letter = (char) ('A' + random.nextInt(26)); 
-            int number = 100 + random.nextInt(999); 
-            orderCode = String.format("%c%d", letter, number);
+            char letter = (char) ('A' + random.nextInt(26));
+            int number = random.nextInt(1000);
+            orderCode = String.format("%c%03d", letter, number);
         } while (Singleton.productDAO.getByCode(orderCode).isPresent());
 
         return orderCode;
