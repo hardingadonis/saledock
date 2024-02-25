@@ -1,5 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -159,7 +160,7 @@
                 }
 
                 function formatCurrency(number) {
-                    return number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ' VND';
+                    return number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ' VNĐ';
                 }
 
                 $('#product-quantity').change(calculateTotal);

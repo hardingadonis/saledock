@@ -1,5 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -18,6 +19,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/animate.min.css">
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/validate/validator.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/sweetalert2.min.css">
 
     </head>
 
@@ -51,7 +53,8 @@
                                                             <div class="row">
                                                                 <div class="mb-3 form-group">
                                                                     <label class="form-label" for="text"><strong>Tổng tiền</strong></label>
-                                                                    <input class="form-control" type="text" id="total-cost" readonly="">
+                                                                    <fmt:formatNumber value="${totalCost}" type="currency" currencySymbol="VNĐ" pattern="#,##0 ¤" var="formattedTotalCost" />
+                                                                    <input class="form-control" type="text" id="total-cost" readonly="" value="${formattedTotalCost}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -68,6 +71,7 @@
                                                                             <th>Đơn giá</th>
                                                                             <th>Số lượng</th>
                                                                             <th>Thành tiền</th>
+                                                                            <th></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -80,9 +84,14 @@
                                                                                     <tr>
                                                                                         <td class="stt"></td>
                                                                                         <td>${product.name}</td>
-                                                                                        <td><fmt:formatNumber type="currency" value="${product.price}" currencySymbol="₫" /></td>
+                                                                                        <td><fmt:formatNumber type="currency" value="${product.price}" currencySymbol="VNĐ" pattern="#,##0 ¤" /></td>
                                                                                         <td>${quantity}</td>
-                                                                                        <td><fmt:formatNumber type="currency" value="${product.price * quantity}" currencySymbol="₫" /></td>
+                                                                                        <td><fmt:formatNumber type="currency" value="${product.price * quantity}" currencySymbol="VNĐ" pattern="#,##0 ¤" /></td>
+                                                                                        <td>
+                                                                                            <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete(${productId})">
+                                                                                                <i class="la la-trash"></i>
+                                                                                            </button>
+                                                                                        </td>
                                                                                     </tr>
                                                                                 </c:if>
                                                                             </c:forEach>
@@ -120,6 +129,8 @@
             <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
             <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
             <script src="<%=request.getContextPath()%>/view/assets/js/validate/validator.js"></script>
+            <script src="<%=request.getContextPath()%>/view/assets/js/sweetalert2.all.min.js"></script>
+            <script src="<%=request.getContextPath()%>/view/assets/js/management/order/confirm-delete-product.js"></script>
 
             <!--Danh sach goi y-->
             <script>
@@ -154,12 +165,6 @@
                     var customerName = encodeURIComponent($('#cus-name').val());
 
                     window.location.href = '<%=request.getContextPath()%>/add-product-into-order?customerName=' + customerName;
-                }
-            </script>
-            
-            <script>
-                function formatCurrency(number) {
-                    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
                 }
             </script>
             
