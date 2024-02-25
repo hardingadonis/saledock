@@ -39,7 +39,7 @@
                                                 <p class="text-primary m-0 fw-bold">Cập nhập sản phẩm</p>
                                             </div>
                                             <div class="card-body">
-                                                <form action="update-product" method="post">
+                                                <form action="update-product"  enctype="multipart/form-data" method="post">    
                                                     <input name="id" hidden value="${param.id}" />
                                                     <div class="row">
                                                         <div class="col">
@@ -107,7 +107,7 @@
 
                                                                 </div>
                                                             </c:if>
-
+                                                            <input class="form-control" type="file" id="imageUpload" name="imageUpload" accept="image/*">
                                                         </div>
                                                         <div class="mb-3">
                                                             <label class="form-label" for="country">
@@ -124,6 +124,7 @@
                                                                 Lưu
                                                             </button>
                                                         </div>
+                                                    </div>
                                                 </form>
                                             </div>
                                         </div>
