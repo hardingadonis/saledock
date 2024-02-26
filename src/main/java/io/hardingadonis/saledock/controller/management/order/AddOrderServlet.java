@@ -98,8 +98,9 @@ public class AddOrderServlet extends HttpServlet {
                     }
                 }
                 Singleton.orderDAO.save(order);
+                SendEmailUtil.sendOrderMessage(customer.get().getEmail(), "Slae Dock - Đặt hàng thành công", order);
                 SessionUtil.getInstance().removeValue(request, "productMap");
-                response.sendRedirect("./order");
+                response.sendRedirect("./order?message=orderSuccess");
             } else {
                 response.sendRedirect("./add-order?message=customerNotExist");
             }
