@@ -181,12 +181,14 @@
                     var price = parseFloat($('#product-price').val().replace(/[^0-9.-]+/g, ''));
                     var total = quantity * price;
                     $('#product-total-price').val(formatCurrency(total));
+    
+                    $('#product-price').val(formatCurrency(price));
                 }
 
                 function formatCurrency(number) {
-                    return number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ' VNĐ';
+                    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', minimumFractionDigits: 0 }).format(number);
                 }
-
+                
                 $('#product-quantity').change(calculateTotal);
             </script>
 

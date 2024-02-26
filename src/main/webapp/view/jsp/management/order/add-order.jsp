@@ -13,7 +13,7 @@
 
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">        
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/fonts/fontawesome-all.min.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/fonts/line-awesome.min.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/animate.min.css">
@@ -47,19 +47,19 @@
                                                         Xoá sản phẩm thành công.
                                                     </div>
                                                 </c:when>
-                                                <c:when test="${requestScope.message eq 'emptyProduct'}">
+                                                <c:when test="${param.message eq 'emptyProduct'}">
                                                     <div class="alert alert-danger text-center" role="alert">
                                                         Chưa có sản phẩm nào được thêm. Vui lòng thêm sản phẩm vào đơn hàng.
                                                     </div>
                                                 </c:when>
-                                                <c:when test="${requestScope.message eq 'productNotExist'}">
+                                                <c:when test="${param.message eq 'productNotExist'}">
                                                     <div class="alert alert-danger text-center" role="alert">
                                                         Sản phẩm không tồn tại. Vui lòng kiểm tra lại thông tin sản phẩm.
                                                     </div>
                                                 </c:when>
-                                                <c:when test="${requestScope.message eq 'invalidCustomer'}">
+                                                <c:when test="${param.message eq 'customerNotExist'}">
                                                     <div class="alert alert-danger text-center" role="alert">
-                                                        Người dùng không hợp lệ. Vui lòng kiểm tra lại.
+                                                        Người dùng không tồn tại. Vui lòng kiểm tra lại.
                                                     </div>
                                                 </c:when>
                                             </c:choose>
@@ -71,7 +71,7 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="mb-3 form-group">
-                                                                <input type="hidden" id="cus-id" name="customerId" value="${customerId} />
+                                                                <input type="hidden" id="cus-id" name="customerId" value="${customerId}" />
                                                                 <label class="form-label" for="username"><strong>Tên Khách hàng</strong></label>
                                                                 <input class="form-control" id="cus-name" name="customerName"">
                                                                 <span class="form-message"></span>
@@ -164,6 +164,10 @@
             <script>
                 $(document).ready(function () {
                     var customerIdParam = '<%= request.getParameter("customerId") %>';
+                    var customerIdAttribute = '<%= request.getAttribute("customerId") %>';
+                    
+                    var selectedCustomerId = customerIdParam.trim() !== '' ? customerIdParam : customerIdAttribute;
+                    
                     var customers = [
                         <c:forEach var="customer" items="${requestScope.customers}">
                             { label: "${customer.name}", value: "${customer.ID}" },

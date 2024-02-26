@@ -23,6 +23,17 @@ public class AddOrderServlet extends HttpServlet {
         String action = request.getParameter("action");
         String customerIdParam = request.getParameter("customerId");
 
+        if (customerIdParam != null && !customerIdParam.isEmpty()) {
+            try {
+                Integer customerId = Integer.parseInt(customerIdParam);
+                request.setAttribute("customerId", customerId);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                response.sendRedirect("./error-404");
+                return;
+            }
+        }
+
         if (action != null) {
             switch (action) {
                 case "delete":
@@ -39,7 +50,6 @@ public class AddOrderServlet extends HttpServlet {
 
         request.setAttribute("customers", customers);
         request.setAttribute("products", products);
-        request.setAttribute("customerId", customerIdParam);
         request.setAttribute("productMap", productMap);
         request.setAttribute("totalCost", totalCost);
 
@@ -51,38 +61,54 @@ public class AddOrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Integer customerId = Integer.parseInt(request.getParameter("customerId"));
-        String note = request.getParameter("note");
-        Employee employee = (Employee) SessionUtil.getInstance().getValue(request, "employee");
+        String customerIdParam = request.getParameter("customerId");
+        if (customerIdParam == null || customerIdParam.isEmpty()) {
+            response.sendRedirect("./add-order?message=customerNotExist");
+            return;
+        }
+        try {
+            Integer customerId = Integer.parseInt(customerIdParam);
+            String note = request.getParameter("note");
+            Employee employee = (Employee) SessionUtil.getInstance().getValue(request, "employee");
 
-        Optional<Customer> customer = Singleton.customerDAO.getByID(customerId);
+            Optional<Customer> customer = Singleton.customerDAO.getByID(customerId);
 
-        if (customer.isPresent()) {
-            Order order = new Order();
+            if (customer.isPresent()) {
+                Order order = new Order();
 
-            order.setCustomer(customer.get());
-            order.setEmployee(employee);
-            order.setNote(note);
+                order.setCustomer(customer.get());
+                order.setEmployee(employee);
+                order.setNote(note);
 
-            Map<Integer, Integer> productMap = getProductMap(request);
+                Map<Integer, Integer> productMap = getProductMap(request);
 
-            if (productMap.isEmpty()) {
-                response.sendRedirect("./add-order?customerId=" + customerId + "&message=emptyProduct");
-            } else {
-                for (Integer productId : productMap.keySet()) {
-                    Optional<Product> product = Singleton.productDAO.getByID(productId);
+                if (productMap.isEmpty()) {
+                    response.sendRedirect("./add-order?customerId=" + customerId + "&message=emptyProduct");
+                    return;
+                } else {
+                    for (Integer productId : productMap.keySet()) {
+                        Optional<Product> product = Singleton.productDAO.getByID(productId);
 
-                    if (product.isPresent()) {
-                        order.addProduct(product.get(), productMap.get(productId));
-                    } else {
-                        response.sendRedirect("./add-order?customerId=" + customerId + "&message=productNotExist");
+                        if (product.isPresent()) {
+                            order.addProduct(product.get(), productMap.get(productId));
+                        } else {
+                            response.sendRedirect("./add-order?customerId=" + customerId + "&message=productNotExist");
+                            return;
+                        }
                     }
                 }
+                Singleton.orderDAO.save(order);
+                SessionUtil.getInstance().removeValue(request, "productMap");
+                response.sendRedirect("./order");
+            } else {
+                response.sendRedirect("./add-order?message=customerNotExist");
             }
-            Singleton.orderDAO.save(order);
-            SessionUtil.getInstance().removeValue(request, "productMap");
-            response.sendRedirect("./order");
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("./error-404");
+            return;
         }
+
     }
 
     private void deleteProductFromOrder(HttpServletRequest request, HttpServletResponse response)

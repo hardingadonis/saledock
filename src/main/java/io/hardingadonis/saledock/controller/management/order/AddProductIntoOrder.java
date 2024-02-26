@@ -16,6 +16,9 @@ public class AddProductIntoOrder extends HttpServlet {
             throws ServletException, IOException {
         List<Product> products = Singleton.productDAO.getAll();
         request.setAttribute("products", products);
+        String customerIdParam = request.getParameter("customerId");
+        
+        checkCusIdParam(request, response, customerIdParam);
 
         request.getRequestDispatcher("/view/jsp/management/order/add-product-into-order.jsp").forward(request, response);
     }
@@ -23,9 +26,22 @@ public class AddProductIntoOrder extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Integer productId = Integer.parseInt(request.getParameter("productId"));
+        String customerIdParam = request.getParameter("customerId");
+        
+        checkCusIdParam(request, response, customerIdParam);
+        
+        
+        String productIdParam = request.getParameter("productId");
+        
+        if (productIdParam == null || productIdParam.isEmpty()) {
+            request.setAttribute("message", "productNotExist");
+            this.doGet(request, response);
+            return;
+        }
+        
+        Integer productId = Integer.parseInt(productIdParam);
         Integer productQuantity = Integer.parseInt(request.getParameter("productQuantity"));
-        Integer customerId = Integer.parseInt(request.getParameter("customerId"));
+        
         
         if (productId == null) {
             request.setAttribute("message", "notInputProduct");
@@ -55,11 +71,21 @@ public class AddProductIntoOrder extends HttpServlet {
             }
 
             SessionUtil.getInstance().putValue(request, "productMap", productMap);
-            response.sendRedirect("./add-order?customerId=" + customerId + "&message=addSuccess");
+            response.sendRedirect("./add-order?customerId=" + customerIdParam + "&message=addSuccess");
         } else {
             request.setAttribute("message", "productNotExist");
             this.doGet(request, response);
         }
 
+    }
+    
+    private void checkCusIdParam(HttpServletRequest request, HttpServletResponse response,String customerIdParam) throws ServletException, IOException{
+        try {
+            Integer customerId = Integer.parseInt(customerIdParam);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("./error-404");
+            return;
+        }
     }
 }
