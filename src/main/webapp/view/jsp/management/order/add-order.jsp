@@ -81,7 +81,7 @@
                                                             <div class="row">
                                                                 <div class="mb-3 form-group">
                                                                     <label class="form-label" for="text"><strong>Tổng tiền</strong></label>
-                                                                    <fmt:formatNumber value="${totalCost}" type="currency" currencySymbol="VNĐ" pattern="#,##0 ¤" var="formattedTotalCost" />
+                                                                    <fmt:formatNumber value="${totalCost}" type="currency" currencySymbol="₫" pattern="#,##0 ¤" var="formattedTotalCost" />
                                                                     <input class="form-control" type="text" id="total-cost" readonly="" value="${formattedTotalCost}">
                                                                 </div>
                                                             </div>
@@ -112,9 +112,9 @@
                                                                                     <tr>
                                                                                         <td class="stt"></td>
                                                                                         <td>${product.name}</td>
-                                                                                        <td><fmt:formatNumber type="currency" value="${product.price}" currencySymbol="VNĐ" pattern="#,##0 ¤" /></td>
+                                                                                        <td><fmt:formatNumber type="currency" value="${product.price}" currencySymbol="₫" pattern="#,##0 ¤" /></td>
                                                                                         <td>${quantity}</td>
-                                                                                        <td><fmt:formatNumber type="currency" value="${product.price * quantity}" currencySymbol="VNĐ" pattern="#,##0 ¤" /></td>
+                                                                                        <td><fmt:formatNumber type="currency" value="${product.price * quantity}" currencySymbol="₫" pattern="#,##0 ¤" /></td>
                                                                                         <td>
                                                                                             <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete(${productId})">
                                                                                                 <i class="la la-trash"></i>

@@ -185,8 +185,8 @@
                 }
 
                 function formatCurrency(number) {
-                    const formattedNumber = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', minimumFractionDigits: 0 }).format(number);
-                    return formattedNumber.replace('₫', 'VNĐ');
+                    return Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', minimumFractionDigits: 0 }).format(number);
+                    
                 }
                 
                 $('#product-quantity').change(calculateTotal);
