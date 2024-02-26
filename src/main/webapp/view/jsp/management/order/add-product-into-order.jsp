@@ -74,7 +74,7 @@
                                                         <div class="col">
                                                             <div class="mb-3">
                                                                 <label class="form-label"><strong>Đơn giá</strong></label>
-                                                                <input class="form-control" type="number" id="product-price" name="productPrice" readonly="">
+                                                                <input class="form-control" id="product-price" name="productPrice" readonly="">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -135,7 +135,7 @@
                             <c:forEach var="product" items="${requestScope.products}">
                                 if("${product.name}" === selectedProduct) {
                                     $('#product-id').val("${product.ID}");
-                                    $('#product-price').val("${product.price}");
+                                    $('#product-price').val(formatCurrency("${product.price}"));
                                     $('#product-quantity').val(1);
                                 }
                             </c:forEach>
@@ -178,15 +178,15 @@
 
                 function calculateTotal() {
                     var quantity = parseInt($('#product-quantity').val());
-                    var price = parseFloat($('#product-price').val().replace(/[^0-9.-]+/g, ''));
+                    var price = parseFloat($('#product-price').val().replace(/[^0-9.-]+/g, '')) * 1000;
                     var total = quantity * price;
+                    
                     $('#product-total-price').val(formatCurrency(total));
-    
-                    $('#product-price').val(formatCurrency(price));
                 }
 
                 function formatCurrency(number) {
-                    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', minimumFractionDigits: 0 }).format(number);
+                    const formattedNumber = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', minimumFractionDigits: 0 }).format(number);
+                    return formattedNumber.replace('₫', 'VNĐ');
                 }
                 
                 $('#product-quantity').change(calculateTotal);

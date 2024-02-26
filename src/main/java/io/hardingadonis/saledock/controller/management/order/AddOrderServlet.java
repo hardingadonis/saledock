@@ -40,7 +40,7 @@ public class AddOrderServlet extends HttpServlet {
                     deleteProductFromOrder(request, response);
                     break;
                 default:
-                    response.sendRedirect("./add-product");
+                    response.sendRedirect("./add-order");
             }
         }
 
