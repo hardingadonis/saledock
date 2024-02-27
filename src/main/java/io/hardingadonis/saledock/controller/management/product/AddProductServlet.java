@@ -6,20 +6,18 @@ import java.io.*;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
+import java.nio.file.*;
 import java.util.*;
 
-import io.hardingadonis.saledock.model.Category;
-import io.hardingadonis.saledock.model.Product;
-import io.hardingadonis.saledock.utils.Singleton;
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
 @WebServlet(name = "AddProductServlet", urlPatterns = {"/add-product"})
+@MultipartConfig
 public class AddProductServlet extends HttpServlet {
+
+    public static final String UPLOAD_PRODUCT_IMG_DIRECTORY = "product_img";
+
+    public static final int MEMORY_THRESHOLD = 1024 * 1024 * 3;
+    public static final int MAX_FILE_SIZE = 1024 * 1024 * 3;
+    public static final int MAX_REQUEST_SIZE = 1024 * 1024 * 5;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,38 +39,35 @@ public class AddProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String codePro = request.getParameter("codeP");
-        String namePro = request.getParameter("nameP");
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
 
+        String namePro = request.getParameter("nameP");
         int catPro = Integer.parseInt(request.getParameter("categoryP"));
         Optional<Category> cat = Singleton.categoryDAO.getByID(catPro);
-
         double pricePro = Double.parseDouble(request.getParameter("priceP"));
         String desPro = request.getParameter("descriptionP");
 
-//        try {
-//            List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
-//            for (FileItem item : items) {
-//                if (!item.isFormField() && item.getFieldName().equals("imageUpload")) {
-//                    // item is the file (and not a field)
-//                    InputStream fileContent = item.getInputStream();
-//                    // assuming you have a connection (conn) to your database
-//                    PreparedStatement stmt = conn.prepareStatement("INSERT INTO images (content) VALUES (?)");
-//                    stmt.setBlob(1, fileContent);
-//                    stmt.executeUpdate();
-//                    break; // we only process one image, so break the loop after the first file
-//                }
-//            }
-//        } catch (Exception e) {
-//            throw new ServletException("Cannot parse multipart request.", e);
-//        }
-        Product p = new Product();
-        p.setCode(codePro.toUpperCase());
-        p.setName(namePro);
-        p.setCategory(cat.get());
-        p.setPrice(pricePro);
-        p.setDescription(desPro);
-        Singleton.productDAO.save(p);
+        Part part = request.getPart("imageUpload");
+        String imgURL = null;
+        if (part.getSize() > 0) {
+            String realPath = request.getServletContext().getRealPath("/product_img");
+            String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+            imgURL = "product_img/" + fileName;
+            if (!Files.exists(Paths.get(realPath))) {
+                Files.createDirectories(Paths.get(realPath));
+            }
+
+            part.write(realPath + "/" + fileName);
+        }
+
+        Product pro = new Product();
+        pro.setName(namePro);
+        pro.setCategory(cat.get());
+        pro.setPrice(pricePro);
+        pro.setImageURL(imgURL);
+        pro.setDescription(desPro);
+        Singleton.productDAO.save(pro);
 
         response.sendRedirect("product");
     }

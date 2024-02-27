@@ -35,3 +35,8 @@ server/*.war
 .settings/
 .classpath
 .project
+
+# IntelliJ IDEA
+.idea/
+
+.history/

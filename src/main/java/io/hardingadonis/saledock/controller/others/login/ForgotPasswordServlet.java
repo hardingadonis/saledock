@@ -43,7 +43,7 @@ public class ForgotPasswordServlet extends HttpServlet {
 
             if (employee.isPresent()) {
                 request.setAttribute("message", "success");
-                String newOtp = OtpUltil.generateRandomOTP();
+                String newOtp = OtpUtil.generateRandomOTP();
                 SendEmailUtil.sendGetOTPMessage(email, "New OTP", newOtp);
                 SessionUtil.getInstance().putValue(request, "otp", newOtp);
                 SessionUtil.getInstance().putValue(request, "email", email);

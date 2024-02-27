@@ -1,10 +1,12 @@
 package io.hardingadonis.saledock.utils;
 
+import lombok.Getter;
 import org.hibernate.*;
 import org.hibernate.cfg.*;
 
 public class HibernateUtil {
 
+    @Getter
     private static final SessionFactory sessionFactory = buildSessionFactory();
 
     private static SessionFactory buildSessionFactory() {
@@ -15,10 +17,6 @@ public class HibernateUtil {
 
             return null;
         }
-    }
-
-    public static SessionFactory getSessionFactory() {
-        return sessionFactory;
     }
 
     public static void shutdown() {

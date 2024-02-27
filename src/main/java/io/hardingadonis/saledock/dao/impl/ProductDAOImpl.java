@@ -36,6 +36,14 @@ public class ProductDAOImpl implements IProductDAO {
     }
 
     @Override
+    public Optional<Product> getByCode(String code) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "FROM Product WHERE code = :code";
+            return Optional.ofNullable(session.createQuery(hql, Product.class).setParameter("code", code).uniqueResult());
+        }
+    }
+
+    @Override
     public List<Product> getAll() {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("FROM Product", Product.class).getResultList();
@@ -114,4 +122,5 @@ public class ProductDAOImpl implements IProductDAO {
     public Integer totalPages(Integer limit) {
         return (int) Math.ceil((double) this.count() / limit);
     }
+
 }

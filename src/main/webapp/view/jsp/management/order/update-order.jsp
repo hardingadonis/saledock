@@ -1,6 +1,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="io.hardingadonis.saledock.utils.Singleton" %>
+<%@page import="io.hardingadonis.saledock.model.Product" %>
 
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -8,7 +9,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <title>Sale Dock - Chi tiết đơn hàng</title>
+        <title>Sale Dock - Cập nhật đơn hàng</title>
         <link rel="icon" type="image/png" sizes="512x512" href="<%=request.getContextPath()%>/view/assets/images/favicon/favicon.png">
 
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/bootstrap.min.css">
@@ -25,7 +26,7 @@
                 <div id="content">
                     <%@include file="../../../common/_nav.jsp" %>
                     <div class="container-fluid">
-                        <h3 class="text-dark mb-4">Thông tin đơn hàng</h3>
+                        <h3 class="text-dark mb-4">Cập nhật đơn hàng</h3>
                         <div class="row justify-content-center mb-3">
                             <div class="col-lg-8 col-xxl-10">
                                 <div class="row mb-3 d-none">
@@ -65,7 +66,9 @@
                                                 <p class="text-primary m-0 fw-bold">Thông tin đơn hàng</p>
                                             </div>
                                             <div class="card-body">
-                                                <form>
+                                                <form method="POST">
+
+                                                    <input name = "id" value="${ requestScope.ord.getID()}" style="display: none">    
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="mb-3">
@@ -104,10 +107,9 @@
 
                                                         <div class="col">
                                                             <div class="mb-3"><label class="form-label" for="email"><strong>Trạng thái</strong></label>
+
                                                                 <c:choose>
-                                                                    <c:when test="${requestScope.ord.status.toString() == 'PENDING'}">
-                                                                        <input class="form-control" type="email" id="email-2" value="Đang xử lý" name="email" readonly="">
-                                                                    </c:when>
+
                                                                     <c:when test="${requestScope.ord.status == 'DONE'}">
                                                                         <input class="form-control" type="email" id="email-2" value="Đã xong" name="email" readonly="">
                                                                     </c:when>
@@ -115,13 +117,23 @@
                                                                         <input class="form-control" type="email" id="email-2" value="Đã hủy" name="email" readonly="">
                                                                     </c:when>
                                                                     <c:otherwise>
-                                                                        <input class="form-control" type="email" id="email-2" value="Đang giao" name="email" readonly="">
+                                                                        <select class="form-control" name="status">
+                                                                            <option value="PENDING" ${requestScope.ord.status == 'PENDING' ? 'selected' : ''}>Đang xử lý</option>
+                                                                            <option value="DONE" ${requestScope.ord.status == 'DONE' ? 'selected' : ''}>Đã xong</option>
+                                                                            <option value="CANCELLED" ${requestScope.ord.status == 'CANCELLED' ? 'selected' : ''}>Đã hủy</option>
+                                                                            <option value="SHIPPING" ${requestScope.ord.status == 'SHIPPING' ? 'selected' : ''}>Đang giao</option>
+                                                                        </select>
                                                                     </c:otherwise>
                                                                 </c:choose>
 
 
+
+
+
+
                                                             </div>
                                                         </div>
+
                                                     </div>
                                                     <div class="row">
                                                         <div class="col"><label class="form-label" for="username"><strong>Danh sách sản phẩm</strong></label>
@@ -162,6 +174,8 @@
 
                                                         <button class="btn btn-primary btn-sm" type="button">
                                                             <a class="back" href="<%=request.getContextPath()%>/order" style="color: white; text-decoration: none;">Quay lại</a>
+                                                        </button>
+                                                        <button class="btn btn-primary btn-sm" type="submit">Cập nhật
                                                         </button>
                                                     </div>
                                                 </form>
