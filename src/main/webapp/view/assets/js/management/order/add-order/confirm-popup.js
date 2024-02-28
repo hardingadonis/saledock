@@ -37,7 +37,7 @@ function confirmDelete(productId, customerId) {
       });
     }
   });
-};
+}
 
 function confirmAddOrder(customerId) {
     Swal.fire({
