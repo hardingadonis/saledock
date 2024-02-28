@@ -137,6 +137,7 @@
                                                             <label class="form-label" for="country"><strong>Ghi chú</strong></label>
                                                             <textarea class="form-control" name="note"></textarea>
                                                         </div>
+                                                        <button class="btn btn-primary btn-sm" id="back-button" type="button" onclick="goBack()">Quay lại</button>
                                                         <button class="btn btn-primary btn-sm" id="save-button" type="submit">Lưu lại</button>
                                                     </div>
                                                 </form>
@@ -158,11 +159,14 @@
             <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
             <script src="<%=request.getContextPath()%>/view/assets/js/validate/validator.js"></script>
             <script src="<%=request.getContextPath()%>/view/assets/js/sweetalert2.all.min.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/management/order/confirm-delete-product.js"></script>
+            <script src="<%=request.getContextPath()%>/view/assets/js/management/order/add-order/confirm-popup.js"></script>
+            <script src="<%=request.getContextPath()%>/view/assets/js/alert-timeout.js"></script>
 
             <!--Danh sach goi y-->
             <script>
                 $(document).ready(function () {
+                    var customerIdInput = $('#cus-id');
+                    var customerNameInput = $('#cus-name');
                     var customerIdParam = '<%= request.getParameter("customerId") %>';
                     var customerIdAttribute = '<%= request.getAttribute("customerId") %>';
                     
@@ -174,7 +178,7 @@
                         </c:forEach>
                     ];
 
-                    $("#cus-name").autocomplete({
+                    customerNameInput.autocomplete({
                         source: function (request, response) {
                             var term = request.term.toLowerCase();
                             var suggestions = customers.filter(function (customer) {
@@ -186,6 +190,12 @@
                             $('#cus-name').val(ui.item.label);
                             $('#cus-id').val(ui.item.value);
                             return false;
+                        }
+                    });
+                    
+                    customerNameInput.focusout(function () {
+                        if (customerNameInput.val().trim() === '') {
+                            customerIdInput.val('');
                         }
                     });
 
@@ -226,6 +236,10 @@
 
                     window.location.href = '<%=request.getContextPath()%>/add-product-into-order?customerId=' + customerId;
                 }
+                
+                function goBack(){
+                    window.location.href = '<%=request.getContextPath()%>/add-order?action=goBack';
+                }                   
             </script>
             
             <script>
@@ -243,6 +257,11 @@
                 $("#delete-button").click(function(event) {
                     event.preventDefault();
                     confirmDelete(${productId}, ${customerId});
+                });
+                
+                $("#save-button").click(function(event) {
+                    event.preventDefault();
+                    confirmAddOrder(${customerId});
                 });
             </script>
 

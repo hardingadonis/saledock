@@ -4,6 +4,8 @@ import io.hardingadonis.saledock.model.*;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.*;
 
 import java.util.*;
 import java.util.logging.*;
@@ -84,7 +86,7 @@ public class SendEmailUtil {
     }
     
     public static void sendOrderMessage(String to, String title, Order order) {
-        
+                
         String message = "<!DOCTYPE html>\n"
                 + "<html lang=\"en\">\n"
                 + "<head>\n"
@@ -110,7 +112,7 @@ public class SendEmailUtil {
                 + "    </style>\n"
                 + "</head>\n"
                 + "<body>\n"
-                + "    <p>Cảm ơn khách hàng <strong>" + order.getCustomer().getName() + "</strong></p>\n"
+                + "    <p>Cảm ơn khách hàng <strong>" + order.getCustomer().getName() + " .</strong></p>\n"
                 + "    <p>Bạn đã đặt hàng thành công.</p>\n"
                 + "    <p>Đây là chi tiết đơn hàng của bạn: </p>\n"
                 + "    <table class=\"table-cart\">\n"
@@ -137,21 +139,22 @@ public class SendEmailUtil {
                     + "                    <p class=\"order-detail-field\">" + orderDetail.getProduct().getName()+ "</p>\n"
                     + "                </td>\n"
                     + "                <td>\n"
-                    + "                    <p class=\"order-detail-field\">" + orderDetail.getProduct().getPrice() + " ₫</p> \n"
+                    + "                    <p class=\"order-detail-field\">" + FormatValue.formatCurrency(orderDetail.getProduct().getPrice(), "VND") + "</p> \n"
                     + "                </td>\n"
                     + "                <td>\n"
                     + "                    <p class=\"order-detail-field\">" + orderDetail.getQuantity()+ "</p> \n"
                     + "                </td>\n"
                     + "                <td>\n"
-                    + "                    <p class=\"order-detail-field\">" + orderDetail.getProduct().getPrice()*orderDetail.getQuantity() + " ₫</p> \n"
+                    + "                    <p class=\"order-detail-field\">" + FormatValue.formatCurrency(orderDetail.getProduct().getPrice()*orderDetail.getQuantity(), "VND") + "</p> \n"
                     + "                </td>\n"
                     + "            </tr>";
         }
         message += "</tbody>\n"
                 + "    </table>\n"
-                + "    <p>Tổng số tiền cần thanh toán cho đơn hàng là: <strong>" + order.getTotal() + " ₫</strong></p>\n"
+                + "    <p>Tổng số tiền cần thanh toán cho đơn hàng là: <strong>" + FormatValue.formatCurrency(order.getTotal(), "VND") + "</strong></p>\n"
                 + "    <p>Địa chỉ giao hàng là: <strong>" + order.getCustomer().getAddress() + "</strong></p>\n"
-                + "    <p>Thời gian đặt hàng: <strong>" + order.getCreatedAt() + "</p>\n"
+                + "    <p>Thời gian đặt hàng: <strong>" + FormatValue.formatDateTime(order.getCreatedAt()) + "</p>\n"
+                + "    <p>Ghi chú đơn hàng: <strong>" + order.getNote() + "</p>\n"
                 + "    <p>Vui lòng giữ liên lạc để nhận hàng trong thời gian tới.</p>\n"
                 + "    <p><strong>Cảm ơn bạn đã tin tưởng Sale Dock!</strong></p>\n"
                 + "</body>\n"

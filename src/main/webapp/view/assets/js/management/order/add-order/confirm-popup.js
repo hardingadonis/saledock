@@ -21,8 +21,13 @@ function confirmDelete(productId, customerId) {
             text: "Sản phẩm đã được xoá.",
             icon: "success"
           }).then(() => {
-            var newUrl =
-              "./add-order?customerId=" + customerId + "&message=deleteSuccess";
+            var newUrl;
+                        if (customerId == null) {
+                            newUrl = "./add-order?message=deleteSuccess";
+                            
+                        } else {
+                            newUrl = "./add-order?customerId=" + customerId + "&message=deleteSuccess";
+                        }
             window.location.href = newUrl;
           });
         },
@@ -32,4 +37,20 @@ function confirmDelete(productId, customerId) {
       });
     }
   });
+};
+
+function confirmAddOrder(customerId) {
+    Swal.fire({
+    title: "Bạn có chắc chắn muốn thêm đơn hàng này?",
+    text: "Bạn có thể sẽ phải chịu trách nhiệm khi thêm nhầm đơn hàng!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Vâng, Thêm đơn hàng!"
+  }).then((result) => {
+            if (result.isConfirmed) {
+                $('#form-add-order').submit();
+            }
+        });
 }

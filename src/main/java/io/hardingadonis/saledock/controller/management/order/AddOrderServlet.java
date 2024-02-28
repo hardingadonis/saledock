@@ -1,5 +1,6 @@
 package io.hardingadonis.saledock.controller.management.order;
 
+import com.mysql.cj.util.StringUtils;
 import io.hardingadonis.saledock.model.*;
 import io.hardingadonis.saledock.utils.*;
 import jakarta.servlet.*;
@@ -39,6 +40,10 @@ public class AddOrderServlet extends HttpServlet {
                 case "delete":
                     deleteProductFromOrder(request, response);
                     break;
+                case "goBack":
+                    SessionUtil.getInstance().removeValue(request, "productMap");
+                    response.sendRedirect("./order");
+                    return;
                 default:
                     response.sendRedirect("./add-order");
             }
@@ -97,8 +102,8 @@ public class AddOrderServlet extends HttpServlet {
                         }
                     }
                 }
-                Singleton.orderDAO.save(order);
-                SendEmailUtil.sendOrderMessage(customer.get().getEmail(), "Slae Dock - Đặt hàng thành công", order);
+                Order saveOrder = Singleton.orderDAO.save(order);
+                SendEmailUtil.sendOrderMessage(customer.get().getEmail(), "Slae Dock - Đặt hàng thành công", saveOrder);
                 SessionUtil.getInstance().removeValue(request, "productMap");
                 response.sendRedirect("./order?message=orderSuccess");
             } else {

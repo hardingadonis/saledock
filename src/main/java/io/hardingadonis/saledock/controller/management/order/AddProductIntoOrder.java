@@ -85,7 +85,7 @@ public class AddProductIntoOrder extends HttpServlet {
 
     private boolean checkCusIdParam(String customerIdParam) {
         if (customerIdParam == null || customerIdParam.isEmpty()) {
-            return false;
+            return true;
         }
 
         try {
