@@ -7,7 +7,6 @@ import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @WebServlet(name = "ProductServlet", urlPatterns = {"/product"})
 public class ProductServlet extends HttpServlet {
@@ -19,10 +18,9 @@ public class ProductServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
 
         List<Product> products = Singleton.productDAO.getAll();
-//        List<Product> sortListP = products.stream().sorted(Comparator.comparing(Product::getID).reversed()).collect(Collectors.toList());
 
         int page = 1;
-        int limit = 20;
+        int limit = 10;
 
         if (request.getParameter("page") != null) {
             page = Integer.parseInt(request.getParameter("page"));
@@ -30,11 +28,7 @@ public class ProductServlet extends HttpServlet {
 
         List<Product> list = Singleton.productDAO.pagination((page - 1) * limit, limit);
         Integer count = Singleton.productDAO.count();
-
-        int totalPage = count / limit;
-        if (count % limit != 0) {
-            totalPage++;
-        }
+        int totalPage = Singleton.productDAO.totalPages(limit);
 
         request.setAttribute("productList", list);
         request.setAttribute("currentPage", page);
