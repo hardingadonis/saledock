@@ -36,16 +36,9 @@
                                                 <p class="text-primary m-0 fw-bold">Thêm sản phẩm mới</p>
                                             </div>
                                             <div class="card-body">
-                                                <form id="add-product" action="add-product" method="post">
+                                                <form id="add-product" enctype="multipart/form-data" action="add-product" method="post">
                                                     <div class="row">
-                                                        <div class="col">
-                                                            <div class="mb-3">
-                                                                <label class="form-label" for="username">
-                                                                    <strong>Mã sản phẩm</strong>
-                                                                </label>
-                                                                <input class="form-control" type="text" id="codeP" placeholder="Nhập mã sản phẩm" name="codeP" required oninvalid="this.setCustomValidity('Vui lòng nhập Mã sản phẩm.')" oninput="this.setCustomValidity('')">
-                                                            </div>
-                                                        </div>
+
                                                         <div class="col">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="email">
@@ -54,8 +47,7 @@
                                                                 <input class="form-control" type="text" id="nameP" placeholder="Nhập tên sản phẩm" name="nameP" required oninvalid="this.setCustomValidity('Vui lòng nhập Tên sản phẩm.')" oninput="this.setCustomValidity('')">
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
+
                                                         <div class="col">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="username">
@@ -68,6 +60,8 @@
                                                                 </select>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    <div class="row">
                                                         <div class="col">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="email">
@@ -76,21 +70,25 @@
                                                                 <input class="form-control" type="number" id="priceP" placeholder="Nhập giá tiền sản phẩm" name="priceP" required min="0" oninvalid="this.setCustomValidity('Vui lòng nhập Giá sản phẩm.')" oninput="this.setCustomValidity('')">
                                                             </div>
                                                         </div>
+                                                        <div class="col">
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="imageUpload">
+                                                                    <strong>Ảnh sản phẩm</strong>
+                                                                </label>
+                                                                <input class="form-control" type="file" id="imageUpload" name="imageUpload" accept="image/*">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <div class="mb-3">
-                                                            <label class="form-label" for="imageUpload">
-                                                                <strong>Ảnh sản phẩm</strong>
-                                                            </label>
-                                                            <input class="form-control" type="file" id="imageUpload" name="imageUpload" accept="image/*">
-                                                        </div>
                                                         <div class="mb-3">
                                                             <label class="form-label" for="country">
                                                                 <strong>Mô tả chi tiết</strong>
                                                             </label>
-                                                            <textarea class="form-control" id="descriptionP"></textarea>
+                                                            <textarea class="form-control" name="descriptionP" id="descriptionP"></textarea>
                                                         </div>
-                                                        <button class="btn btn-primary btn-sm" type="submit">Lưu sản phẩm</button>
+                                                        <a class="btn btn-primary btn-sm" href="product">Quay lại</a>
+
+                                                        <button class="btn btn-primary btn-sm" type="submit">Thêm sản phẩm</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -105,10 +103,13 @@
             </div>
             <%@include file="../../../common/_goback.jsp" %>
         </div>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
-
+        <script src="<%=request.getContextPath()%>/view/assets/js/management/product/add-product.js"></script>
     </body>
-
 </html>
