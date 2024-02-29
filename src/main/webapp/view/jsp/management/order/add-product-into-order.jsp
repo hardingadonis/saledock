@@ -97,8 +97,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     <div class="mb-3">
+                                                        <button class="btn btn-primary btn-sm" id="back-button" type="button" onclick="goBack()">Quay lại</button>
                                                         <button class="btn btn-primary btn-sm" id="save-button" type="submit">Thêm vào đơn hàng</button>
                                                     </div>
                                                 </form>
@@ -191,6 +191,18 @@
                 
                 $('#product-quantity').change(calculateTotal);
             </script>
+            
+            <script>
+                function goBack() {
+                    var customerId = "${param.customerId}";
+
+                    if (customerId.trim() !== '') {
+                        window.location.href = './add-order?customerId=' + customerId;
+                    } else {
+                        window.location.href = './add-order';
+                    }
+                }
+</script>
 
     </body>
 
