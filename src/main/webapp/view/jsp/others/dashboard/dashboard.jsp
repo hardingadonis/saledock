@@ -52,10 +52,6 @@
                                         <option value="12">12 tháng trước</option>
                                     </select>
                                 </div>
-
-                                <button class="ms-3 btn btn-primary btn-sm d-none d-sm-inline-block">
-                                    <i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Tải báo cáo
-                                </button>
                             </div>
                         </div>
 
