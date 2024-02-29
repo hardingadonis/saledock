@@ -24,6 +24,13 @@
                     <div class="container-fluid">
                         <h3 class="text-dark mb-4">Đặt hàng</h3>
                         <div class="card shadow">
+                            <c:choose>
+                                <c:when test="${param.message eq 'orderSuccess'}">
+                                    <div class="alert alert-success text-center" role="alert">
+                                        Thêm đơn hàng thành công.
+                                    </div>
+                                </c:when>
+                            </c:choose>
                             <div class="card-header d-xxl-flex justify-content-between align-items-center align-items-xxl-center py-3">
                                 <p class="text-primary m-0 fw-bold">Quản lý đơn hàng</p><a class="btn btn-primary btn-sm" role="button" href="<%=request.getContextPath()%>/add-order">Thêm đơn hàng</a>
                             </div>

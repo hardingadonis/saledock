@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import java.io.*;
 import java.util.*;
+import java.util.stream.*;
 
 @WebServlet(name = "OrderServlet", urlPatterns = {"/order"})
 public class OrderServlet extends HttpServlet {
@@ -18,7 +19,12 @@ public class OrderServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
 
         List<Order> orders = Singleton.orderDAO.getAll();
-        request.setAttribute("orders", orders);
+        
+        List<Order> reversedOrders = orders.stream()
+        .sorted(Comparator.comparing(Order::getID).reversed())
+        .collect(Collectors.toList());
+        
+        request.setAttribute("orders", reversedOrders);
         request.setAttribute("page", "order");
 
         request.getRequestDispatcher("/view/jsp/management/order/order.jsp").forward(request, response);
