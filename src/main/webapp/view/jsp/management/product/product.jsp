@@ -39,7 +39,7 @@
                                                 <th>Thao tác</th>
                                             </tr>
                                         </thead>
-                                        <c:forEach items="${requestScope.products}" var="product">
+                                        <c:forEach items="${requestScope.productList}" var="product">
                                             <tbody>
                                                 <tr>
                                                     <td>${product.code}</td>
@@ -60,16 +60,25 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 align-self-center">
-                                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Hiển thị ${requestScope.productCount} trên ${requestScope.productCount} sản phẩm</p>
+                                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
+                                            Hiển thị ${requestScope.currentPage * requestScope.limit < requestScope.numOfPro ? requestScope.currentPage * requestScope.limit : requestScope.numOfPro}
+                                            trên ${requestScope.numOfPro} sản phẩm
+                                        </p>
                                     </div>
                                     <div class="col-md-6">
                                         <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                             <ul class="pagination">
-                                                <li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                                                <li class="page-item ${requestScope.currentPage == 1 ? 'disabled' : ''}">
+                                                    <a class="page-link" aria-label="Previous" href="<%=request.getContextPath()%>/product?page=${requestScope.currentPage - 1}"><span aria-hidden="true">«</span></a>
+                                                </li>
+                                                <c:forEach var="i" begin="1" end="${requestScope.totalPage}">
+                                                    <li class="page-item ${i == requestScope.currentPage ? 'active' : ''}">
+                                                        <a class="page-link" href="<%=request.getContextPath()%>/product?page=${i}">${i}</a>
+                                                    </li>
+                                                </c:forEach>
+                                                <li class="page-item ${requestScope.currentPage == requestScope.totalPage ? 'disabled' : ''}">
+                                                    <a class="page-link" aria-label="Next" href="ProductServlet?page=${requestScope.currentPage + 1}"><span aria-hidden="true">»</span></a>
+                                                </li>
                                             </ul>
                                         </nav>
                                     </div>
@@ -78,10 +87,10 @@
                         </div>
                     </div>
                 </div>
-              
+
                 <%@include file="../../../common/_footer.jsp" %>                         
             </div>
-          
+
             <%@include file="../../../common/_goback.jsp" %>
         </div>
 
@@ -89,5 +98,5 @@
         <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
     </body>
-  
+
 </html>
