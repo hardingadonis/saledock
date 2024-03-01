@@ -48,7 +48,7 @@
                                                         <a class="btn btn-primary btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/customer-detail?id=${customer.ID}">
                                                             <i class="la la-info-circle"></i>
                                                         </a>
-                                                        <a class="btn btn-warning btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/update-customer?id=${customer.ID}">
+                                                        <a class="btn btn-warning btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Cập nhật thông tin khách hàng" href="<%=request.getContextPath()%>/update-customer?id=${customer.ID}">
                                                             <i class="la la-edit"></i>
                                                         </a>
 

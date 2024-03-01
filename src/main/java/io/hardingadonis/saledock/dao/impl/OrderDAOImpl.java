@@ -159,7 +159,7 @@ public class OrderDAOImpl implements IOrderDAO {
     @Override
     public List<Order> pagination(Integer offset, Integer limit) {
         try (Session session = sessionFactory.openSession()) {
-            Query<Order> query = session.createQuery("FROM Order", Order.class);
+            Query<Order> query = session.createQuery("FROM Order ORDER BY ID DESC", Order.class);
             query.setFirstResult(offset);
             query.setMaxResults(limit);
 
