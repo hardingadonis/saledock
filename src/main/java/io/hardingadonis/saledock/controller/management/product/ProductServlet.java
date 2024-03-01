@@ -23,12 +23,20 @@ public class ProductServlet extends HttpServlet {
         int limit = 10;
 
         if (request.getParameter("page") != null) {
-            page = Integer.parseInt(request.getParameter("page"));
+            try {
+                page = Integer.parseInt(request.getParameter("page"));
+
+            } catch (Exception e) {
+                response.sendRedirect("./error-404");
+                return;
+            }
         }
 
         List<Product> list = Singleton.productDAO.pagination((page - 1) * limit, limit);
         Integer count = Singleton.productDAO.count();
         int totalPage = Singleton.productDAO.totalPages(limit);
+
+        list.isEmpty();
 
         request.setAttribute("productList", list);
         request.setAttribute("currentPage", page);
