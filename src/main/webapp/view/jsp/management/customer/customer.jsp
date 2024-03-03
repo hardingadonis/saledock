@@ -65,27 +65,32 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 align-self-center">
-                                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Hiển thị <%= request.getAttribute("customerCount") %> trên <%= request.getAttribute("customerCount") %> khách hàng</p>
+                                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
+                                            Hiển thị ${requestScope.currentPage * requestScope.pageSize < requestScope.customerCount ? requestScope.currentPage * requestScope.pageSize : requestScope.customerCount} 
+                                            trên ${requestScope.customerCount} khách hàng
+                                        </p>
                                     </div>
+
                                     <div class="col-md-6">
                                         <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                             <ul class="pagination">
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" aria-label="Previous" href="<%=request.getContextPath()%>#">
+
+                                                <li class="page-item ${requestScope.currentPage == 1 ? 'disabled' : ''}">
+                                                    <a class="page-link" aria-label="Previous" href="customer?page=${requestScope.currentPage - 1}">
                                                         <span aria-hidden="true">«</span>
                                                     </a>
                                                 </li>
-                                                <li class="page-item active">
-                                                    <a class="page-link" href="<%=request.getContextPath()%>#">1</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="<%=request.getContextPath()%>#">2</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="<%=request.getContextPath()%>#">3</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" aria-label="Next" href="<%=request.getContextPath()%>#">
+
+                                                <c:forEach begin="1" end="${requestScope.totalPages}" var="pageIndex">
+
+                                                    <li class="page-item ${pageIndex == requestScope.currentPage ? 'active' : ''}">
+                                                        <a class="page-link" href="customer?page=${pageIndex}">${pageIndex}</a>
+                                                    </li>
+
+                                                </c:forEach>
+
+                                                <li class="page-item ${requestScope.currentPage == requestScope.totalPages ? 'disabled' : ''}"> 
+                                                    <a class="page-link" aria-label="Next" href="customer?page=${requestScope.currentPage + 1}">
                                                         <span aria-hidden="true">»</span>
                                                     </a>
                                                 </li>
@@ -93,6 +98,7 @@
                                         </nav>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
