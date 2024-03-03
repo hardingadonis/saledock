@@ -34,10 +34,10 @@
                                         <table class="table my-0" id="dataTable">
                                             <thead>
                                                 <tr>
-                                                    <th>Mã sản phẩm</th>
-                                                    <th>Tên sản phẩm</th>
-                                                    <th>Phân loại</th>
-                                                    <th>Thao tác</th>
+                                                    <th width="20%">Mã sản phẩm</th>
+                                                    <th width="40%">Tên sản phẩm</th>
+                                                    <th width="30%">Phân loại</th>
+                                                    <th width="10%">Thao tác</th>
                                                 </tr>
                                             </thead>
                                             <c:forEach items="${requestScope.productList}" var="product">
