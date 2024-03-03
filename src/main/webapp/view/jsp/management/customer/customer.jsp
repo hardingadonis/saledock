@@ -25,7 +25,11 @@
                         <h3 class="text-dark mb-4">Khách hàng</h3>
                         <div class="card shadow">
                             <div class="card-header d-xxl-flex justify-content-between align-items-center align-items-xxl-center py-3">
-                                <p class="text-primary m-0 fw-bold">Quản lý khách hàng</p><a class="btn btn-primary btn-sm" role="button" href="<%=request.getContextPath()%>/add-customer">Thêm khách hàng</a>
+                                <p class="text-primary m-0 fw-bold">Quản lý khách hàng</p>
+                                <div>
+                                    <a class="btn btn-primary btn-sm" role="button" href="<%=request.getContextPath()%>/download?type=customer">Tải xuống danh sách</a>
+                                    <a class="btn btn-primary btn-sm" role="button" href="<%=request.getContextPath()%>/add-customer">Thêm khách hàng</a>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
@@ -48,7 +52,7 @@
                                                         <a class="btn btn-primary btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/customer-detail?id=${customer.ID}">
                                                             <i class="la la-info-circle"></i>
                                                         </a>
-                                                        <a class="btn btn-warning btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/update-customer?id=${customer.ID}">
+                                                        <a class="btn btn-warning btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Cập nhật thông tin khách hàng" href="<%=request.getContextPath()%>/update-customer?id=${customer.ID}">
                                                             <i class="la la-edit"></i>
                                                         </a>
 
@@ -61,27 +65,32 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 align-self-center">
-                                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Hiển thị <%= request.getAttribute("customerCount") %> trên <%= request.getAttribute("customerCount") %> khách hàng</p>
+                                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
+                                            Hiển thị ${requestScope.currentPage * requestScope.pageSize < requestScope.customerCount ? requestScope.currentPage * requestScope.pageSize : requestScope.customerCount} 
+                                            trên ${requestScope.customerCount} khách hàng
+                                        </p>
                                     </div>
+
                                     <div class="col-md-6">
                                         <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                             <ul class="pagination">
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" aria-label="Previous" href="<%=request.getContextPath()%>#">
+
+                                                <li class="page-item ${requestScope.currentPage == 1 ? 'disabled' : ''}">
+                                                    <a class="page-link" aria-label="Previous" href="customer?page=${requestScope.currentPage - 1}">
                                                         <span aria-hidden="true">«</span>
                                                     </a>
                                                 </li>
-                                                <li class="page-item active">
-                                                    <a class="page-link" href="<%=request.getContextPath()%>#">1</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="<%=request.getContextPath()%>#">2</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="<%=request.getContextPath()%>#">3</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" aria-label="Next" href="<%=request.getContextPath()%>#">
+
+                                                <c:forEach begin="1" end="${requestScope.totalPages}" var="pageIndex">
+
+                                                    <li class="page-item ${pageIndex == requestScope.currentPage ? 'active' : ''}">
+                                                        <a class="page-link" href="customer?page=${pageIndex}">${pageIndex}</a>
+                                                    </li>
+
+                                                </c:forEach>
+
+                                                <li class="page-item ${requestScope.currentPage == requestScope.totalPages ? 'disabled' : ''}"> 
+                                                    <a class="page-link" aria-label="Next" href="customer?page=${requestScope.currentPage + 1}">
                                                         <span aria-hidden="true">»</span>
                                                     </a>
                                                 </li>
@@ -89,6 +98,7 @@
                                         </nav>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>

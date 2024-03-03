@@ -157,7 +157,8 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <div class="mb-3">
-                                                            <label class="form-label" for="country"><strong>Ghi chú</strong></label><textarea class="form-control" readonly=""></textarea>
+                                                            <label class="form-label" for="country"><strong>Ghi chú</strong></label>
+                                                            <textarea class="form-control" id="order-note" readonly=""></textarea>
                                                         </div>
 
                                                         <button class="btn btn-primary btn-sm" type="button">
@@ -182,5 +183,10 @@
         <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/management/order/order-detail.js"></script>
     </body>
+    
+    <script>
+        var note = "${requestScope.ord.note}".trim();
+        document.getElementById("order-note").value = note;
+    </script>
 
 </html>

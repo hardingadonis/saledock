@@ -17,14 +17,30 @@ public class CustomerServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
-        List<Customer> customers = Singleton.customerDAO.getAll();
-        Integer customerCount = Singleton.customerDAO.count();
-        request.setAttribute("customerCount", customerCount);
+        int pageNumber = 1;
+        int pageSize = 10;
+
+        // Get the requested page number
+        String pageStr = request.getParameter("page");
+        if (pageStr != null) {
+            pageNumber = Integer.parseInt(pageStr);
+        }
+
+        List<Customer> customers = Singleton.customerDAO.pagination((pageNumber - 1) * pageSize, pageSize);
+
+        int totalPages = Singleton.customerDAO.totalPages(pageSize);
+
+        request.setAttribute("pageSize", pageSize);
+
+        request.setAttribute("customerCount", Singleton.customerDAO.count());
         request.setAttribute("customers", customers);
+        request.setAttribute("currentPage", pageNumber);
+        request.setAttribute("totalPages", totalPages);
+        request.setAttribute("pageSize", pageSize);
         request.setAttribute("page", "customer");
+        
 
         request.getRequestDispatcher("/view/jsp/management/customer/customer.jsp").forward(request, response);
-
     }
 
     @Override
