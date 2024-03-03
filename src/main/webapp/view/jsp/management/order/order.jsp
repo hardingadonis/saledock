@@ -40,10 +40,10 @@
                                         <table class="table my-0" id="dataTable">
                                             <thead>
                                                 <tr>
-                                                    <th>Mã đặt hàng</th>
-                                                    <th>Tên khách hàng</th>
-                                                    <th>Tổng tiền</th>
-                                                    <th>Thao tác</th>
+                                                    <th width = '30%'>Mã đặt hàng</th>
+                                                    <th width = '30%'>Tên khách hàng</th>
+                                                    <th width = '30%'>Tổng tiền</th>
+                                                    <th width = '10%'>Thao tác</th>
                                                 </tr>
                                             </thead>
                                             <c:forEach items="${requestScope.orders}" var="order">
@@ -51,7 +51,7 @@
                                                     <tr>
                                                         <td><img class="rounded-circle me-2" width="40" height="40" src="<%=request.getContextPath()%>/view/assets/images/icons/order.png">${order.code}</td>
                                                         <td>${order.customer.name}</td>
-                                                        <td>${order.getTotalToString()}</td>
+                                                        <td>${order.getTotalToString()} ₫</td>
                                                         <td class="text-start">
                                                             <a class="btn btn-primary btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/order-detail?id=${order.ID}">
                                                                 <i class="la la-info-circle"></i>
