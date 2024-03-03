@@ -34,57 +34,85 @@
                             <div class="card-header d-xxl-flex justify-content-between align-items-center align-items-xxl-center py-3">
                                 <p class="text-primary m-0 fw-bold">Quản lý đơn hàng</p><a class="btn btn-primary btn-sm" role="button" href="<%=request.getContextPath()%>/add-order">Thêm đơn hàng</a>
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                    <table class="table my-0" id="dataTable">
-                                        <thead>
-                                            <tr>
-                                                <th>Mã đặt hàng</th>
-                                                <th>Tên khách hàng</th>
-                                                <th>Tổng tiền</th>
-                                                <th>Thao tác</th>
-                                            </tr>
-                                        </thead>
-                                        <c:forEach items="${requestScope.orders}" var="order">
-                                            <tbody>                                        
+                            <c:if test="${requestScope.orders != null && !requestScope.order.isEmpty()}">
+                                <div class="card-body">                                
+                                    <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                        <table class="table my-0" id="dataTable">
+                                            <thead>
                                                 <tr>
-                                                    <td><img class="rounded-circle me-2" width="40" height="40" src="<%=request.getContextPath()%>/view/assets/images/icons/order.png">${order.code}</td>
-                                                    <td>${order.customer.name}</td>
-                                                    <td>${order.getTotalToString()}</td>
-                                                    <td class="text-start">
-                                                        <a class="btn btn-primary btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/order-detail?id=${order.ID}">
-                                                            <i class="la la-info-circle"></i>
-                                                        </a>
-
-                                                        <a class="btn btn-warning btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Chỉnh sửa" href="<%=request.getContextPath()%>/update-order?id=${order.ID}">
-                                                            <i class="la la-edit"></i>
-                                                        </a>
-
-                                                    </td>
-
+                                                    <th>Mã đặt hàng</th>
+                                                    <th>Tên khách hàng</th>
+                                                    <th>Tổng tiền</th>
+                                                    <th>Thao tác</th>
                                                 </tr>
+                                            </thead>
+                                            <c:forEach items="${requestScope.orders}" var="order">
+                                                <tbody>                                        
+                                                    <tr>
+                                                        <td><img class="rounded-circle me-2" width="40" height="40" src="<%=request.getContextPath()%>/view/assets/images/icons/order.png">${order.code}</td>
+                                                        <td>${order.customer.name}</td>
+                                                        <td>${order.getTotalToString()}</td>
+                                                        <td class="text-start">
+                                                            <a class="btn btn-primary btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/order-detail?id=${order.ID}">
+                                                                <i class="la la-info-circle"></i>
+                                                            </a>
 
-                                            </tbody>
-                                        </c:forEach>
-                                    </table>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 align-self-center">
-                                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Hiển thị 1 trong 1 đơn hàng</p>
+                                                            <a class="btn btn-warning btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Chỉnh sửa" href="<%=request.getContextPath()%>/update-order?id=${order.ID}">
+                                                                <i class="la la-edit"></i>
+                                                            </a>
+
+                                                        </td>
+
+                                                    </tr>
+
+                                                </tbody>
+                                            </c:forEach>
+                                        </table>
                                     </div>
-                                    <div class="col-md-6">
-                                        <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                                            <ul class="pagination">
-                                                <li class="page-item disabled"><a class="page-link" aria-label="Previous" href="<%=request.getContextPath()%>#"><span aria-hidden="true">«</span></a></li>
-                                                <li class="page-item active"><a class="page-link" href="<%=request.getContextPath()%>#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>#">3</a></li>
-                                                <li class="page-item"><a class="page-link" aria-label="Next" href="<%=request.getContextPath()%>#"><span aria-hidden="true">»</span></a></li>
-                                            </ul>
-                                        </nav>
+                                    <div class="row">
+                                        <div class="col-md-6 align-self-center">
+                                            <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
+                                                Hiển thị ${requestScope.currentPage * requestScope.limit < requestScope.numOfOrder ? requestScope.currentPage * requestScope.limit : requestScope.numOfOrder}
+                                                trên ${requestScope.numOfOrder} đơn hàng
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">                                            
+                                            <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                                                <ul class="pagination">
+                                                    <li class="page-item ${requestScope.currentPage == 1 ? 'disabled' : ''}">
+                                                        <a class="page-link" aria-label="Previous" href="<%=request.getContextPath()%>/order?page=${requestScope.currentPage - 1}">
+                                                            <span aria-hidden="true">«</span>
+                                                        </a>
+                                                    </li>
+
+                                                    <c:forEach var="i" begin="1" end="${requestScope.totalPage}">
+
+                                                        <li class="page-item ${i == requestScope.currentPage ? 'active' : ''}">
+                                                            <a class="page-link" href="<%=request.getContextPath()%>/order?page=${i}">${i}</a>
+                                                        </li>
+
+                                                    </c:forEach>
+
+                                                    <li class="page-item ${requestScope.currentPage == requestScope.totalPage ? 'disabled' : ''}">
+                                                        <a class="page-link" aria-label="Next" href="<%=request.getContextPath()%>/order?page=${requestScope.currentPage + 1}">
+                                                            <span aria-hidden="true">»</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </c:if>
+                            <c:if test="${requestScope.orders == null || requestScope.order.isEmpty()}">
+                                <div class="card-body">    
+                                    <div class="row">                                           
+                                        <h3 style="text-align: center">
+                                            Không có đơn hàng nào để quản lí.
+                                        </h3>
+                                    </div>
+                                </div>
+                            </c:if>
                         </div>
                     </div>
                 </div>                                            

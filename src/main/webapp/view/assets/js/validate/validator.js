@@ -1,4 +1,3 @@
-
 //Object 'Validator'
 
 function Validator(options) {
@@ -251,4 +250,3 @@ function updateCKEditor() {
         CKEDITOR.instances['description'].updateElement();
     }
 }
-
