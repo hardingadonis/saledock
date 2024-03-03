@@ -40,3 +40,5 @@ server/*.war
 .idea/
 
 .history/
+
+*.xlsx

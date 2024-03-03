@@ -52,54 +52,56 @@
                                         <option value="12">12 tháng trước</option>
                                     </select>
                                 </div>
-
-                                <button class="ms-3 btn btn-primary btn-sm d-none d-sm-inline-block">
-                                    <i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Tải báo cáo
-                                </button>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 col-xl-4 mb-4" data-bss-hover-animate="pulse">
-                                <div class="card shadow border-start-primary py-2">
-                                    <div class="card-body">
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col me-2">
-                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Tổng số khách hàng</span></div>
-                                                <div class="text-dark fw-bold h5 mb-0"><span>🤝 ${Singleton.customerDAO.count()} khách hàng</span></div>
+                                <a href="<%=request.getContextPath()%>/customer" style="text-decoration: none;">
+                                    <div class="card shadow border-start-primary py-2">
+                                        <div class="card-body">
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col me-2">
+                                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Tổng số khách hàng</span></div>
+                                                    <div class="text-dark fw-bold h5 mb-0"><span>🤝 ${Singleton.customerDAO.count()} khách hàng</span></div>
+                                                </div>
+                                                <div class="col-auto"><i class="fas fa-table fa-2x text-gray-300"></i></div>
                                             </div>
-                                            <div class="col-auto"><i class="fas fa-table fa-2x text-gray-300"></i></div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
 
                             <div class="col-md-6 col-xl-4 mb-4" data-bss-hover-animate="pulse">
-                                <div class="card shadow border-start-success py-2">
-                                    <div class="card-body">
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col me-2">
-                                                <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Tổng số sản phẩm</span></div>
-                                                <div class="text-dark fw-bold h5 mb-0"><span>📦 ${Singleton.productDAO.count()} sản phẩm</span></div>
+                                <a href="<%=request.getContextPath()%>/product" style="text-decoration: none;">
+                                    <div class="card shadow border-start-success py-2">
+                                        <div class="card-body">
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col me-2">
+                                                    <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Tổng số sản phẩm</span></div>
+                                                    <div class="text-dark fw-bold h5 mb-0"><span>📦 ${Singleton.productDAO.count()} sản phẩm</span></div>
+                                                </div>
+                                                <div class="col-auto"><i class="fas fa-table fa-2x text-gray-300"></i></div>
                                             </div>
-                                            <div class="col-auto"><i class="fas fa-table fa-2x text-gray-300"></i></div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
 
                             <div class="col-md-6 col-xl-4 mb-4" data-bss-hover-animate="pulse">
-                                <div class="card shadow border-start-warning py-2">
-                                    <div class="card-body">
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col me-2">
-                                                <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>Tổng số đơn hàng</span></div>
-                                                <div class="text-dark fw-bold h5 mb-0"><span>🛒 ${Singleton.orderDAO.countOrderInProcess()} đơn hàng cần được xử lý</span></div>
+                                <a href="<%=request.getContextPath()%>/order" style="text-decoration: none;">
+                                    <div class="card shadow border-start-warning py-2">
+                                        <div class="card-body">
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col me-2">
+                                                    <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>Tổng số đơn hàng</span></div>
+                                                    <div class="text-dark fw-bold h5 mb-0"><span>🛒 ${Singleton.orderDAO.countOrderInProcess()} đơn hàng cần được xử lý</span></div>
+                                                </div>
+                                                <div class="col-auto"><i class="fas fa-table fa-2x text-gray-300"></i></div>
                                             </div>
-                                            <div class="col-auto"><i class="fas fa-table fa-2x text-gray-300"></i></div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
 

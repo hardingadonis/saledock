@@ -25,7 +25,11 @@
                         <h3 class="text-dark mb-4">Khách hàng</h3>
                         <div class="card shadow">
                             <div class="card-header d-xxl-flex justify-content-between align-items-center align-items-xxl-center py-3">
-                                <p class="text-primary m-0 fw-bold">Quản lý khách hàng</p><a class="btn btn-primary btn-sm" role="button" href="<%=request.getContextPath()%>/add-customer">Thêm khách hàng</a>
+                                <p class="text-primary m-0 fw-bold">Quản lý khách hàng</p>
+                                <div>
+                                    <a class="btn btn-primary btn-sm" role="button" href="<%=request.getContextPath()%>/download?type=customer">Tải xuống danh sách</a>
+                                    <a class="btn btn-primary btn-sm" role="button" href="<%=request.getContextPath()%>/add-customer">Thêm khách hàng</a>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">

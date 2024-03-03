@@ -26,7 +26,10 @@
                         <div class="card shadow">
                             <div class="card-header d-xxl-flex justify-content-between align-items-center align-items-xxl-center py-3">
                                 <p class="text-primary m-0 fw-bold">Quản lý sản phẩm</p>
-                                <a href="<%=request.getContextPath()%>/add-product" class="btn btn-primary btn-sm">Thêm sản phẩm</a>
+                                <div>
+                                    <a href="<%=request.getContextPath()%>/download?type=product" class="btn btn-primary btn-sm">Tải xuống danh sách</a>
+                                    <a href="<%=request.getContextPath()%>/add-product" class="btn btn-primary btn-sm">Thêm sản phẩm</a>
+                                </div>
                             </div>
                             <c:if test="${!requestScope.productList.isEmpty()}">
                                 <div class="card-body">
