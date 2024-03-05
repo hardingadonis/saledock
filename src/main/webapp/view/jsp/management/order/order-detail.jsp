@@ -28,36 +28,6 @@
                         <h3 class="text-dark mb-4">Thông tin đơn hàng</h3>
                         <div class="row justify-content-center mb-3">
                             <div class="col-lg-8 col-xxl-10">
-                                <div class="row mb-3 d-none">
-                                    <div class="col">
-                                        <div class="card text-white bg-primary shadow">
-                                            <div class="card-body">
-                                                <div class="row mb-2">
-                                                    <div class="col">
-                                                        <p class="m-0">Peformance</p>
-                                                        <p class="m-0"><strong>65.2%</strong></p>
-                                                    </div>
-                                                    <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                                                </div>
-                                                <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="card text-white bg-success shadow">
-                                            <div class="card-body">
-                                                <div class="row mb-2">
-                                                    <div class="col">
-                                                        <p class="m-0">Peformance</p>
-                                                        <p class="m-0"><strong>65.2%</strong></p>
-                                                    </div>
-                                                    <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                                                </div>
-                                                <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-xxl-12">
                                         <div class="card shadow mb-3">
@@ -160,10 +130,11 @@
                                                             <label class="form-label" for="country"><strong>Ghi chú</strong></label>
                                                             <textarea class="form-control" id="order-note" readonly=""></textarea>
                                                         </div>
-
-                                                        <button class="btn btn-primary btn-sm" type="button">
-                                                            <a class="back" href="<%=request.getContextPath()%>/order" style="color: white; text-decoration: none;">Quay lại</a>
-                                                        </button>
+                                                        <a class="back" href="<%=request.getContextPath()%>/order" style="color: white; text-decoration: none;">
+                                                            <button class="btn btn-primary btn-sm" type="button">
+                                                                Quay lại
+                                                            </button>
+                                                        </a>
                                                     </div>
                                                 </form>
                                             </div>
@@ -183,7 +154,7 @@
         <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/management/order/order-detail.js"></script>
     </body>
-    
+
     <script>
         var note = "${requestScope.ord.note}".trim();
         document.getElementById("order-note").value = note;
