@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#add-product').on('submit', function (e) {
+    $('#update-product').on('submit', function (e) {
         e.preventDefault();
 
         var formData = new FormData(this);
@@ -13,7 +13,7 @@ $(document).ready(function () {
             success: function (response) {
                 Swal.fire({
                     title: 'Thành công!',
-                    text: 'Thêm sản phẩm thành công',
+                    text: 'Cập nhật sản phẩm thành công',
                     icon: 'success',
                     timer: 1500
                 }).then((result) => {

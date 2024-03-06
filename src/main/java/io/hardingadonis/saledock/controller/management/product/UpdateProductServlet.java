@@ -73,8 +73,8 @@ public class UpdateProductServlet extends HttpServlet {
         Integer idP = Integer.valueOf(pId);
         String productName = request.getParameter("productName");
         String productDescription = request.getParameter("productDescription");
-        double price = Double.parseDouble(request.getParameter("price"));
-        
+        String productPrice = request.getParameter("price");
+
         Part part = request.getPart("imageUpload");
         String imgURL = null;
         if (part.getSize() > 0) {
@@ -88,12 +88,19 @@ public class UpdateProductServlet extends HttpServlet {
             part.write(realPath + "/" + fileName);
         }
 
-        
         Product product = Singleton.productDAO.getByID(idP).get();
-        product.setPrice(price);
-        product.setName(productName);
-        product.setImageURL(imgURL);
-        product.setDescription(productDescription);
+        if (!productName.isEmpty()) {
+            product.setName(productName);
+        }
+        if (!productPrice.isEmpty()) {
+            product.setPrice(Double.parseDouble(productPrice));
+        }
+        if (imgURL != null) {
+            product.setImageURL(imgURL);
+        }
+        if (!productDescription.isEmpty()) {
+            product.setDescription(productDescription);
+        }
 
         Singleton.productDAO.save(product);
 
