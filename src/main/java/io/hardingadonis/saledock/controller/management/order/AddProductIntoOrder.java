@@ -37,25 +37,34 @@ public class AddProductIntoOrder extends HttpServlet {
         }
 
         String productIdParam = request.getParameter("productId");
+        String productQuantityParam = request.getParameter("productQuantity");
 
         if (productIdParam == null || productIdParam.isEmpty()) {
-            request.setAttribute("message", "productNotExist");
+            request.setAttribute("message", "notInputProduct");
+            this.doGet(request, response);
+            return;
+        }
+        
+        if (productQuantityParam == null || productQuantityParam.isEmpty()) {
+            request.setAttribute("message", "notInputProductQuantity");
             this.doGet(request, response);
             return;
         }
 
+        if (!isInteger(productIdParam)) {
+            request.setAttribute("message", "productNotExist");
+            this.doGet(request, response);
+            return;
+        }
+        
+        if (!isInteger(productQuantityParam)) {
+            request.setAttribute("message", "productQuantityNotExist");
+            this.doGet(request, response);
+            return;
+        }
+        
         Integer productId = Integer.parseInt(productIdParam);
-        Integer productQuantity = Integer.parseInt(request.getParameter("productQuantity"));
-
-        if (productId == null) {
-            request.setAttribute("message", "notInputProduct");
-            this.doGet(request, response);
-        }
-
-        if (productQuantity == null) {
-            request.setAttribute("message", "notInputProduct");
-            this.doGet(request, response);
-        }
+        Integer productQuantity = Integer.parseInt(productQuantityParam);
 
         Optional<Product> product = Singleton.productDAO.getByID(productId);
 
@@ -95,5 +104,14 @@ public class AddProductIntoOrder extends HttpServlet {
             return false;
         }
         return true;
+    }
+    
+    private boolean isInteger(String param){
+        try {
+            Integer.parseInt(param);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
