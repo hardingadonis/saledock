@@ -3,6 +3,8 @@ $(document).ready(function () {
         e.preventDefault();
 
         var formData = new FormData(this);
+        
+        var productId = formData.get('id');
 
         $.ajax({
             type: 'POST',
@@ -20,11 +22,11 @@ $(document).ready(function () {
                     if (result.dismiss === Swal.DismissReason.timer) {
                         console.log('I was closed by the timer')
                     }
-                    window.location.href = 'product';
+                    window.location.href = 'product-detail?id=' + productId;
                 });
 
                 setTimeout(function () {
-                    window.location.href = 'product';
+                    window.location.href = 'product-detail?id=' + productId;
                 }, 1500);
             },
             error: function (response) {

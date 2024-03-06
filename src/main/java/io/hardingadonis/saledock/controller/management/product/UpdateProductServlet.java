@@ -104,7 +104,7 @@ public class UpdateProductServlet extends HttpServlet {
 
         Singleton.productDAO.save(product);
 
-        response.sendRedirect("./product");
+        response.sendRedirect("./product-detail?id=" + idP);
     }
 
 }
