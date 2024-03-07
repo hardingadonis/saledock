@@ -130,10 +130,8 @@
                                                             <label class="form-label" for="country"><strong>Ghi chú</strong></label>
                                                             <textarea class="form-control" id="order-note" readonly=""></textarea>
                                                         </div>
-                                                        <a class="back" href="<%=request.getContextPath()%>/order" style="color: white; text-decoration: none;">
-                                                            <button class="btn btn-primary btn-sm" type="button">
-                                                                Quay lại
-                                                            </button>
+                                                        <a class="btn btn-primary btn-sm back" href="<%=request.getContextPath()%>/order" style="color: white; text-decoration: none;">
+                                                            Quay lại
                                                         </a>
                                                     </div>
                                                 </form>
