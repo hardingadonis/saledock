@@ -102,6 +102,11 @@ public class UpdateProductServlet extends HttpServlet {
             product.setDescription(productDescription);
         }
 
+        if (productDescription.trim().length() > 0) {
+            product.setDescription(productDescription);
+
+        }
+
         Singleton.productDAO.save(product);
 
         response.sendRedirect("./product-detail?id=" + idP);
