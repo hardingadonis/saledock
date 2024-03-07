@@ -177,6 +177,19 @@
                             { label: "${customer.name}", value: "${customer.ID}" },
                         </c:forEach>
                     ];
+                    
+                    customerNameInput.on('input', function () {
+                        var inputText = $(this).val().trim().toLowerCase();
+                        var matchedCustomer = customers.find(function (customer) {
+                            return customer.label.toLowerCase() === inputText;
+                        });
+
+                        if (matchedCustomer) {
+                            customerIdInput.val(matchedCustomer.value); 
+                        } else {
+                            customerIdInput.val(''); 
+                        }
+                    });
 
                     customerNameInput.autocomplete({
                         source: function (request, response) {

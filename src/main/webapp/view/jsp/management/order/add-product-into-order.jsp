@@ -22,7 +22,7 @@
 
     </head>
 
-    <body id="page-top">
+    <body id="page-top" class="d-flex flex-column min-vh-100">
         <div id="wrapper">
             <%@include file="../../../common/_sidenav.jsp" %>
             <div class="d-flex flex-column" id="content-wrapper">
@@ -123,27 +123,58 @@
             <!--Danh sach goi y-->
             <script>
                 $(document).ready(function () {
-                    var availableProducts = [
+                    var productsArray = [
                         <c:forEach var="product" items="${requestScope.products}">
-                            "${product.name}",
+                            { name: "${product.name}", ID: "${product.ID}", price: "${product.price}" },
                         </c:forEach>
                     ];
+
                     $("#product-name").autocomplete({
-                        source: availableProducts,
-                        select: function( event, ui ) {
-                            var selectedProduct = ui.item.value;
-                            <c:forEach var="product" items="${requestScope.products}">
-                                if("${product.name}" === selectedProduct) {
-                                    $('#product-id').val("${product.ID}");
-                                    $('#product-price').val(formatCurrency("${product.price}"));
-                                    $('#product-quantity').val(1);
-                                }
-                            </c:forEach>
-                            calculateTotal();
+                        source: function(request, response) {
+                            var term = request.term.toLowerCase();
+                            var filteredProducts = productsArray.filter(function(product) {
+                                return product.name.toLowerCase().includes(term);
+                            });
+                            response(filteredProducts.map(function(product) {
+                                return product.name;
+                            }));
+                        },
+                        select: function (event, ui) {
+                            var selectedProductName = ui.item.value;
+                            var selectedProduct = findProductByName(selectedProductName);
+                            if (selectedProduct) {
+                                $('#product-id').val(selectedProduct.ID);
+                                $('#product-price').val(formatCurrency(selectedProduct.price));
+                                $('#product-quantity').val(1);
+                                calculateTotal();
+                            }
+                        },
+                        change: function (event, ui) {
+                            var enteredProductName = $(this).val();
+                            var enteredProduct = findProductByName(enteredProductName);
+
+                            if (enteredProduct) {
+                                $('#product-id').val(enteredProduct.ID);
+                                $('#product-price').val(formatCurrency(enteredProduct.price));
+                                $('#product-quantity').val(1);
+                                calculateTotal();
+                            } else {
+                                $('#product-id').val('');
+                                $('#product-price').val('');
+                                $('#product-quantity').val('');
+                                $('#product-total-price').val('');
+                            }
                         }
                     });
+
+                    function findProductByName(productName) {
+                        return productsArray.find(function(product) {
+                            return product.name === productName;
+                        });
+                    }
                 });
             </script>
+
 
             <!--Validate input-->
             <script>
