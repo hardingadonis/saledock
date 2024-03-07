@@ -148,19 +148,20 @@
                             </div>
                         </div>
                     </div>
-                    <%@include file="../../../common/_footer.jsp" %>
-                </div>
-                <%@include file="../../../common/_goback.jsp" %>
+                </div>                                         
+                <%@include file="../../../common/_footer.jsp" %>
             </div>
-            <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
-            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/validate/validator.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/sweetalert2.all.min.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/management/order/add-order/confirm-popup.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/alert-timeout.js"></script>
+            <%@include file="../../../common/_goback.jsp" %>
+        </div>
+        <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/validate/validator.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/sweetalert2.all.min.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/management/order/add-order/confirm-popup.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/alert-timeout.js"></script>
 
             <!--Danh sach goi y-->
             <script>

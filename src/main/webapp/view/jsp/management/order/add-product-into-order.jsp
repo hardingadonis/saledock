@@ -46,9 +46,14 @@
                                                         Chưa nhập tên sản phẩm. Vui lòng kiểm tra lại.
                                                     </div>
                                                 </c:when>
-                                                <c:when test="${requestScope.message eq 'productNotExist'}">
+                                                <c:when test="${requestScope.message eq 'notInputProductQuantity'}">
                                                     <div class="alert alert-danger text-center" role="alert">
-                                                        Chưa nhập số lượng sản phẩm cần mua. Vui lòng kiểm tra lại.
+                                                        Chưa nhập số lượng sản phẩm. Vui lòng kiểm tra lại.
+                                                    </div>
+                                                </c:when>
+                                                <c:when test="${requestScope.message eq 'productQuantityNotExist'}">
+                                                    <div class="alert alert-danger text-center" role="alert">
+                                                        Nhập sai định dạng số lượng sản phẩm. Vui lòng kiểm tra lại.
                                                     </div>
                                                 </c:when>
                                                 <c:when test="${requestScope.message eq 'missingCustomer'}">
@@ -109,16 +114,18 @@
                             </div>
                         </div>
                     </div>
-                    <%@include file="../../../common/_footer.jsp" %>
                 </div>
-                <%@include file="../../../common/_goback.jsp" %>
+                <%@include file="../../../common/_footer.jsp" %>
             </div>
-            <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
-            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/validate/validator.js"></script>
+            <%@include file="../../../common/_goback.jsp" %>
+        </div>
+        <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/validate/validator.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/alert-timeout.js"></script>
 
             <!--Danh sach goi y-->
             <script>

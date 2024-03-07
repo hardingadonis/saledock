@@ -124,6 +124,7 @@
         <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/alert-timeout.js"></script>
     </body>
 
 </html>

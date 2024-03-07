@@ -82,6 +82,7 @@
             <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
             <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
             <script src="<%=request.getContextPath()%>/view/assets/js/validate/validator.js"></script>
+            <script src="<%=request.getContextPath()%>/view/assets/js/alert-timeout.js"></script>
 
             <!--Validate Login-->
             <script>
