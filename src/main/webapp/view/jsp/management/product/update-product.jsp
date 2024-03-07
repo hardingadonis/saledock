@@ -1,5 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page import="io.hardingadonis.saledock.utils.Singleton" %>
 
 <!DOCTYPE html>
@@ -39,7 +40,7 @@
                                                 <p class="text-primary m-0 fw-bold">Cập nhập sản phẩm</p>
                                             </div>
                                             <div class="card-body">
-                                                <form action="update-product"  enctype="multipart/form-data" method="post">    
+                                                <form id="update-product" action="update-product"  enctype="multipart/form-data" method="post">    
                                                     <input name="id" hidden value="${param.id}" />
                                                     <div class="row">
                                                         <div class="col">
@@ -72,14 +73,10 @@
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="email">
                                                                     <strong>Giá tiền</strong>
-                                                                </label>                                  
-                                                                <input class="form-control" type="number" id="price" placeholder="${requestScope.pro.price}" name="price" required min="0" oninvalid="this.setCustomValidity('Vui lòng nhập Giá sản phẩm.')" oninput="this.setCustomValidity('')">
-                                                                <script>
-                                                                    let inputElement = document.getElementById("price");
-                                                                    let valueText = inputElement.value;
-                                                                    let formattedNum = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(valueText);
-                                                                    inputElement.value = formattedNum;
-                                                                </script>
+                                                                </label>       
+                                                                <fmt:formatNumber value="${requestScope.pro.price}" type="currency" currencySymbol="₫" pattern="#,##0 ¤" var="proPrice" />
+                                                                <input class="form-control" type="number" id="price" placeholder="${proPrice}" name="price" min="0">
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -121,7 +118,7 @@
                                                                 Quay lại
                                                             </a>
                                                             <button class="btn btn-primary btn-sm" type="submit">
-                                                                Lưu
+                                                                Cập nhật sản phẩm
                                                             </button>
                                                         </div>
                                                     </div>
@@ -141,9 +138,12 @@
             <%@include file="../../../common/_goback.jsp" %>
         </div>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/management/product/update-product.js"></script>
     </body>
 
 </html>
