@@ -103,7 +103,7 @@ public class UpdateProductServlet extends HttpServlet {
         }
 
         if (productDescription.trim().length() > 0) {
-            product.setDescription(productDescription);
+            product.setDescription(productDescription.trim());
 
         }
 
