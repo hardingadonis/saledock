@@ -56,6 +56,11 @@
                                                         Nhập sai định dạng số lượng sản phẩm. Vui lòng kiểm tra lại.
                                                     </div>
                                                 </c:when>
+                                                <c:when test="${requestScope.message eq 'productQuantityNotPositive'}">
+                                                    <div class="alert alert-danger text-center" role="alert">
+                                                        Số lượng sản phẩm phải lớn hơn 0. Vui lòng kiểm tra lại.
+                                                    </div>
+                                                </c:when>
                                                 <c:when test="${requestScope.message eq 'missingCustomer'}">
                                                     <div class="alert alert-danger text-center" role="alert">
                                                         Tên người dùng bị trống. Vui lòng kiểm tra và nhập vào.
@@ -192,7 +197,9 @@
                     formGroupSelector: '.form-group',
                     rules: [
                         Validator.isRequired('#product-name', 'Vui lòng nhập tên sản phẩm!'),
-                        Validator.isRequired('#product-quantity', 'Vui lòng nhập số lượng sản phẩm!')
+                        
+                        Validator.isRequired('#product-quantity', 'Vui lòng nhập số lượng sản phẩm!'),
+                        Validator.isPositive('#product-quantity', 'Vui lòng nhập số lượng sản phẩm lớn hơn 0!')
                     ]
                 });
             </script>

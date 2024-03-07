@@ -65,6 +65,12 @@ public class AddProductIntoOrder extends HttpServlet {
         
         Integer productId = Integer.parseInt(productIdParam);
         Integer productQuantity = Integer.parseInt(productQuantityParam);
+        
+        if(productQuantity <= 0){
+            request.setAttribute("message", "productQuantityNotPositive");
+            this.doGet(request, response);
+            return;
+        }
 
         Optional<Product> product = Singleton.productDAO.getByID(productId);
 
