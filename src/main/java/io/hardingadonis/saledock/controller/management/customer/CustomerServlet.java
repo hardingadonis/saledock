@@ -20,12 +20,6 @@ public class CustomerServlet extends HttpServlet {
         int pageNumber = 1;
         int pageSize = 10;
 
-        // Get the requested page number
-//        String pageStr = request.getParameter("page");
-//        if (pageStr != null) {
-//            pageNumber = Integer.parseInt(pageStr);
-//        }
-
         if (request.getParameter("page") != null) {
             try {
                 pageNumber = Integer.parseInt(request.getParameter("page"));
