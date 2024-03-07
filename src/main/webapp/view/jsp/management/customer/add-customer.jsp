@@ -48,6 +48,8 @@
                                                     <div class="mb-3">
                                                         <div class="mb-3"><label class="form-label" for="address"><strong>Địa chỉ</strong></label><input class="form-control" type="text" id="address" placeholder="Nhập địa chỉ của khách hàng" name="address"></div>
                                                         <div class="mb-3"><label class="form-label" for="email"><strong>Email</strong></label><input class="form-control" type="email" id="email" placeholder="Nhập email khách hàng" name="email"></div>
+
+                                                        <a class="btn btn-primary btn-sm" href="customer">Quay lại</a>
                                                         <button class="btn btn-primary btn-sm" type="submit">Lưu lại</button>
                                                     </div>
                                                 </form>
