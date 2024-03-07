@@ -116,7 +116,7 @@
                                                                                         <td>${quantity}</td>
                                                                                         <td><fmt:formatNumber type="currency" value="${product.price * quantity}" currencySymbol="₫" pattern="#,##0 ¤" /></td>
                                                                                         <td>
-                                                                                            <button class="btn btn-danger btn-sm" type="button" id="delete-button">
+                                                                                            <button class="btn btn-danger btn-sm delete-button" type="button" data-product-id="${product.ID}">
                                                                                                 <i class="la la-trash"></i>
                                                                                             </button>
                                                                                         </td>
@@ -268,9 +268,12 @@
             </script>
             
             <script>
-                $("#delete-button").click(function(event) {
+                $(document).on("click", ".delete-button", function (event) {
                     event.preventDefault();
-                    confirmDelete(${productId}, ${customerId});
+                    
+                    var productId = $(this).data("product-id");
+                    
+                    confirmDelete(productId, ${customerId});
                 });
                 
                 $("#save-button").click(function(event) {
