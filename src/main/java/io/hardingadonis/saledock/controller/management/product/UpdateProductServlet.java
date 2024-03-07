@@ -71,7 +71,7 @@ public class UpdateProductServlet extends HttpServlet {
             return;
         }
         Integer idP = Integer.valueOf(pId);
-        String productName = request.getParameter("productName");
+        String productName = request.getParameter("productName").trim();
         String productDescription = request.getParameter("productDescription");
         String productPrice = request.getParameter("price");
 
