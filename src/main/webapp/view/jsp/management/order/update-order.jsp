@@ -169,7 +169,10 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <div class="mb-3">
-                                                            <label class="form-label" for="country"><strong>Ghi chú</strong></label><textarea class="form-control" readonly=""></textarea>
+                                                            <label class="form-label" for="country">
+                                                                <strong>Ghi chú</strong>
+                                                            </label>
+                                                            <textarea class="form-control" id="order-note" name="note" placeholder="${requestScope.ord.note}"></textarea>
                                                         </div>
 
                                                         <button class="btn btn-primary btn-sm" type="button">

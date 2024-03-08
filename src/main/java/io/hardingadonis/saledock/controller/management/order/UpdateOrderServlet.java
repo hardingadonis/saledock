@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @WebServlet(name = "UpdateOrderServlet", urlPatterns = {"/update-order"})
 public class UpdateOrderServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -43,26 +44,27 @@ public class UpdateOrderServlet extends HttpServlet {
         String ID = request.getParameter("id");
         Order order = Singleton.orderDAO.getByID(Integer.valueOf(ID)).orElse(null);
         
-        
-        String status = request.getParameter("status");
-        
-        
-        if (status != null && !status.equals(order.getStatus()) ) {
-           
-            order.setStatus(Order.Status.valueOf(status));
-            Singleton.orderDAO.save(order);
 
-             response.sendRedirect("./order");
-            return;
+        String status = request.getParameter("status");
+        String note = request.getParameter("note");
+
+        if (status != null && !status.equals(order.getStatus())) {
+
+            order.setStatus(Order.Status.valueOf(status));
+            
+        } 
+        if(!note.trim().isEmpty()){
+            order.setNote(note.trim());
         }
-        else {
-            response.sendRedirect("./order");
-            return;
-        }
+        Singleton.orderDAO.save(order);
+
+            response.sendRedirect(request.getContextPath() + "/order-detail?id=" + ID);
         
+//        else {
+//            response.sendRedirect(request.getContextPath() + "/order-detail?id=" + ID);
+//            return;
+//        }
+
     }
-    
-    
-    
-    
+
 }
