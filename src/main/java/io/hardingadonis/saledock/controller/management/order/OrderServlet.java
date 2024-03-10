@@ -7,11 +7,10 @@ import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import java.io.*;
 import java.util.*;
-import java.util.stream.*;
 
 @WebServlet(name = "OrderServlet", urlPatterns = {"/order"})
 public class OrderServlet extends HttpServlet {
-    
+
     final static int LIMIT = 10;
 
     @Override
@@ -22,20 +21,37 @@ public class OrderServlet extends HttpServlet {
 
         List<Order> orders = Singleton.orderDAO.getAll();
         int count = Singleton.orderDAO.count();
-        
-        int pageNum = getInteger(request.getParameter("page"));
-        int offset = pageNum;
-        
-        if (offset == -1){
-            offset = 0;
+
+        String pageNumParam = request.getParameter("page");
+        int pageNum = 0;
+
+        if (pageNumParam == null || pageNumParam.isEmpty()) {
             pageNum = 1;
         } else {
-            offset = (offset - 1)*LIMIT;
+            try {
+                pageNum = Integer.parseInt(pageNumParam);
+            } catch (NumberFormatException e) {
+                response.sendRedirect("./error-404");
+                return;
+            }
         }
-        
-        List<Order> orderPaging = Singleton.orderDAO.pagination(offset, LIMIT);      
+
+        if (pageNum < 0) {
+            response.sendRedirect("./error-404");
+            return;
+        }
+
+        int offset = pageNum;
+
+        if (offset == 0) {
+            pageNum = 1;
+        } else {
+            offset = (offset - 1) * LIMIT;
+        }
+
+        List<Order> orderPaging = Singleton.orderDAO.pagination(offset, LIMIT);
         int total = Singleton.orderDAO.totalPages(LIMIT);
-        
+
         request.setAttribute("numOfOrder", count);
         request.setAttribute("currentPage", pageNum);
         request.setAttribute("totalPage", total);
@@ -49,16 +65,5 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    }
-    
-    private static int getInteger(String parameter){
-        if (parameter == null) {
-            return -1;
-        }
-        try {
-            return Integer.parseInt(parameter);
-        } catch (NumberFormatException e) {
-            return -1;
-        }
     }
 }
