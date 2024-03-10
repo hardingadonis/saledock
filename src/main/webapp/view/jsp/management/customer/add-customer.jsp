@@ -1,7 +1,11 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 
 <%@page import="io.hardingadonis.saledock.utils.Singleton" %>
-
+<%@page import="io.hardingadonis.saledock.model.Customer" %>
+<% 
+    String error = (String)request.getAttribute("error"); 
+    Customer customer = (Customer)request.getAttribute("appendCustomer");
+%>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -44,7 +48,7 @@
                                                                     <strong>Tên khách hàng</strong>
                                                                 </label>
                                                                 <div class="mb-3 form-group">
-                                                                    <input class="form-control" type="text" id="name-customer" placeholder="Nhập tên khách hàng" name="name" >
+                                                                    <input class="form-control" type="text" id="name-customer" placeholder="Nhập tên khách hàng" name="name" value="<%= (error != null && customer != null) ? customer.getName() : ""%>">
                                                                     <span class="form-message text-danger"></span>
                                                                 </div>
                                                             </div>
@@ -60,26 +64,31 @@
                                                                 </div> 
                                                             </div>
                                                         </div>
+
                                                     </div>
                                                     <div class="mb-3">
                                                         <div class="mb-3">
-                                                            <label class="form-label" for="address">
-                                                                <strong>Địa chỉ</strong>
-                                                            </label>
-                                                            <div class="mb-3 form-group">
-                                                                <input class="form-control" type="text" id="address-customer" placeholder="Nhập địa chỉ của khách hàng" name="address"  >
-                                                                <span class="form-message text-danger"></span>
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="address">
+                                                                    <strong>Địa chỉ</strong>
+                                                                </label>
+                                                                <input class="form-control" type="text" id="address" placeholder="Nhập địa chỉ của khách hàng" name="address" value="<%= (error != null && customer != null) ? customer.getAddress() : ""%>">
                                                             </div>
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label class="form-label" for="email">
-                                                                <strong>Email</strong>
-                                                            </label>
-                                                            <div class="mb-3 form-group">
-                                                                <input class="form-control" type="email" id="email-customer" placeholder="Nhập email khách hàng" name="email"  >
-                                                                <span class="form-message text-danger"></span>
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="email">
+                                                                    <strong>Email</strong>
+                                                                </label>
+                                                                <input class="form-control" type="email" id="email" placeholder="Nhập email khách hàng" name="email">
                                                             </div>
+                                                                <%
+                                                                    if(error != null) {
+                                                                %>
+                                                                    <span class="form-message text-danger"><%=error%></span>
+                                                                <%
+                                                                    }
+                                                                %>
                                                         </div>
+                                                        <a class="btn btn-primary btn-sm" href="customer">Quay lại</a>
                                                         <button class="btn btn-primary btn-sm" type="submit">Lưu lại</button>
                                                     </div>
                                                 </form>
