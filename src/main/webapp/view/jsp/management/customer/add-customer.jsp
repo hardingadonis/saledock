@@ -109,7 +109,7 @@
                     Validator.isRequired('#name-customer', 'Vui lòng nhập tên khách hàng!'),
                     Validator.isRequired('#code-customer', 'Vui lòng nhập mã khách hàng!'),
                     Validator.isRequired('#address-customer', 'Vui lòng nhập địa chỉ khách hàng!'),
-                    Validator.isRequired('#email-customer', 'Vui lòng nhập mã khách hàng!')
+                    Validator.isRequired('#email-customer', 'Vui lòng nhập email khách hàng!')
 
 
                 ]
