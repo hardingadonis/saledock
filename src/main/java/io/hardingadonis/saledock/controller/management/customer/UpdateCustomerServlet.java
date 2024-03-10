@@ -58,11 +58,11 @@ public class UpdateCustomerServlet extends HttpServlet {
 
         Integer id_customer = Integer.valueOf(id);
         Customer customer = Singleton.customerDAO.getByID(id_customer).get();
-        if (!name.isEmpty()) {
-            customer.setName(name);
+        if (!name.trim().isEmpty()) {
+            customer.setName(name.trim());
         }
-        if (!address.isEmpty()) {
-            customer.setAddress(address);
+        if (!address.trim().isEmpty()) {
+            customer.setAddress(address.trim());
         }
         Singleton.customerDAO.save(customer);
         response.sendRedirect(request.getContextPath() + "/customer-detail?id="+id);

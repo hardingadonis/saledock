@@ -71,10 +71,10 @@ public class UpdateProductServlet extends HttpServlet {
             return;
         }
         Integer idP = Integer.valueOf(pId);
-        String productName = request.getParameter("productName");
+        String productName = request.getParameter("productName").trim();
         String productDescription = request.getParameter("productDescription");
-        double price = Double.parseDouble(request.getParameter("price"));
-        
+        String productPrice = request.getParameter("price");
+
         Part part = request.getPart("imageUpload");
         String imgURL = null;
         if (part.getSize() > 0) {
@@ -88,16 +88,28 @@ public class UpdateProductServlet extends HttpServlet {
             part.write(realPath + "/" + fileName);
         }
 
-        
         Product product = Singleton.productDAO.getByID(idP).get();
-        product.setPrice(price);
-        product.setName(productName);
-        product.setImageURL(imgURL);
-        product.setDescription(productDescription);
+        if (!productName.isEmpty()) {
+            product.setName(productName);
+        }
+        if (!productPrice.isEmpty()) {
+            product.setPrice(Double.parseDouble(productPrice));
+        }
+        if (imgURL != null) {
+            product.setImageURL(imgURL);
+        }
+        if (!productDescription.isEmpty()) {
+            product.setDescription(productDescription);
+        }
+
+        if (productDescription.trim().length() > 0) {
+            product.setDescription(productDescription.trim());
+
+        }
 
         Singleton.productDAO.save(product);
 
-        response.sendRedirect("./product");
+        response.sendRedirect("./product-detail?id=" + idP);
     }
 
 }

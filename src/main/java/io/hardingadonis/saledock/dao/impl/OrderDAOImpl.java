@@ -13,6 +13,8 @@ public class OrderDAOImpl implements IOrderDAO {
 
     private final SessionFactory sessionFactory;
 
+    private static boolean isDisable = false;
+
     public OrderDAOImpl() {
         this.sessionFactory = HibernateUtil.getSessionFactory();
     }
@@ -90,12 +92,16 @@ public class OrderDAOImpl implements IOrderDAO {
 
     @Override
     public String statisticBySold(Integer duration) {
+        if (!isDisable) {
+            this.disableOnlyFullGroupBy();
+        }
+
         JSONObject json = new JSONObject();
 
         try {
             Connection conn = Singleton.dbContext.getConnection();
 
-            PreparedStatement smt = conn.prepareStatement("SELECT COUNT(*), DATE_FORMAT(SUBSTR(`created_at`, 1, 10), 'Tháng %m năm %Y') FROM `order` WHERE `created_at` BETWEEN DATE_SUB(CURDATE(), INTERVAL ? MONTH) AND CURDATE() GROUP BY SUBSTR(`created_at`, 1, 7)");
+            PreparedStatement smt = conn.prepareStatement("SELECT COUNT(*), DATE_FORMAT(SUBSTR(`created_at`, 1, 10), 'Tháng %m năm %Y') FROM `order` WHERE SUBSTR(`created_at`, 1, 10) BETWEEN DATE_SUB(CURDATE(), INTERVAL ? MONTH) AND CURDATE() GROUP BY SUBSTR(`created_at`, 1, 7)");
             smt.setInt(1, duration);
 
             ResultSet rs = smt.executeQuery();
@@ -129,7 +135,7 @@ public class OrderDAOImpl implements IOrderDAO {
         try {
             Connection conn = Singleton.dbContext.getConnection();
 
-            PreparedStatement smt = conn.prepareStatement("SELECT COUNT(*), CASE WHEN `status` = 'PENDING' THEN 'Đang xử lý' WHEN `status` = 'SHIPPING' THEN 'Đang giao hàng' WHEN `status` = 'DONE' THEN 'Đã hoàn thành' WHEN `status` = 'CANCELLED' THEN 'Đã hủy' END FROM `order` WHERE `created_at` BETWEEN DATE_SUB(CURDATE(), INTERVAL ? MONTH) AND CURDATE() GROUP BY `status`");
+            PreparedStatement smt = conn.prepareStatement("SELECT COUNT(*), CASE WHEN `status` = 'PENDING' THEN 'Đang xử lý' WHEN `status` = 'SHIPPING' THEN 'Đang giao hàng' WHEN `status` = 'DONE' THEN 'Đã hoàn thành' WHEN `status` = 'CANCELLED' THEN 'Đã hủy' END FROM `order` WHERE SUBSTR(`created_at`, 1, 10) BETWEEN DATE_SUB(CURDATE(), INTERVAL ? MONTH) AND CURDATE() GROUP BY `status`");
             smt.setInt(1, duration);
 
             ResultSet rs = smt.executeQuery();
@@ -170,5 +176,19 @@ public class OrderDAOImpl implements IOrderDAO {
     @Override
     public Integer totalPages(Integer limit) {
         return (int) Math.ceil((double) this.count() / limit);
+    }
+
+    private void disableOnlyFullGroupBy() {
+        try {
+            Connection conn = Singleton.dbContext.getConnection();
+
+            PreparedStatement smt = conn.prepareStatement("SET GLOBAL SQL_MODE=(SELECT REPLACE(@@SQL_MODE,'ONLY_FULL_GROUP_BY',''));");
+
+            smt.executeUpdate();
+
+            Singleton.dbContext.closeConnection(conn);
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 }

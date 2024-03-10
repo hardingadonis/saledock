@@ -20,10 +20,13 @@ public class CustomerServlet extends HttpServlet {
         int pageNumber = 1;
         int pageSize = 10;
 
-        // Get the requested page number
-        String pageStr = request.getParameter("page");
-        if (pageStr != null) {
-            pageNumber = Integer.parseInt(pageStr);
+        if (request.getParameter("page") != null) {
+            try {
+                pageNumber = Integer.parseInt(request.getParameter("page"));
+            } catch (Exception e) {
+                response.sendRedirect("./error-404");
+                return;
+            }
         }
 
         List<Customer> customers = Singleton.customerDAO.pagination((pageNumber - 1) * pageSize, pageSize);
@@ -38,7 +41,6 @@ public class CustomerServlet extends HttpServlet {
         request.setAttribute("totalPages", totalPages);
         request.setAttribute("pageSize", pageSize);
         request.setAttribute("page", "customer");
-        
 
         request.getRequestDispatcher("/view/jsp/management/customer/customer.jsp").forward(request, response);
     }

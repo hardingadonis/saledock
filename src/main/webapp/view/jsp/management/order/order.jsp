@@ -40,9 +40,10 @@
                                         <table class="table my-0" id="dataTable">
                                             <thead>
                                                 <tr>
-                                                    <th width = '30%'>Mã đặt hàng</th>
+                                                    <th width = '25%'>Mã đặt hàng</th>
                                                     <th width = '30%'>Tên khách hàng</th>
-                                                    <th width = '30%'>Tổng tiền</th>
+                                                    <th width = '20%'>Tổng tiền</th>
+                                                    <th width = '15%'>Trạng thái</th>
                                                     <th width = '10%'>Thao tác</th>
                                                 </tr>
                                             </thead>
@@ -52,6 +53,23 @@
                                                         <td><img class="rounded-circle me-2" width="40" height="40" src="<%=request.getContextPath()%>/view/assets/images/icons/order.png">${order.code}</td>
                                                         <td>${order.customer.name}</td>
                                                         <td>${order.getTotalToString()} ₫</td>
+                                                        <td style="color:
+                                                            <c:choose>
+                                                                <c:when test="${order.status eq 'PENDING'}">gray</c:when>
+                                                                <c:when test="${order.status eq 'SHIPPING'}">orange</c:when>
+                                                                <c:when test="${order.status eq 'DONE'}">green</c:when>
+                                                                <c:when test="${order.status eq 'CANCELLED'}">red</c:when>
+                                                                <c:otherwise>black</c:otherwise>
+                                                            </c:choose>;
+                                                            ">
+                                                            <c:choose>
+                                                                <c:when test="${order.status eq 'PENDING'}">Đang xử lý</c:when>
+                                                                <c:when test="${order.status eq 'SHIPPING'}">Đang giao</c:when>
+                                                                <c:when test="${order.status eq 'DONE'}">Đã xong</c:when>
+                                                                <c:when test="${order.status eq 'CANCELLED'}">Đã huỷ</c:when>
+                                                                <c:otherwise>${order.status}</c:otherwise>
+                                                            </c:choose>
+                                                        </td>
                                                         <td class="text-start">
                                                             <a class="btn btn-primary btn-sm" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" style="margin: 2px;" title="Thông tin chi tiết" href="<%=request.getContextPath()%>/order-detail?id=${order.ID}">
                                                                 <i class="la la-info-circle"></i>
@@ -124,6 +142,7 @@
         <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
         <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/alert-timeout.js"></script>
     </body>
 
 </html>

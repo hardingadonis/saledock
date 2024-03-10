@@ -1,8 +1,10 @@
 $(document).ready(function () {
-    $('#add-product').on('submit', function (e) {
+    $('#update-product').on('submit', function (e) {
         e.preventDefault();
 
         var formData = new FormData(this);
+        
+        var productId = formData.get('id');
 
         $.ajax({
             type: 'POST',
@@ -13,18 +15,18 @@ $(document).ready(function () {
             success: function (response) {
                 Swal.fire({
                     title: 'Thành công!',
-                    text: 'Thêm sản phẩm thành công',
+                    text: 'Cập nhật sản phẩm thành công',
                     icon: 'success',
                     timer: 1500
                 }).then((result) => {
                     if (result.dismiss === Swal.DismissReason.timer) {
                         console.log('I was closed by the timer')
                     }
-                    window.location.href = 'product';
+                    window.location.href = 'product-detail?id=' + productId;
                 });
 
                 setTimeout(function () {
-                    window.location.href = 'product';
+                    window.location.href = 'product-detail?id=' + productId;
                 }, 1500);
             },
             error: function (response) {

@@ -62,11 +62,11 @@
                                                         <div class="mb-3"><label class="form-label" for="country"><strong>Email</strong></label>
                                                             <input class="form-control" type="text" id="country" placeholder="${requestScope.cus.email}" name="country" readonly="">
                                                         </div>
-
-                                                        <button class="btn btn-primary btn-sm" type="button">
-                                                            <a class="back" href="<%=request.getContextPath()%>/customer" style="color: white; text-decoration: none;">Quay lại</a>
-                                                        </button>
-
+                                                        <a class="back" href="<%=request.getContextPath()%>/customer" style="color: white; text-decoration: none;">
+                                                            <button class="btn btn-primary btn-sm" type="button">
+                                                                Quay lại
+                                                            </button>
+                                                        </a>
                                                     </div>
                                                 </form>
                                             </div>

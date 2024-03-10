@@ -116,7 +116,7 @@
                                                                                         <td>${quantity}</td>
                                                                                         <td><fmt:formatNumber type="currency" value="${product.price * quantity}" currencySymbol="₫" pattern="#,##0 ¤" /></td>
                                                                                         <td>
-                                                                                            <button class="btn btn-danger btn-sm" type="button" id="delete-button">
+                                                                                            <button class="btn btn-danger btn-sm delete-button" type="button" data-product-id="${product.ID}">
                                                                                                 <i class="la la-trash"></i>
                                                                                             </button>
                                                                                         </td>
@@ -148,19 +148,20 @@
                             </div>
                         </div>
                     </div>
-                    <%@include file="../../../common/_footer.jsp" %>
-                </div>
-                <%@include file="../../../common/_goback.jsp" %>
+                </div>                                         
+                <%@include file="../../../common/_footer.jsp" %>
             </div>
-            <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
-            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/validate/validator.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/sweetalert2.all.min.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/management/order/add-order/confirm-popup.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/alert-timeout.js"></script>
+            <%@include file="../../../common/_goback.jsp" %>
+        </div>
+        <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/validate/validator.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/sweetalert2.all.min.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/management/order/add-order/confirm-popup.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/alert-timeout.js"></script>
 
             <!--Danh sach goi y-->
             <script>
@@ -177,6 +178,19 @@
                             { label: "${customer.name}", value: "${customer.ID}" },
                         </c:forEach>
                     ];
+                    
+                    customerNameInput.on('input', function () {
+                        var inputText = $(this).val().trim().toLowerCase();
+                        var matchedCustomer = customers.find(function (customer) {
+                            return customer.label.toLowerCase() === inputText;
+                        });
+
+                        if (matchedCustomer) {
+                            customerIdInput.val(matchedCustomer.value); 
+                        } else {
+                            customerIdInput.val(''); 
+                        }
+                    });
 
                     customerNameInput.autocomplete({
                         source: function (request, response) {
@@ -254,9 +268,12 @@
             </script>
             
             <script>
-                $("#delete-button").click(function(event) {
+                $(document).on("click", ".delete-button", function (event) {
                     event.preventDefault();
-                    confirmDelete(${productId}, ${customerId});
+                    
+                    var productId = $(this).data("product-id");
+                    
+                    confirmDelete(productId, ${customerId});
                 });
                 
                 $("#save-button").click(function(event) {
