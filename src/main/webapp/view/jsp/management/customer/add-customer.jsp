@@ -69,17 +69,23 @@
                                                     <div class="mb-3">
                                                         <div class="mb-3">
                                                             <div class="mb-3">
-                                                                <label class="form-label" for="address">
-                                                                    <strong>Địa chỉ</strong>
-                                                                </label>
-                                                                <input class="form-control" type="text" id="address" placeholder="Nhập địa chỉ của khách hàng" name="address" value="<%= (error != null && customer != null) ? customer.getAddress() : ""%>">
+                                                            <label class="form-label" for="address">
+                                                                <strong>Địa chỉ</strong>
+                                                            </label>
+                                                            <div class="mb-3 form-group">
+                                                                <input class="form-control" type="text" id="address-customer" placeholder="Nhập địa chỉ của khách hàng" name="address"  >
+                                                                <span class="form-message text-danger"></span>
                                                             </div>
-                                                            <div class="mb-3">
-                                                                <label class="form-label" for="email">
-                                                                    <strong>Email</strong>
-                                                                </label>
-                                                                <input class="form-control" type="email" id="email" placeholder="Nhập email khách hàng" name="email">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="email">
+                                                                <strong>Email</strong>
+                                                            </label>
+                                                            <div class="mb-3 form-group">
+                                                                <input class="form-control" type="email" id="email-customer" placeholder="Nhập email khách hàng" name="email"  >
+                                                                <span class="form-message text-danger"></span>
                                                             </div>
+                                                        </div>
                                                                 <%
                                                                     if(error != null) {
                                                                 %>
