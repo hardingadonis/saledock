@@ -6,6 +6,7 @@ import java.io.*;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
+import java.sql.SQLException;
 
 @WebServlet(name = "AddCustomerServlet", urlPatterns = {"/add-customer"})
 public class AddCustomerServlet extends HttpServlet {
@@ -30,18 +31,35 @@ public class AddCustomerServlet extends HttpServlet {
         String address = request.getParameter("address");
         String email = request.getParameter("email");
 
-        if (name.length() > 0 && code.length() > 0 && address.length() > 0 && email.length() > 0) {
+        try {
+            if (name.length() > 0 && code.length() > 0 && address.length() > 0 && email.length() > 0) {
+                Customer customer = new Customer();
+                customer.setName(name);
+                customer.setCode(code);
+                customer.setAddress(address);
+                customer.setEmail(email);
+                Singleton.customerDAO.save(customer);
+
+                response.sendRedirect(request.getContextPath() + "/customer");
+                return;
+            }
+        } catch (Exception e) {
             Customer customer = new Customer();
             customer.setName(name);
-            customer.setCode(code);
             customer.setAddress(address);
-            customer.setEmail(email);
-            Singleton.customerDAO.save(customer);
+            StringBuilder message = new StringBuilder("Tạo khách hàng không thành công: ");
+            if (e.getMessage().contains(code)) {
+                message.append("Không được trùng mã khách hàng.");
+            }
+            if (e.getMessage().contains(email)) {
+                message.append("Không được trùng email.");
+            }
+            request.setAttribute("error", message.toString());
+            request.setAttribute("appendCustomer", customer);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/jsp/management/customer/add-customer.jsp");
+            requestDispatcher.forward(request, response);
 
-            response.sendRedirect(request.getContextPath() + "/customer");
-            return;
         }
 
-        response.sendRedirect(request.getContextPath() + "/add-customer");
     }
 }
