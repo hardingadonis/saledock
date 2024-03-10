@@ -12,17 +12,17 @@
         <link rel="icon" type="image/png" sizes="512x512" href="<%=request.getContextPath()%>/view/assets/images/favicon/favicon.png">
 
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://f...content-available-to-author-only...s.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
-        <link rel="stylesheet" href="https://c...content-available-to-author-only...e.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/fonts/fontawesome-all.min.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/fonts/line-awesome.min.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/animate.min.css">
-        <link rel="stylesheet" href="https://c...content-available-to-author-only...y.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/view/assets/css/validate/validator.css">
 
     </head>
 
-    <body id="page-top">
+    <body id="page-top" class="d-flex flex-column min-vh-100">
         <div id="wrapper">
             <%@include file="../../../common/_sidenav.jsp" %>
             <div class="d-flex flex-column" id="content-wrapper">
@@ -46,9 +46,19 @@
                                                         Chưa nhập tên sản phẩm. Vui lòng kiểm tra lại.
                                                     </div>
                                                 </c:when>
-                                                <c:when test="${requestScope.message eq 'productNotExist'}">
+                                                <c:when test="${requestScope.message eq 'notInputProductQuantity'}">
                                                     <div class="alert alert-danger text-center" role="alert">
-                                                        Chưa nhập số lượng sản phẩm cần mua. Vui lòng kiểm tra lại.
+                                                        Chưa nhập số lượng sản phẩm. Vui lòng kiểm tra lại.
+                                                    </div>
+                                                </c:when>
+                                                <c:when test="${requestScope.message eq 'productQuantityNotExist'}">
+                                                    <div class="alert alert-danger text-center" role="alert">
+                                                        Nhập sai định dạng số lượng sản phẩm. Vui lòng kiểm tra lại.
+                                                    </div>
+                                                </c:when>
+                                                <c:when test="${requestScope.message eq 'productQuantityNotPositive'}">
+                                                    <div class="alert alert-danger text-center" role="alert">
+                                                        Số lượng sản phẩm phải lớn hơn 0. Vui lòng kiểm tra lại.
                                                     </div>
                                                 </c:when>
                                                 <c:when test="${requestScope.message eq 'missingCustomer'}">
@@ -109,41 +119,74 @@
                             </div>
                         </div>
                     </div>
-                    <%@include file="../../../common/_footer.jsp" %>
                 </div>
-                <%@include file="../../../common/_goback.jsp" %>
+                <%@include file="../../../common/_footer.jsp" %>
             </div>
-            <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
-            <script src="https://c...content-available-to-author-only...y.com/jquery-3.5.1.min.js"></script>
-            <script src="https://c...content-available-to-author-only...y.com/ui/1.12.1/jquery-ui.min.js"></script>
-            <script src="<%=request.getContextPath()%>/view/assets/js/validate/validator.js"></script>
+            <%@include file="../../../common/_goback.jsp" %>
+        </div>
+        <script src="<%=request.getContextPath()%>/view/assets/js/bootstrap.min.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/bs-init.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/theme.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/validate/validator.js"></script>
+        <script src="<%=request.getContextPath()%>/view/assets/js/alert-timeout.js"></script>
 
             <!--Danh sach goi y-->
             <script>
                 $(document).ready(function () {
-                    var availableProducts = [
+                    var productsArray = [
                         <c:forEach var="product" items="${requestScope.products}">
-                            "${product.name}",
+                            { name: "${product.name}", ID: "${product.ID}", price: "${product.price}" },
                         </c:forEach>
                     ];
+
                     $("#product-name").autocomplete({
-                        source: availableProducts,
-                        select: function( event, ui ) {
-                            var selectedProduct = ui.item.value;
-                            <c:forEach var="product" items="${requestScope.products}">
-                                if("${product.name}" === selectedProduct) {
-                                    $('#product-id').val("${product.ID}");
-                                    $('#product-price').val(formatCurrency("${product.price}"));
-                                    $('#product-quantity').val(1);
-                                }
-                            </c:forEach>
-                            calculateTotal();
+                        source: function(request, response) {
+                            var term = request.term.toLowerCase();
+                            var filteredProducts = productsArray.filter(function(product) {
+                                return product.name.toLowerCase().includes(term);
+                            });
+                            response(filteredProducts.map(function(product) {
+                                return product.name;
+                            }));
+                        },
+                        select: function (event, ui) {
+                            var selectedProductName = ui.item.value;
+                            var selectedProduct = findProductByName(selectedProductName);
+                            if (selectedProduct) {
+                                $('#product-id').val(selectedProduct.ID);
+                                $('#product-price').val(formatCurrency(selectedProduct.price));
+                                $('#product-quantity').val(1);
+                                calculateTotal();
+                            }
+                        },
+                        change: function (event, ui) {
+                            var enteredProductName = $(this).val();
+                            var enteredProduct = findProductByName(enteredProductName);
+
+                            if (enteredProduct) {
+                                $('#product-id').val(enteredProduct.ID);
+                                $('#product-price').val(formatCurrency(enteredProduct.price));
+                                $('#product-quantity').val(1);
+                                calculateTotal();
+                            } else {
+                                $('#product-id').val('');
+                                $('#product-price').val('');
+                                $('#product-quantity').val('');
+                                $('#product-total-price').val('');
+                            }
                         }
                     });
+
+                    function findProductByName(productName) {
+                        return productsArray.find(function(product) {
+                            return product.name === productName;
+                        });
+                    }
                 });
             </script>
+
 
             <!--Validate input-->
             <script>
@@ -154,7 +197,9 @@
                     formGroupSelector: '.form-group',
                     rules: [
                         Validator.isRequired('#product-name', 'Vui lòng nhập tên sản phẩm!'),
-                        Validator.isRequired('#product-quantity', 'Vui lòng nhập số lượng sản phẩm!')
+                        
+                        Validator.isRequired('#product-quantity', 'Vui lòng nhập số lượng sản phẩm!'),
+                        Validator.isPositive('#product-quantity', 'Vui lòng nhập số lượng sản phẩm lớn hơn 0!')
                     ]
                 });
             </script>
@@ -183,7 +228,6 @@
                     if(isNaN(total)){
                         total = 0;
                     }
-                    
                     $('#product-total-price').val(formatCurrency(total));
                 }
 
