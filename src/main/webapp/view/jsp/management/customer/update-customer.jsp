@@ -48,7 +48,7 @@
 
                                                         <div class="col">
                                                             <div class="mb-3"><label class="form-label" for="email"><strong>Mã khách hàng</strong></label>
-                                                                <input class="form-control" type="email" id="email" placeholder="${requestScope.cus.code}" name="email" readonly="">
+                                                                <input class="form-control" type="email" id="email" placeholder="${requestScope.cus.code}" name="email" disabled>
                                                             </div>
                                                         </div>
 
@@ -61,7 +61,7 @@
                                                         </div>
 
                                                         <div class="mb-3"><label class="form-label" for="country"><strong>Email</strong></label>
-                                                            <input class="form-control" type="text" id="country" placeholder="${requestScope.cus.email}" name="country" readonly="">
+                                                            <input class="form-control" type="text" id="country" placeholder="${requestScope.cus.email}" name="country" disabled>
                                                         </div>
 
                                                         <button class="btn btn-primary btn-sm" type="button">
