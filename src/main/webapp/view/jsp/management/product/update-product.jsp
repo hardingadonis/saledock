@@ -48,7 +48,7 @@
                                                                 <label class="form-label" for="username">
                                                                     <strong>Mã sản phẩm</strong>
                                                                 </label>
-                                                                <input class="form-control" type="text" id="username" value="${requestScope.pro.code}" name="username" readonly=""  >
+                                                                <input class="form-control" type="text" id="username" value="${requestScope.pro.code}" name="username" disabled  >
                                                             </div>
                                                         </div>
                                                         <div class="col">
@@ -66,7 +66,7 @@
                                                                 <label class="form-label" for="username">
                                                                     <strong>Phân loại</strong>
                                                                 </label>
-                                                                <input class="form-control"  id="cat" value="${requestScope.cat.name}" name="cat" readonly="" >
+                                                                <input class="form-control"  id="cat" value="${requestScope.cat.name}" name="cat" disabled >
                                                             </div>
                                                         </div>
                                                         <div class="col">

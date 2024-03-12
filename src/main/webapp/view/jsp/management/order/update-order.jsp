@@ -73,14 +73,14 @@
                                                         <div class="col">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="username"><strong>Mã đơn hàng</strong></label>
-                                                                <input class="form-control" type="text" id="username" value ="${requestScope.ord.code}" name="username" readonly="">
+                                                                <input class="form-control" type="text" id="username" value ="${requestScope.ord.code}" name="username" disabled>
                                                             </div>
                                                         </div>
 
                                                         <div class="col">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="email"><strong>Ngày tạo</strong></label>
-                                                                <input class="form-control" type="email" id="createAt" value ="${requestScope.ord.createdAt}" name="email" readonly="">
+                                                                <input class="form-control" type="email" id="createAt" value ="${requestScope.ord.createdAt}" name="email" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -88,20 +88,20 @@
                                                         <div class="col">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="username"><strong>Khách hàng</strong></label>
-                                                                <input class="form-control" type="text" value ="${requestScope.ord.customer.name}" readonly="">
+                                                                <input class="form-control" type="text" value ="${requestScope.ord.customer.name}" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="email"><strong>Nhân viên phụ trách</strong></label>
-                                                                <input class="form-control" type="email" id="email-1" value = "${requestScope.ord.employee.fullName}" name="email" readonly="">
+                                                                <input class="form-control" type="email" id="email-1" value = "${requestScope.ord.employee.fullName}" name="email" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="mb-3"><label class="form-label" for="username"><strong>Tổng tiền</strong></label>
-                                                                <input class="form-control price" type ="text" value ="${requestScope.ord.total}" readonly="">
+                                                                <input class="form-control price" type ="text" value ="${requestScope.ord.total}" disabled>
                                                             </div>
                                                         </div>
 
@@ -111,10 +111,10 @@
                                                                 <c:choose>
 
                                                                     <c:when test="${requestScope.ord.status == 'DONE'}">
-                                                                        <input class="form-control" type="email" id="email-2" value="Đã xong" name="email" readonly="">
+                                                                        <input class="form-control" type="email" id="email-2" value="Đã xong" name="email" disabled>
                                                                     </c:when>
                                                                     <c:when test="${requestScope.ord.status == 'CANCELLED'}">
-                                                                        <input class="form-control" type="email" id="email-2" value="Đã hủy" name="email" readonly="">
+                                                                        <input class="form-control" type="email" id="email-2" value="Đã hủy" name="email" disabled>
                                                                     </c:when>
                                                                     <c:otherwise>
                                                                         <select class="form-control" name="status">

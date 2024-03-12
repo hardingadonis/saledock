@@ -42,29 +42,15 @@
                                             <div class="card-body">
                                                 <form action="./add-customer" method="post" id="form-add-customer">
                                                     <div class="row">
-                                                        <div class="col">
+                                                        <div class="mb-3 form-group">
+                                                            <label class="form-label" for="name">
+                                                                <strong>Tên khách hàng</strong>
+                                                            </label>
                                                             <div class="mb-3 form-group">
-                                                                <label class="form-label" for="name">
-                                                                    <strong>Tên khách hàng</strong>
-                                                                </label>
-                                                                <div class="mb-3 form-group">
-                                                                    <input class="form-control" type="text" id="name-customer" placeholder="Nhập tên khách hàng" name="name" value="<%= (error != null && customer != null) ? customer.getName() : ""%>">
-                                                                    <span class="form-message text-danger"></span>
-                                                                </div>
+                                                                <input class="form-control" type="text" id="name-customer" placeholder="Nhập tên khách hàng" name="name" value="<%= (error != null && customer != null) ? customer.getName() : ""%>">
+                                                                <span class="form-message text-danger"></span>
                                                             </div>
                                                         </div>
-                                                        <div class="col">
-                                                            <div class="mb-3">
-                                                                <label class="form-label" for="code">
-                                                                    <strong>Mã khách hàng</strong>
-                                                                </label>
-                                                                <div class="mb-3 form-group">
-                                                                    <input class="form-control" type="text" id="code-customer" placeholder="Mã khách hàng" name="code" >
-                                                                    <span class="form-message text-danger"></span>
-                                                                </div> 
-                                                            </div>
-                                                        </div>
-
                                                     </div>
                                                     <div class="mb-3">
                                                         <div class="mb-3">
@@ -122,11 +108,8 @@
                 formGroupSelector: '.form-group',
                 rules: [
                     Validator.isRequired('#name-customer', 'Vui lòng nhập tên khách hàng!'),
-                    Validator.isRequired('#code-customer', 'Vui lòng nhập mã khách hàng!'),
                     Validator.isRequired('#address-customer', 'Vui lòng nhập địa chỉ khách hàng!'),
                     Validator.isRequired('#email-customer', 'Vui lòng nhập email khách hàng!')
-
-
                 ]
             });
         </script>

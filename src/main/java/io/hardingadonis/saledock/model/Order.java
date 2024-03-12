@@ -87,9 +87,4 @@ public class Order {
 
         return uuid.toString().toUpperCase().replace("-", "").substring(0, 15);
     }
-
-    public String getTotalToString() {
-        DecimalFormat decimalFormat = new DecimalFormat("#,###.#");
-        return decimalFormat.format(this.total);
-    }
 }
