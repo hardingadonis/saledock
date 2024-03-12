@@ -225,7 +225,9 @@
                     var quantity = parseInt($('#product-quantity').val());
                     var price = parseFloat($('#product-price').val().replace(/[^0-9.-]+/g, '')) * 1000;
                     var total = quantity * price;
-                    
+                    if(isNaN(total)){
+                        total = 0;
+                    }
                     $('#product-total-price').val(formatCurrency(total));
                 }
 
