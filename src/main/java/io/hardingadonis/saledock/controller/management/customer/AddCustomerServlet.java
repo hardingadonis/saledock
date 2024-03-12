@@ -27,15 +27,13 @@ public class AddCustomerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String name = request.getParameter("name");
-        String code = request.getParameter("code");
         String address = request.getParameter("address");
         String email = request.getParameter("email");
 
         try {
-            if (name.length() > 0 && code.length() > 0 && address.length() > 0 && email.length() > 0) {
+            if (name.length() > 0 && address.length() > 0 && email.length() > 0) {
                 Customer customer = new Customer();
                 customer.setName(name);
-                customer.setCode(code);
                 customer.setAddress(address);
                 customer.setEmail(email);
                 Singleton.customerDAO.save(customer);
@@ -48,9 +46,6 @@ public class AddCustomerServlet extends HttpServlet {
             customer.setName(name);
             customer.setAddress(address);
             StringBuilder message = new StringBuilder("Tạo khách hàng không thành công: ");
-            if (e.getMessage().contains(code)) {
-                message.append("Không được trùng mã khách hàng.");
-            }
             if (e.getMessage().contains(email)) {
                 message.append("Không được trùng email.");
             }

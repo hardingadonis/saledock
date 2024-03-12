@@ -2,6 +2,8 @@ package io.hardingadonis.saledock.model;
 
 import jakarta.persistence.*;
 import java.time.*;
+import java.util.*;
+
 import lombok.*;
 
 @Entity(name = "Customer")
@@ -38,11 +40,18 @@ public class Customer {
 
     @PrePersist
     protected void onCreate() {
+        this.code = generateRandomCustomerCode();
         this.createdAt = LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"));
     }
 
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"));
+    }
+
+    private static String generateRandomCustomerCode() {
+        UUID uuid = UUID.randomUUID();
+
+        return uuid.toString().toUpperCase().replace("-", "").substring(0, 7);
     }
 }
