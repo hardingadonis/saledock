@@ -68,7 +68,7 @@
                 errorSelector: '.form-message',
                 formGroupSelector: '.form-group',
                 rules: [
-                    Validator.isRequired('#input-otp', 'Vui lòng nhập mã OTP!'),
+                    Validator.isRequired('#input-otp', 'Vui lòng nhập mã OTP!')
                 ]
             });
         </script>
