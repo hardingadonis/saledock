@@ -30,6 +30,13 @@ public class DownloadServlet extends HttpServlet {
                 break;
             }
 
+            case "order": {
+                Integer ID = Integer.parseInt(request.getParameter("id"));
+
+                path = ExcelUtil.generateOrderDetailExcel(getServletContext().getRealPath("/"), ID);
+                break;
+            }
+
             default: {
                 response.sendError(404);
                 return;
