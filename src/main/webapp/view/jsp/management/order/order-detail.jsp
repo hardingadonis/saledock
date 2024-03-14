@@ -133,6 +133,9 @@
                                                         <a class="btn btn-primary btn-sm back" href="<%=request.getContextPath()%>/order" style="color: white; text-decoration: none;">
                                                             Quay lại
                                                         </a>
+                                                        <a class="btn btn-primary btn-sm back" href="<%=request.getContextPath()%>/download?type=order&id=${requestScope.ord.ID}" style="color: white; text-decoration: none;">
+                                                            Tải xuống
+                                                        </a>
                                                     </div>
                                                 </form>
                                             </div>
