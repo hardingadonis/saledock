@@ -44,7 +44,7 @@ public class ForgotPasswordServlet extends HttpServlet {
             if (employee.isPresent()) {
                 request.setAttribute("message", "success");
                 String newOtp = OtpUtil.generateRandomOTP();
-                SendEmailUtil.sendGetOTPMessage(email, "New OTP", newOtp);
+                SendEmailUtil.sendGetOTPMessage(email, "Sale Dock - Quên mật khẩu?", newOtp);
                 SessionUtil.getInstance().putValue(request, "otp", newOtp);
                 SessionUtil.getInstance().putValue(request, "email", email);
                 request.getRequestDispatcher("/view/jsp/others/login/otp.jsp").forward(request, response);
