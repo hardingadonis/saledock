@@ -47,6 +47,7 @@
                                             </div>
                                             <button class="btn btn-primary d-block btn-user w-100" type="submit">Quên mật khẩu</button>
                                         </form>
+                                        <div class="text-center"><a class="small" href="./login">Quay Lại</a></div>
                                     </div>
                                 </div>
                             </div>

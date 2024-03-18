@@ -60,6 +60,7 @@
                                             </div>
                                             <button class="btn btn-primary d-block btn-user w-100" type="submit">Xác nhận</button>
                                         </form>
+                                        <div class="text-center"><a class="small" href="./forgot-password">Quay lại</a></div>
                                     </div>
                                 </div>
                             </div>
