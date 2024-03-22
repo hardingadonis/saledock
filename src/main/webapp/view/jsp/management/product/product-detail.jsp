@@ -98,7 +98,7 @@
 
                                                             <c:if test="${requestScope.pro.imageURL != null}">
                                                                 <div class="tag" style="
-                                                                     background-image: url('<%=request.getContextPath()%>/${requestScope.pro.imageURL}');
+                                                                     background-image: url('<%=request.getContextPath()%>/view/assets/images/${requestScope.pro.imageURL}');
                                                                      background-repeat: no-repeat;
                                                                      background-size: contain;
                                                                      height: 300px;
